@@ -1,16 +1,18 @@
 # ows_events_mobile
 
-A new Flutter project.
+Мобильный клиент Peredelano Events
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+В проекте используется кодогенерация.
+Чтобы собрать и разрабатывать проект необходимо запустить кодогенератор:
 
-A few resources to get you started if this is your first Flutter project:
+```bash
+flutter pub run build_runner build
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Или же, если вы используете FVM, то:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```bash
+fvm flutter pub run build_runner build
+```
