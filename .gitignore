@@ -43,6 +43,6 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# Exclude freezed classes from git
+# Exclude generated classes from git
 **/*.freezed.dart
 **/*.g.dart
