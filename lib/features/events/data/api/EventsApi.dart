@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:ows_events_mobile/domain/Event.dart';
+import 'package:ows_events_mobile/features/events/data/response/EventResponse.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'EventsApi.g.dart';
@@ -9,5 +9,5 @@ abstract class EventsApi {
   factory EventsApi(Dio dio, {String baseUrl}) = _EventsApi;
 
   @GET("events")
-  Future<List<Event>> getEvents();
+  Future<List<EventResponse>> getEvents();
 }
