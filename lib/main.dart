@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
-import 'package:ows_events_mobile/data/EventsApi.dart';
+import 'package:ows_events_mobile/features/events/data/EventsRepository.dart';
+import 'package:ows_events_mobile/features/events/data/api/EventsApi.dart';
 import 'package:ows_events_mobile/routing.dart';
 
 final logger = Logger();
@@ -9,14 +10,17 @@ final logger = Logger();
 void main() async {
   final dio = Dio();
   final eventsApi = EventsApi(dio);
+  final eventsRepo = EventsRepository(eventsApi);
 
-  final events = await eventsApi.getEvents();
+  final events = await eventsRepo.getEvents();
   logger.i(events);
 
-  runApp(const HomePage());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
@@ -102,10 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // TRY THIS: Try changing the color here to a specific color (to
         // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
         // change color while the other colors stay the same.
-        backgroundColor: Theme
-            .of(context)
-            .colorScheme
-            .inversePrimary,
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
