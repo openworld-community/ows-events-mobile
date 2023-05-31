@@ -1,8 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'LocationResponse.freezed.dart';
+part 'location_response.freezed.dart';
 
-part 'LocationResponse.g.dart';
+part 'location_response.g.dart';
 
 @freezed
 class LocationResponse with _$LocationResponse {

@@ -1,8 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'Location.dart';
+import 'location.dart';
 
-part 'Event.freezed.dart';
+part 'event.freezed.dart';
 
 @freezed
 class Event with _$Event {

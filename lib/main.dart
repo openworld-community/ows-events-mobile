@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
-import 'package:ows_events_mobile/features/events/data/EventsRepository.dart';
-import 'package:ows_events_mobile/features/events/data/api/EventsApi.dart';
+import 'package:ows_events_mobile/features/events/data/events_repository.dart';
+import 'package:ows_events_mobile/features/events/data/api/events_api.dart';
 import 'package:ows_events_mobile/routing.dart';
 import 'package:ows_events_mobile/widgets/EventListItem.dart';
 
@@ -81,7 +81,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
 
   void _incrementCounter() {
     setState(() {
@@ -90,7 +89,6 @@ class _MyHomePageState extends State<MyHomePage> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      _counter++;
     });
   }
 
