@@ -24,6 +24,8 @@ jobs:
       - name: Install dependencies
         run: dart pub get
 
+      - name: Run codegen
+        run: flutter pub run build_runner build
 #      - name: Verify formatting
 #        run: dart format --output=none --set-exit-if-changed .
 
