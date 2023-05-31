@@ -18,6 +18,7 @@ jobs:
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: ${{ env.FLUTTER_CHANNEL }}
+          cache: true
       - run: flutter --version
 
       - name: Install dependencies
