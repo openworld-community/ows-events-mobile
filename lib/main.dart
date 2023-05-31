@@ -120,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
             description: 'Peredelano',
             date: '21 мая, 20:00',
             linkText: 'Вилла отцов разработки',
-            image: 'assets/images/test_image.jpg',
+            image: 'https://picsum.photos/357/268',
             price: '500\$',
             linkAction: () => {},
           );

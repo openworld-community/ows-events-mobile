@@ -25,17 +25,14 @@ class EvenListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-    final isSmallSizeScreen = screenSize.width <= 500;
     return Column(
       children: [
-        Container(
-          width: isSmallSizeScreen ? double.infinity : 500,
+        SizedBox(
           height: 176,
           child: Stack(
             fit: StackFit.expand,
             children: [
-              Image.asset(
+              Image.network(
                   image,
                   fit: BoxFit.fitWidth),
               Positioned(
@@ -57,7 +54,6 @@ class EvenListItem extends StatelessWidget {
           ),
         ),
         Container(
-          width: isSmallSizeScreen ? double.infinity : 500,
           padding: const EdgeInsets.fromLTRB(16, 0, 15, 0),
           alignment: Alignment.topLeft,
           child: Column(
