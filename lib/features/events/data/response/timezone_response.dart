@@ -1,8 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'TimezoneResponse.freezed.dart';
+part 'timezone_response.freezed.dart';
 
-part 'TimezoneResponse.g.dart';
+part 'timezone_response.g.dart';
 
 @freezed
 class TimezoneResponse with _$TimezoneResponse {
