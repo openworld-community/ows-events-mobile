@@ -122,7 +122,8 @@ class _MyHomePageState extends State<MyHomePage> {
             linkText: 'Вилла отцов разработки',
             image: 'https://picsum.photos/357/268',
             price: '500\$',
-            linkAction: () => {},
+            linkAction: () => {logger.d('Click on link')},
+            itemAction: () => {logger.d('Click on item')},
           );
         },
       ),
