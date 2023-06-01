@@ -99,35 +99,59 @@ class _MyHomePageState extends State<MyHomePage> {
               )
             ],
           ),
-          Center(
-            child: SizedBox(
-              width: isSmallSizeScreen ? double.infinity : 500,
-              child: ListView.builder(
-                itemCount: 5,
-                itemBuilder: (context, index) {
-                  return EvenListItem(
-                      title: 'Конференция «Как не умереть от эмигрантской тоски»',
-                      description: 'Peredelano',
-                      date: '21 мая, 20:00',
-                      linkText: 'Вилла отцов разработки',
-                      image: 'https://picsum.photos/357/268',
-                      price: '500\$',
-                      linkAction: () {
-                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text("Click on link")));
-                        logger.d('Click on link');
-                      },
-                      itemAction: () {
-                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text("Click on item")));
-                        logger.d('Click on item');
-                      });
-                },
-              ),
-            ),
-          )
+          SliverList.builder(
+            itemCount: 5,
+            itemBuilder: (context, index) {
+              return EvenListItem(
+                  title: 'Конференция «Как не умереть от эмигрантской тоски»',
+                  description: 'Peredelano',
+                  date: '21 мая, 20:00',
+                  linkText: 'Вилла отцов разработки',
+                  image: 'https://picsum.photos/357/268',
+                  price: '500\$',
+                  linkAction: () {
+                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text("Click on link")));
+                    logger.d('Click on link');
+                  },
+                  itemAction: () {
+                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text("Click on item")));
+                    logger.d('Click on item');
+                  });
+            },
+          ),
+          // Center(
+          //   child: SizedBox(
+          //     width: isSmallSizeScreen ? double.infinity : 500,
+          //     child: SliverList.builder(
+          //       itemCount: 5,
+          //       itemBuilder: (context, index) {
+          //         return EvenListItem(
+          //             title: 'Конференция «Как не умереть от эмигрантской тоски»',
+          //             description: 'Peredelano',
+          //             date: '21 мая, 20:00',
+          //             linkText: 'Вилла отцов разработки',
+          //             image: 'https://picsum.photos/357/268',
+          //             price: '500\$',
+          //             linkAction: () {
+          //               ScaffoldMessenger.of(context).hideCurrentSnackBar();
+          //               ScaffoldMessenger.of(context).showSnackBar(
+          //                   const SnackBar(content: Text("Click on link")));
+          //               logger.d('Click on link');
+          //             },
+          //             itemAction: () {
+          //               ScaffoldMessenger.of(context).hideCurrentSnackBar();
+          //               ScaffoldMessenger.of(context).showSnackBar(
+          //                   const SnackBar(content: Text("Click on item")));
+          //               logger.d('Click on item');
+          //             });
+          //       },
+          //     ),
+          //   ),
+          // )
         ],
       ),
     );
