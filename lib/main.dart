@@ -4,6 +4,7 @@ import 'package:logger/logger.dart';
 import 'package:ows_events_mobile/features/events/data/EventsRepository.dart';
 import 'package:ows_events_mobile/features/events/data/api/EventsApi.dart';
 import 'package:ows_events_mobile/routing.dart';
+import 'package:ows_events_mobile/widgets/EventListItem.dart';
 
 final logger = Logger();
 
@@ -113,7 +114,18 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: ListView.builder(
         itemCount: 5,
-        itemBuilder: (context, index) {},
+        itemBuilder: (context, index) {
+          return EvenListItem(
+            title: 'Конференция «Как не умереть от эмигрантской тоски»',
+            description: 'Peredelano',
+            date: '21 мая, 20:00',
+            linkText: 'Вилла отцов разработки',
+            image: 'https://picsum.photos/357/268',
+            price: '500\$',
+            linkAction: () => {logger.d('Click on link')},
+            itemAction: () => {logger.d('Click on item')},
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
