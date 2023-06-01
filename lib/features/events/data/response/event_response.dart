@@ -1,11 +1,11 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'LocationResponse.dart';
-import 'TimezoneResponse.dart';
+import 'location_response.dart';
+import 'timezone_response.dart';
 
-part 'EventResponse.freezed.dart';
+part 'event_response.freezed.dart';
 
-part 'EventResponse.g.dart';
+part 'event_response.g.dart';
 
 @freezed
 class EventResponse with _$EventResponse {

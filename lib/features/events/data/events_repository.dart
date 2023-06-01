@@ -1,7 +1,7 @@
-import 'package:ows_events_mobile/features/events/domain/Event.dart';
-import 'package:ows_events_mobile/features/events/domain/Location.dart';
+import 'package:ows_events_mobile/features/events/domain/event.dart';
+import 'package:ows_events_mobile/features/events/domain/location.dart';
 
-import 'api/EventsApi.dart';
+import 'api/events_api.dart';
 
 class EventsRepository {
   final EventsApi api;
