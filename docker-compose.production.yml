@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  ows-flutter-web:
+    image: ghcr.io/openworld-community/ows-events-mobile:main
+    restart: unless-stopped
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - 'traefik.frontend.rule=Host:indexscan.ru,spiinvest.ccrowd.in'
+      - "traefik.port=80"
+
+networks:
+  traefik:
+    external: true
