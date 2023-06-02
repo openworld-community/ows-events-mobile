@@ -4,8 +4,6 @@ name: Build and publish web docker image
 on:
   push:
     branches: [ 'main' ]
-  pull_request:
-    branches: [ '**' ]
 
 env:
   REGISTRY: ghcr.io
