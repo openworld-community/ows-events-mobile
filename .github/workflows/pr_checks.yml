@@ -1,5 +1,5 @@
 #file: noinspection YAMLSchemaValidation
-name: Dart
+name: Pull request checks
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
     branches: [ '**' ]
 
 jobs:
-  build:
+  pr_check:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,14 +19,12 @@ jobs:
           flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: ${{ env.FLUTTER_CHANNEL }}
           cache: true
-      - run: flutter --version
 
       - name: Install dependencies
         run: dart pub get
 
       - name: Run codegen
         run: flutter pub run build_runner build
-#      - name: Verify formatting
-#        run: dart format --output=none --set-exit-if-changed .
 
-      - uses: invertase/github-action-dart-analyzer@v2.0.0
+      - name: Run static analyzer
+        uses: invertase/github-action-dart-analyzer@v2.0.0
