@@ -5,7 +5,7 @@ import 'package:ows_events_mobile/features/events/data/api/events_api.dart';
 import 'package:ows_events_mobile/features/events/data/events_repository.dart';
 import 'package:ows_events_mobile/routing.dart';
 import 'package:ows_events_mobile/widgets/event_list_item.dart';
-import 'package:ows_events_mobile/widgets/textFields_widget.dart';
+import 'package:ows_events_mobile/widgets/filters.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
 final logger = Logger();
@@ -96,10 +96,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
               MultiSliver(children: [
-                TextFields_widget(
-                  onSearchTextChanged: (String) {},
-                  onCountryTextChanged: (String) {},
-                  onCityTextChanged: (String) {},
+                FiltersWidget(
+                  onSearchTextChanged: (_) {},
+                  onCountryTextChanged: (_) {},
+                  onCityTextChanged: (_) {},
                 ),
                 SliverList.builder(
                   itemCount: 5,
