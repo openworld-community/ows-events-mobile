@@ -6,3 +6,4 @@ final router = GoRouter(
     GoRoute(path: '/', builder: (context, state) => const HomePage()),
   ],
 );
+

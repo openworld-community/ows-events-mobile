@@ -4,18 +4,14 @@ import 'package:logger/logger.dart';
 import 'package:ows_events_mobile/features/events/data/api/events_api.dart';
 import 'package:ows_events_mobile/features/events/data/events_repository.dart';
 import 'package:ows_events_mobile/routing.dart';
+import 'package:ows_events_mobile/util/time_utils.dart';
 import 'package:ows_events_mobile/widgets/event_list_item.dart';
+
+import 'features/events/domain/event.dart';
 
 final logger = Logger();
 
 void main() async {
-  final dio = Dio();
-  final eventsApi = EventsApi(dio);
-  final eventsRepo = EventsRepository(eventsApi);
-
-  final events = await eventsRepo.getEvents();
-  logger.i(events);
-
   runApp(const MyApp());
 }
 
@@ -59,6 +55,34 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<Event> events = [];
+  void _incrementCounter() {
+    setState(() {
+      // This call to setState tells the Flutter framework that something has
+      // changed in this State, which causes it to rerun the build method below
+      // so that the display can reflect the updated values. If we changed
+      // _counter without calling setState(), then the build method would not be
+      // called again, and so nothing would appear to happen.
+    });
+  }
+
+
+  @override
+  void initState() {
+    super.initState();
+    final dio = Dio();
+    final eventsApi = EventsApi(dio);
+    final eventsRepo = EventsRepository(eventsApi);
+    loadData(eventsRepo);
+  }
+
+  Future<void> loadData(eventsRepo) async {
+    final loadedEvents = await eventsRepo.getEvents();
+    logger.i(loadedEvents);
+    setState(() {
+      events = loadedEvents;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+
     return Center(
       child: SizedBox(
         width: isSmallSizeScreen ? double.infinity : 500,
@@ -88,22 +113,22 @@ class _MyHomePageState extends State<MyHomePage> {
                       IconButton(
                           onPressed: () {},
                           icon:
-                              const Icon(Icons.info_outline_rounded, size: 35)),
+                          const Icon(Icons.info_outline_rounded, size: 35)),
                     ],
                   )
                 ],
               ),
               SliverList.builder(
-                itemCount: 5,
+                itemCount: events.length,
                 itemBuilder: (context, index) {
+                  Event event = events[index];
                   return EvenListItem(
-                      title:
-                          'Конференция «Как не умереть от эмигрантской тоски»',
-                      description: 'Peredelano',
-                      date: '21 мая, 20:00',
-                      linkText: 'Вилла отцов разработки',
-                      image: 'https://picsum.photos/357/268',
-                      price: '500\$',
+                      title: event.title,
+                      description: event.description,
+                      date: TimeUtils.formatDateTime(event.date),
+                      linkText: '${event.location.country}, ${event.location.city}',
+                      image: event.image,
+                      price: event.price.toString(),
                       linkAction: () {
                         ScaffoldMessenger.of(context).hideCurrentSnackBar();
                         ScaffoldMessenger.of(context).showSnackBar(
