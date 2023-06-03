@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ows_events_mobile/resources/colors.dart';
 import 'package:ows_events_mobile/resources/text_styles.dart';
 
-class EvenListItem extends StatelessWidget {
+class EventListItem extends StatelessWidget {
   final String title;
   final String description;
   final String date;
@@ -13,7 +13,7 @@ class EvenListItem extends StatelessWidget {
   final VoidCallback linkAction;
   final VoidCallback itemAction;
 
-  const EvenListItem({
+  const EventListItem({
     super.key,
     required this.title,
     required this.description,

@@ -6,6 +6,7 @@ import 'package:ows_events_mobile/features/events/data/events_repository.dart';
 import 'package:ows_events_mobile/routing.dart';
 import 'package:ows_events_mobile/widgets/event_list_item.dart';
 import 'package:ows_events_mobile/widgets/textFields_widget.dart';
+import 'package:sliver_tools/sliver_tools.dart';
 
 final logger = Logger();
 
@@ -14,8 +15,8 @@ void main() async {
   final eventsApi = EventsApi(dio);
   final eventsRepo = EventsRepository(eventsApi);
 
-  final events = await eventsRepo.getEvents();
-  logger.i(events);
+  // final events = await eventsRepo.getEvents();
+  // logger.i(events);
 
   runApp(const MyApp());
 }
@@ -60,12 +61,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery
-        .of(context)
-        .size;
+    final screenSize = MediaQuery.of(context).size;
     final isSmallSizeScreen = screenSize.width <= 500;
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
@@ -78,67 +76,58 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: SizedBox(
           width: isSmallSizeScreen ? double.infinity : 500,
-          child: Column(
-              children: [
-                Expanded(
-                  child: TextFields_widget(onSearchTextChanged: (String ) {  }, onCountryTextChanged: (String ) {  }, onCityTextChanged: (String ) {  },),
+          child: CustomScrollView(
+            slivers: [
+              SliverAppBar.large(
+                leading: Row(
+                  children: [Image.asset('assets/logo.png')],
                 ),
-                Expanded(
-                  child: Scaffold(
-                    body: CustomScrollView(
-                      slivers: [
-                        SliverAppBar.large(
-                          leading: Row(
-                            children: [Image.asset('assets/logo.png')],
-                          ),
-                          title: const Text('Мероприятия'),
-                          actions: [
-                            Row(
-                              children: [
-                                const Text("30 дней до конца подписки"),
-                                IconButton(
-                                    onPressed: () {},
-                                    icon:
-                                    const Icon(
-                                        Icons.info_outline_rounded, size: 35)),
-                              ],
-                            )
-                          ],
-                        ),
-                        SliverList.builder(
-                          itemCount: 5,
-                          itemBuilder: (context, index) {
-                            return EvenListItem(
-                                title:
-                                'Конференция «Как не умереть от эмигрантской тоски»',
-                                description: 'Peredelano',
-                                date: '21 мая, 20:00',
-                                linkText: 'Вилла отцов разработки',
-                                image: 'https://picsum.photos/357/268',
-                                price: '500\$',
-                                linkAction: () {
-                                  ScaffoldMessenger.of(context)
-                                      .hideCurrentSnackBar();
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                          content: Text("Click on link")));
-                                  logger.d('Click on link');
-                                },
-                                itemAction: () {
-                                  ScaffoldMessenger.of(context)
-                                      .hideCurrentSnackBar();
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                          content: Text("Click on item")));
-                                  logger.d('Click on item');
-                                });
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
+                title: const Text('Мероприятия'),
+                actions: [
+                  Row(
+                    children: [
+                      const Text("30 дней до конца подписки"),
+                      IconButton(
+                          onPressed: () {},
+                          icon:
+                              const Icon(Icons.info_outline_rounded, size: 35)),
+                    ],
+                  )
+                ],
+              ),
+              MultiSliver(children: [
+                TextFields_widget(
+                  onSearchTextChanged: (String) {},
+                  onCountryTextChanged: (String) {},
+                  onCityTextChanged: (String) {},
                 ),
-              ]
+                SliverList.builder(
+                  itemCount: 5,
+                  itemBuilder: (context, index) {
+                    return EventListItem(
+                        title:
+                            'Конференция «Как не умереть от эмигрантской тоски»',
+                        description: 'Peredelano',
+                        date: '21 мая, 20:00',
+                        linkText: 'Вилла отцов разработки',
+                        image: 'https://picsum.photos/357/268',
+                        price: '500\$',
+                        linkAction: () {
+                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text("Click on link")));
+                          logger.d('Click on link');
+                        },
+                        itemAction: () {
+                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text("Click on item")));
+                          logger.d('Click on item');
+                        });
+                  },
+                )
+              ]),
+            ],
           ),
         ),
       ),
