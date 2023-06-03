@@ -74,14 +74,14 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
 
-    return Scaffold( // добавляем Scaffold
+    return Scaffold(
       body: Center(
         child: SizedBox(
           width: isSmallSizeScreen ? double.infinity : 500,
           child: Column(
               children: [
                 Expanded(
-                  child: TextFields_widget(),
+                  child: TextFields_widget(onSearchTextChanged: (String ) {  }, onCountryTextChanged: (String ) {  }, onCityTextChanged: (String ) {  },),
                 ),
                 Expanded(
                   child: Scaffold(

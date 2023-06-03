@@ -4,6 +4,11 @@ class TextFields_widget extends StatelessWidget {
   final TextEditingController _textControllerSearch = TextEditingController();
   final TextEditingController _textControllerCountry = TextEditingController();
   final TextEditingController _textControllerCity = TextEditingController();
+  final void Function(String) onSearchTextChanged;
+  final void Function(String) onCountryTextChanged;
+  final void Function(String) onCityTextChanged;
+
+  TextFields_widget({required this.onSearchTextChanged, required this.onCountryTextChanged, required this.onCityTextChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +19,7 @@ class TextFields_widget extends StatelessWidget {
         children: [
           TextField(
             controller: _textControllerSearch,
+            onChanged: onSearchTextChanged,
             decoration: InputDecoration(
               suffixIcon: Icon(Icons.search, size: 30.0, color: Colors.grey,),
               contentPadding: EdgeInsets.fromLTRB(15, 12, 12, 12),
@@ -41,6 +47,7 @@ class TextFields_widget extends StatelessWidget {
               Expanded(
                 child: TextField(
                   controller: _textControllerCountry,
+                  onChanged: onCountryTextChanged,
                   decoration: InputDecoration(
                     suffixIcon: Icon(Icons.keyboard_arrow_down, size: 30.0, color: Colors.grey,),
                     contentPadding: EdgeInsets.fromLTRB(15, 12, 12, 12),
@@ -67,6 +74,7 @@ class TextFields_widget extends StatelessWidget {
               Expanded(
                 child: TextField(
                   controller: _textControllerCity,
+                  onChanged: onCityTextChanged,
                   decoration: InputDecoration(
                     suffixIcon: Icon(Icons.keyboard_arrow_down, size: 30.0, color: Colors.grey,),
                     contentPadding: EdgeInsets.fromLTRB(15, 12, 12, 12),
