@@ -40,7 +40,13 @@ class HomePage extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      //home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      routes: {
+        '/': (context) => const MyHomePage(
+              title: '???',
+            ),
+        '/event': (context) => const EventScreen(),
+      },
     );
   }
 }
@@ -65,7 +71,6 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
     });
   }
-
 
   @override
   void initState() {
@@ -109,11 +114,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 actions: [
                   Row(
                     children: [
-                      const Text("30 дней до конца подписки"),
+                      const Text("30 дней"),
                       IconButton(
                           onPressed: () {},
                           icon:
-                          const Icon(Icons.info_outline_rounded, size: 35)),
+                              const Icon(Icons.info_outline_rounded, size: 35)),
                     ],
                   )
                 ],
@@ -122,11 +127,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 itemCount: events.length,
                 itemBuilder: (context, index) {
                   Event event = events[index];
+                  const eventTitle = 'Peredelanoconf';
                   return EvenListItem(
                       title: event.title,
                       description: event.description,
                       date: TimeUtils.formatDateTime(event.date),
-                      linkText: '${event.location.country}, ${event.location.city}',
+                      linkText:
+                          '${event.location.country}, ${event.location.city}',
                       image: event.image,
                       price: event.price.toString(),
                       linkAction: () {
@@ -136,6 +143,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         logger.d('Click on link');
                       },
                       itemAction: () {
+                        Navigator.of(context)
+                            .pushNamed('/event', arguments: eventTitle);
                         ScaffoldMessenger.of(context).hideCurrentSnackBar();
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text("Click on item")));
@@ -147,6 +156,45 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class EventScreen extends StatefulWidget {
+  const EventScreen({super.key});
+
+  @override
+  State<EventScreen> createState() => _EventScreenState();
+}
+
+class _EventScreenState extends State<EventScreen> {
+  String? eventTitle;
+
+  @override
+  void didChangeDependencies() {
+    final args = ModalRoute.of(context)?.settings.arguments;
+    if (args == null) {
+      print('You must provide args!');
+      return;
+    }
+    if (args is String) {
+      print('You must provide String args!');
+      return;
+    }
+    eventTitle = args as String;
+
+    super.didChangeDependencies();
+    setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text(eventTitle ?? '...')),
+      body: SliverList.builder(itemCount: 5, 
+      itemBuilder: (context, index) {
+        
+      }),
     );
   }
 }
