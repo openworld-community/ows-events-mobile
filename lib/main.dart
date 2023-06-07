@@ -1,15 +1,9 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
-import 'package:ows_events_mobile/features/events/data/api/events_api.dart';
-import 'package:ows_events_mobile/features/events/data/events_repository.dart';
 import 'package:ows_events_mobile/routing.dart';
-import 'package:ows_events_mobile/util/time_utils.dart';
 import 'package:ows_events_mobile/widgets/event_list_item.dart';
 import 'package:ows_events_mobile/widgets/filters.dart';
 import 'package:sliver_tools/sliver_tools.dart';
-
-import 'features/events/domain/event.dart';
 
 final logger = Logger();
 
