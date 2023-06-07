@@ -4,20 +4,16 @@ import 'package:logger/logger.dart';
 import 'package:ows_events_mobile/features/events/data/api/events_api.dart';
 import 'package:ows_events_mobile/features/events/data/events_repository.dart';
 import 'package:ows_events_mobile/routing.dart';
+import 'package:ows_events_mobile/util/time_utils.dart';
 import 'package:ows_events_mobile/widgets/event_list_item.dart';
 import 'package:ows_events_mobile/widgets/filters.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
+import 'features/events/domain/event.dart';
+
 final logger = Logger();
 
 void main() async {
-  final dio = Dio();
-  final eventsApi = EventsApi(dio);
-  final eventsRepo = EventsRepository(eventsApi);
-
-  // final events = await eventsRepo.getEvents();
-  // logger.i(events);
-
   runApp(const MyApp());
 }
 
@@ -61,6 +57,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
@@ -71,6 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+
 
     return Scaffold(
       body: Center(
@@ -90,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       IconButton(
                           onPressed: () {},
                           icon:
-                              const Icon(Icons.info_outline_rounded, size: 35)),
+                          const Icon(Icons.info_outline_rounded, size: 35)),
                     ],
                   )
                 ],
