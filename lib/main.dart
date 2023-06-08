@@ -1,8 +1,14 @@
+//import 'dart:html';
+
+import 'dart:ui';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:ows_events_mobile/features/events/data/api/events_api.dart';
 import 'package:ows_events_mobile/features/events/data/events_repository.dart';
+import 'package:ows_events_mobile/resources/colors.dart';
+import 'package:ows_events_mobile/resources/text_styles.dart';
 import 'package:ows_events_mobile/routing.dart';
 import 'package:ows_events_mobile/util/time_utils.dart';
 import 'package:ows_events_mobile/widgets/event_list_item.dart';
@@ -41,12 +47,13 @@ class HomePage extends StatelessWidget {
         useMaterial3: true,
       ),
       //home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      routes: {
-        '/': (context) => const MyHomePage(
-              title: '???',
-            ),
-        '/event': (context) => const EventScreen(),
-      },
+      home: const EventScreen(),
+      // routes: {
+      //   '/': (context) => const MyHomePage(
+      //         title: '???',
+      //       ),
+      //   '/event': (context) => const EventScreen(),
+      // },
     );
   }
 }
@@ -190,11 +197,121 @@ class _EventScreenState extends State<EventScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(eventTitle ?? '...')),
-      body: SliverList.builder(itemCount: 5, 
-      itemBuilder: (context, index) {
-        
-      }),
+      appBar: AppBar(
+        title: Text(eventTitle ?? 'PeredelanoConf'),
+        leading: IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.ios_share),
+            color: Colors.black,
+          )
+        ],
+      ),
+      body: Column(
+        children: [
+          SizedBox(
+            height: 176,
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                Image.asset(
+                  'assets/party.png',
+                  fit: BoxFit.fitWidth,
+                ),
+                Positioned(
+                    top: 12,
+                    left: 16,
+                    child: Container(
+                      padding: const EdgeInsets.fromLTRB(4, 10, 4, 10),
+                      decoration: BoxDecoration(
+                          color: AppColors.accent,
+                          borderRadius: BorderRadius.circular(16)),
+                      child: const Text("100€",
+                          style: AppTextStyles.priceTextStyle),
+                    )),
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.fromLTRB(16, 0, 15, 0),
+            alignment: Alignment.topLeft,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
+                  child: Text(
+                    'Peredelano',
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
+                  child: Text(
+                    'Peredelanoconf Ереван',
+                    textAlign: TextAlign.left,
+                    style: AppTextStyles.mainTextStyle,
+                  ),
+                ),
+                const Text(
+                  '''17 июня, 15:00 - 17 июня, 23:59 
+                    (+04:00 Asia/Yerevan)''',
+                  textAlign: TextAlign.left,
+                  style: AppTextStyles.secondaryText,
+                ),
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(0, 8, 0, 44),
+                  child: Text(
+                    'Armenia, Yerevan',
+                    textAlign: TextAlign.left,
+                    style: AppTextStyles.linkTextStyle,
+                  ),
+                ),
+                const SizedBox(
+                  height: 250,
+                ),
+                Column(
+                  children: [
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                          ),
+                          minimumSize: const Size(400, 50),
+                          backgroundColor: AppColors.accent),
+                      onPressed: () {},
+                      child: const Text('Зарегистрироваться'),
+                    ),
+                    const SizedBox(height: 15),
+                    Row(
+                      children: [
+                        OutlinedButton(
+                            style: OutlinedButton.styleFrom(
+                                minimumSize: const Size(160, 50),
+                                foregroundColor: Colors.black),
+                            onPressed: () {},
+                            child: const Text('Редактировать')),
+                        const SizedBox(width: 40),
+                        OutlinedButton(
+                            style: OutlinedButton.styleFrom(
+                                minimumSize: const Size(160, 50),
+                                foregroundColor: Colors.red),
+                            onPressed: () {},
+                            child: const Text('Удалить'))
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
