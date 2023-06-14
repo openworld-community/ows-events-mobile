@@ -1,3 +1,5 @@
+//import 'dart:html';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
@@ -5,6 +7,7 @@ import 'package:ows_events_mobile/features/events/data/api/events_api.dart';
 import 'package:ows_events_mobile/features/events/data/events_repository.dart';
 import 'package:ows_events_mobile/routing.dart';
 import 'package:ows_events_mobile/util/time_utils.dart';
+import 'package:ows_events_mobile/widgets/create_event_menu.dart';
 import 'package:ows_events_mobile/widgets/event_list_item.dart';
 
 import 'features/events/domain/event.dart';
@@ -66,7 +69,6 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-
   @override
   void initState() {
     super.initState();
@@ -109,11 +111,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 actions: [
                   Row(
                     children: [
-                      const Text("30 дней до конца подписки"),
+                      const Text("30 дней"),
                       IconButton(
                           onPressed: () {},
                           icon:
-                          const Icon(Icons.info_outline_rounded, size: 35)),
+                              const Icon(Icons.info_outline_rounded, size: 35)),
                     ],
                   )
                 ],
@@ -126,7 +128,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       title: event.title,
                       description: event.description,
                       date: TimeUtils.formatDateTime(event.date),
-                      linkText: '${event.location.country}, ${event.location.city}',
+                      linkText:
+                          '${event.location.country}, ${event.location.city}',
                       image: event.image,
                       price: event.price.toString(),
                       linkAction: () {
@@ -140,6 +143,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text("Click on item")));
                         logger.d('Click on item');
+                        showOverlayDialog();
                       });
                 },
               ),
@@ -149,4 +153,15 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+
+  void showOverlayDialog() {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) => CreateEventMenu()
+    );
+
+
+  }
 }
+

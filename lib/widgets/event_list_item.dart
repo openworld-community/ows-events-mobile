@@ -76,7 +76,7 @@ class EvenListItem extends StatelessWidget {
                   child: Text(
                     title,
                     textAlign: TextAlign.left,
-                    style: AppTextStyles.mainTextStyle,
+                    style: AppTextStyles.mainTextStyleWeight,
                   ),
                 ),
 
