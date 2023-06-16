@@ -1,24 +1,28 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
+import 'package:ows_events_mobile/core/logger.dart';
 import 'package:ows_events_mobile/features/events/data/api/events_api.dart';
 import 'package:ows_events_mobile/features/events/data/events_repository.dart';
 import 'package:ows_events_mobile/features/events/domain/event.dart';
-import 'package:ows_events_mobile/main.dart';
 import 'package:ows_events_mobile/util/time_utils.dart';
 import 'package:ows_events_mobile/features/events/presentation/event_list_item.dart';
 
-class EventsScreen extends StatefulWidget {
+class EventsScreen extends ConsumerStatefulWidget {
   const EventsScreen({super.key});
 
   @override
-  State<EventsScreen> createState() => _EventsScreenState();
+  EventsScreenState createState() => EventsScreenState();
 }
 
-class _EventsScreenState extends State<EventsScreen> {
+class EventsScreenState extends ConsumerState<EventsScreen> {
   List<Event> events = [];
+  late Logger _logger;
 
   @override
   void initState() {
+    _logger = ref.read(loggerProvider);
     super.initState();
     final dio = Dio();
     final eventsApi = EventsApi(dio);
@@ -28,7 +32,7 @@ class _EventsScreenState extends State<EventsScreen> {
 
   Future<void> loadData(eventsRepo) async {
     final loadedEvents = await eventsRepo.getEvents();
-    logger.i(loadedEvents);
+    _logger.i(loadedEvents);
     setState(() {
       events = loadedEvents;
     });
@@ -78,13 +82,13 @@ class _EventsScreenState extends State<EventsScreen> {
                         ScaffoldMessenger.of(context).hideCurrentSnackBar();
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text("Click on link")));
-                        logger.d('Click on link');
+                        _logger.d('Click on link');
                       },
                       itemAction: () {
                         ScaffoldMessenger.of(context).hideCurrentSnackBar();
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text("Click on item")));
-                        logger.d('Click on item');
+                        _logger.d('Click on item');
                       });
                 },
               ),

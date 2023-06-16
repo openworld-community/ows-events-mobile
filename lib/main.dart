@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ows_events_mobile/app.dart';
 
-final logger = Logger();
-
 void main() async {
-  runApp(const App());
+  runApp(const ProviderScope(
+    child: App(),
+  ));
 }
