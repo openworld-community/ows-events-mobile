@@ -1,9 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:ows_events_mobile/resources/colors.dart';
 import 'package:ows_events_mobile/resources/text_styles.dart';
 
-class EvenListItem extends StatelessWidget {
+class EventListItem extends StatelessWidget {
   final String title;
   final String description;
   final String date;
@@ -13,17 +12,16 @@ class EvenListItem extends StatelessWidget {
   final VoidCallback linkAction;
   final VoidCallback itemAction;
 
-  const EvenListItem({
-    super.key,
-    required this.title,
-    required this.description,
-    required this.date,
-    required this.price,
-    required this.linkText,
-    required this.image,
-    required this.linkAction,
-    required this.itemAction
-  });
+  const EventListItem(
+      {super.key,
+      required this.title,
+      required this.description,
+      required this.date,
+      required this.price,
+      required this.linkText,
+      required this.image,
+      required this.linkAction,
+      required this.itemAction});
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +34,7 @@ class EvenListItem extends StatelessWidget {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                Image.network(
-                    image,
-                    fit: BoxFit.fitWidth),
+                Image.network(image, fit: BoxFit.fitWidth),
                 Positioned(
                     top: 12,
                     left: 16,
@@ -46,14 +42,12 @@ class EvenListItem extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(4, 10, 4, 10),
                       decoration: BoxDecoration(
                           color: AppColors.accent,
-                          borderRadius: BorderRadius.circular(16)
-                      ),
+                          borderRadius: BorderRadius.circular(16)),
                       child: Text(
                         price,
                         style: AppTextStyles.priceTextStyle,
                       ),
-                    )
-                )
+                    ))
               ],
             ),
           ),
@@ -65,7 +59,7 @@ class EvenListItem extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
-                  child:   Text(
+                  child: Text(
                     description,
                     textAlign: TextAlign.left,
                     style: AppTextStyles.secondaryText,
@@ -79,7 +73,6 @@ class EvenListItem extends StatelessWidget {
                     style: AppTextStyles.mainTextStyleWeight,
                   ),
                 ),
-
                 Text(
                   date,
                   textAlign: TextAlign.left,
@@ -93,9 +86,7 @@ class EvenListItem extends StatelessWidget {
                           linkText,
                           textAlign: TextAlign.left,
                           style: AppTextStyles.linkTextStyle,
-                        )
-                    )
-                )
+                        )))
               ],
             ),
           )
