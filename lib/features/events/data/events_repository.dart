@@ -1,12 +1,13 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ows_events_mobile/features/events/domain/event.dart';
 import 'package:ows_events_mobile/features/events/domain/location.dart';
 
 import 'api/events_api.dart';
 
 class EventsRepository {
-  final EventsApi api;
-
   EventsRepository(this.api);
+
+  final EventsApi api;
 
   Future<List<Event>> getEvents() async {
     final eventsResponse = await api.getEvents();
@@ -14,6 +15,7 @@ class EventsRepository {
     return eventsResponse.map((e) {
       var date = e.date;
       var durationInSeconds = e.durationInSeconds;
+
       return Event(
         id: e.id,
         title: e.title,
@@ -30,6 +32,9 @@ class EventsRepository {
         url: e.url,
         image: e.image,
       );
-    }).toList(growable: false);
+    }).toList();
   }
 }
+
+final eventsRepositoryProvider =
+    Provider((ref) => EventsRepository(ref.read(eventsApiProvider)));
