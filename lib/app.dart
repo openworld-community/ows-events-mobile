@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ows_events_mobile/features/events/presentation/events_screen.dart';
+import 'package:ows_events_mobile/features/main/presentation/main_screen.dart';
 import 'package:ows_events_mobile/theme/app_theme.dart';
 
 class App extends StatelessWidget {
@@ -11,7 +11,7 @@ class App extends StatelessWidget {
       title: 'Afisha Peredelano',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.theme,
-      home: const EventsScreen(),
+      home: const MainScreen(),
     );
   }
 }
