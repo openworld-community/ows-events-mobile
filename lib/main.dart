@@ -7,4 +7,3 @@ void main() async {
     child: App(),
   ));
 }
-
