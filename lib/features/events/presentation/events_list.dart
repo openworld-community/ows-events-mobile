@@ -11,7 +11,7 @@ class EventsList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final AsyncValue<List<Event>> asyncEventsListData =
-        ref.watch(eventsListControllerProvider);
+    ref.watch(eventsListControllerProvider);
 
     return asyncEventsListData.when(
       data: (events) => CustomScrollView(
@@ -29,7 +29,7 @@ class EventsList extends ConsumerWidget {
                 description: event.description,
                 date: TimeUtils.formatDateTime(event.date),
                 venueLinkText:
-                    '${event.location.country}, ${event.location.city}',
+                '${event.location.country}, ${event.location.city}',
                 image: event.image,
                 price: event.price.toString(),
                 venueLinkAction: () {
