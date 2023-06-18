@@ -5,4 +5,5 @@ class AppColors {
   static const Color secondTextColor = Color(0xffacacac);
   static const Color linkTextColor = Color(0xff5c9ad2);
   static const Color accent = Color(0xff48c78e);
+  static const Color input = Color(0xffc3c3c3);
 }
