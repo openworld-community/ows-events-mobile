@@ -5,7 +5,6 @@ import 'package:ows_events_mobile/features/events/domain/event.dart';
 import 'package:ows_events_mobile/features/events/presentation/events_filters.dart';
 import 'package:ows_events_mobile/features/events/presentation/events_list_controller.dart';
 import 'package:ows_events_mobile/features/events/presentation/events_list_item.dart';
-import 'package:ows_events_mobile/util/time_utils.dart';
 
 class EventsList extends ConsumerWidget {
   const EventsList({super.key});
@@ -49,14 +48,8 @@ class EventsList extends ConsumerWidget {
                 final Event event = events[index];
 
                 return EventsListItem(
-                  title: event.title,
-                  description: event.description,
-                  date: TimeUtils.formatDateTime(event.date),
-                  venueLinkText:
-                      '${event.location.country}, ${event.location.city}',
-                  image: event.image,
-                  price: event.price.toString(),
-                  venueLinkAction: () {
+                  eventData: event,
+                  locationLinkAction: () {
                     // TODO: реализовать клик по месту проведения
                     throw UnimplementedError();
                   },
@@ -66,6 +59,9 @@ class EventsList extends ConsumerWidget {
                         eventData: event,
                       ),
                     ));
+                  },
+                  onAddToFavorite: () {
+                    // TODO: реализовать добавление события в избранное
                   },
                 );
               },

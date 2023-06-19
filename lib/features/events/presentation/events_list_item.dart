@@ -1,27 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:ows_events_mobile/common_widgets/favorite_icon_button.dart';
+import 'package:ows_events_mobile/features/events/domain/event.dart';
 import 'package:ows_events_mobile/theme/app_theme.dart';
+import 'package:ows_events_mobile/util/time_utils.dart';
 
 class EventsListItem extends StatelessWidget {
   const EventsListItem({
     super.key,
-    required this.title,
-    required this.description,
-    required this.date,
-    required this.price,
-    required this.venueLinkText,
-    required this.image,
-    required this.venueLinkAction,
+    required this.eventData,
+    required this.locationLinkAction,
     required this.itemAction,
+    required this.onAddToFavorite,
   });
 
-  final String title;
-  final String description;
-  final String date;
-  final String price;
-  final String venueLinkText;
-  final String image;
-  final VoidCallback venueLinkAction;
+  final Event eventData;
+  final VoidCallback locationLinkAction;
   final VoidCallback itemAction;
+  final VoidCallback onAddToFavorite;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +31,7 @@ class EventsListItem extends StatelessWidget {
               fit: StackFit.expand,
               children: [
                 Image.network(
-                  image,
+                  eventData.image,
                   fit: BoxFit.fitWidth,
                 ),
                 Positioned(
@@ -49,11 +44,18 @@ class EventsListItem extends StatelessWidget {
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Text(
-                      price,
+                      eventData.price.toString(),
                       style: Theme.of(context).textTheme.labelMedium?.copyWith(
                             color: Theme.of(context).colorScheme.background,
                           ),
                     ),
+                  ),
+                ),
+                Positioned(
+                  top: 12,
+                  right: 16,
+                  child: FavoriteIconButton(
+                    onPressed: onAddToFavorite,
                   ),
                 ),
               ],
@@ -67,27 +69,27 @@ class EventsListItem extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
                   child: Text(
-                    description,
+                    eventData.description,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
                   child: Text(
-                    title,
+                    eventData.title,
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 ),
                 Text(
-                  date,
+                  TimeUtils.formatDateTime(eventData.date),
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 8, 0, 44),
                   child: GestureDetector(
-                    onTap: venueLinkAction,
+                    onTap: locationLinkAction,
                     child: Text(
-                      venueLinkText,
+                      '${eventData.location.country}, ${eventData.location.city}',
                       style: Theme.of(context).textTheme.labelMedium?.copyWith(
                             color: AppTheme.blue1,
                           ),
@@ -96,7 +98,7 @@ class EventsListItem extends StatelessWidget {
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
