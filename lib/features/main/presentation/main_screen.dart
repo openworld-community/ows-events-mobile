@@ -4,7 +4,7 @@ import 'package:ows_events_mobile/common_widgets/info_icon_button.dart';
 import 'package:ows_events_mobile/common_widgets/logo.dart';
 import 'package:ows_events_mobile/features/events/presentation/events_screen.dart';
 import 'package:ows_events_mobile/features/favourites/presentation/favourites_screen.dart';
-import 'main_screen_controller.dart';
+import 'package:ows_events_mobile/features/main/presentation/main_screen_controller.dart';
 
 class MainScreen extends ConsumerWidget {
   const MainScreen({super.key});
@@ -39,14 +39,16 @@ class MainScreen extends ConsumerWidget {
                 controller: controller,
                 children: screens,
                 onPageChanged: (index) =>
-                    ref.read(indexProvider.notifier).value = index),
+                    ref.read(indexProvider.notifier).value = index,
+                    ),
             bottomNavigationBar: NavigationBar(
               selectedIndex: menuIndex,
               onDestinationSelected: (int index) {
                 ref.read(indexProvider.notifier).value = index;
                 controller.animateToPage(index,
                     duration: const Duration(seconds: 1),
-                    curve: Curves.easeInOut);
+                    curve: Curves.easeInOut,
+                    );
               },
               destinations: const <NavigationDestination>[
                 NavigationDestination(
