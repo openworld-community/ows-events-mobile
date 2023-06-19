@@ -9,14 +9,10 @@ class FavoriteEventsRepository {
 
   final FavoriteEventsApi api;
 
-  Future<FavoriteEvents?> getFavoriteEvents() async {
+  Future<FavoriteEvents> getFavoriteEvents() async {
     final List<String>? idsList = await api.getFavoriteEventsIds();
 
-    if (idsList != null) {
-      return FavoriteEvents(idsList: idsList);
-    }
-
-    return null;
+    return FavoriteEvents(idsList: idsList ?? []);
   }
 
   Future<bool?> setFavoriteEvents(FavoriteEvents favoriteEvents) async {

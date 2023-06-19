@@ -5,13 +5,14 @@ import 'package:ows_events_mobile/features/events/domain/event.dart';
 import 'package:ows_events_mobile/features/events/presentation/events_filters.dart';
 import 'package:ows_events_mobile/features/events/presentation/events_list_controller.dart';
 import 'package:ows_events_mobile/features/events/presentation/events_list_item.dart';
+import 'package:ows_events_mobile/features/favorite_events/domain/event_with_favorite_mark.dart';
 
 class EventsList extends ConsumerWidget {
   const EventsList({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<List<Event>> asyncEventsListData =
+    final AsyncValue<List<EventWithFavoriteMark>> asyncEventsListData =
         ref.watch(eventsListControllerProvider);
 
     return asyncEventsListData.when(
@@ -45,10 +46,12 @@ class EventsList extends ConsumerWidget {
             child: ListView.builder(
               itemCount: events.length,
               itemBuilder: (context, index) {
-                final Event event = events[index];
+                final Event event = events[index].event;
+                final bool favoriteMark = events[index].favoriteMark;
 
                 return EventsListItem(
                   eventData: event,
+                  favorite: favoriteMark,
                   locationLinkAction: () {
                     // TODO: реализовать клик по месту проведения
                     throw UnimplementedError();

@@ -8,12 +8,14 @@ class EventsListItem extends StatelessWidget {
   const EventsListItem({
     super.key,
     required this.eventData,
+    required this.favorite,
     required this.locationLinkAction,
     required this.itemAction,
     required this.onAddToFavorite,
   });
 
   final Event eventData;
+  final bool favorite;
   final VoidCallback locationLinkAction;
   final VoidCallback itemAction;
   final VoidCallback onAddToFavorite;

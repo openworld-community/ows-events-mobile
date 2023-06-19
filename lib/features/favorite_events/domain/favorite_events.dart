@@ -1,6 +1,6 @@
 class FavoriteEvents {
   FavoriteEvents({
-    required idsList,
+    required List<String> idsList,
   }) {
     this.idsList = idsList;
   }
