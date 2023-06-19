@@ -57,6 +57,7 @@ class EventsListItem extends StatelessWidget {
                   top: 12,
                   right: 16,
                   child: FavoriteIconButton(
+                    selected: favorite,
                     onPressed: onAddToFavorite,
                   ),
                 ),

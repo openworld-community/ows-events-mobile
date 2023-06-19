@@ -14,6 +14,8 @@ class EventsList extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final AsyncValue<List<EventWithFavoriteMark>> asyncEventsListData =
         ref.watch(eventsListControllerProvider);
+    final EventsListController controller =
+        ref.read(eventsListControllerProvider.notifier);
 
     return asyncEventsListData.when(
       data: (events) => Column(
@@ -64,7 +66,7 @@ class EventsList extends ConsumerWidget {
                     ));
                   },
                   onAddToFavorite: () {
-                    // TODO: реализовать добавление события в избранное
+                    controller.toggleEventToFavorites(event.id);
                   },
                 );
               },

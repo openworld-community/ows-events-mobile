@@ -16,4 +16,12 @@ class FavoriteEvents {
   bool checkIdInList(String id) {
     return _idsList.contains(id);
   }
+
+  toggleIds(String id) {
+    if (_idsList.contains(id)) {
+      _idsList = _idsList.where((existingId) => existingId != id).toList();
+    } else {
+      _idsList.add(id);
+    }
+  }
 }

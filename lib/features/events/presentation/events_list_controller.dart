@@ -21,30 +21,44 @@ class EventsListController
   final EventsRepository repository;
   final FavoriteEventsRepository favoriteEventsRepository;
 
+  late List<Event> _eventsList;
+  late FavoriteEvents _favoriteEvents;
+
   init() async {
     state = const AsyncLoading();
 
     try {
-      final List<Event> eventsList = await repository.getEvents();
-      final FavoriteEvents favoriteEvents =
-          await favoriteEventsRepository.getFavoriteEvents();
-      final List<EventWithFavoriteMark> eventsWithFavoriteMarksList =
-          eventsList.map((event) {
-        final bool favoriteMark = favoriteEvents.checkIdInList(event.id);
-        ;
-        return EventWithFavoriteMark(
-          event: event,
-          favoriteMark: favoriteMark,
-        );
-      }).toList();
-
-      if (mounted == true) {
-        state = AsyncData(eventsWithFavoriteMarksList);
-      }
+      _eventsList = await repository.getEvents();
+      _favoriteEvents = await favoriteEventsRepository.getFavoriteEvents();
+      _setState();
     } catch (error) {
       state = AsyncError(error, StackTrace.current);
       logger.e('EventsListController.init', error, StackTrace.current);
     }
+  }
+
+  void _setState() {
+    final List<EventWithFavoriteMark> eventsWithFavoriteMarksList =
+        _eventsList.map((event) {
+      final bool favoriteMark = _favoriteEvents.checkIdInList(event.id);
+      ;
+      return EventWithFavoriteMark(
+        event: event,
+        favoriteMark: favoriteMark,
+      );
+    }).toList();
+
+    if (mounted == true) {
+      state = AsyncData(eventsWithFavoriteMarksList);
+    }
+  }
+
+  void toggleEventToFavorites(String id) {
+    _favoriteEvents.toggleIds(id);
+
+    favoriteEventsRepository.setFavoriteEvents(_favoriteEvents);
+
+    _setState();
   }
 }
 
