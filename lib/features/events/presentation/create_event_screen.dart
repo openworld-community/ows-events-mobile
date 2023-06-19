@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ows_events_mobile/features/events/presentation/rounded_text_field.dart';
-import 'package:ows_events_mobile/resources/colors.dart';
-import 'package:ows_events_mobile/resources/text_styles.dart';
 
 class CreateEventScreen extends ConsumerStatefulWidget {
   const CreateEventScreen({super.key});
@@ -109,17 +107,17 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
             body: SingleChildScrollView(
               child: Container(
                 padding: const EdgeInsets.all(20),
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.secondary,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             'Локация',
                             textAlign: TextAlign.left,
-                            style: AppTextStyles.mainTextStyle,
+                            style: Theme.of(context).textTheme.titleMedium,
                           ),
                           const SizedBox(height: 12),
                           Column(
@@ -151,10 +149,10 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           'Общая информация',
                           textAlign: TextAlign.left,
-                          style: AppTextStyles.mainTextStyle,
+                          style: Theme.of(context).textTheme.titleMedium,
                         ),
                         const SizedBox(height: 12),
                         Column(
@@ -180,10 +178,10 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           'Начало',
                           textAlign: TextAlign.left,
-                          style: AppTextStyles.mainTextStyle,
+                          style: Theme.of(context).textTheme.titleMedium,
                         ),
                         const SizedBox(height: 12),
                         Row(
@@ -215,10 +213,10 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           'Окончание',
                           textAlign: TextAlign.left,
-                          style: AppTextStyles.mainTextStyle,
+                          style: Theme.of(context).textTheme.titleMedium,
                         ),
                         const SizedBox(height: 12),
                         Row(
@@ -250,10 +248,10 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           'Стоимость',
                           textAlign: TextAlign.left,
-                          style: AppTextStyles.mainTextStyle,
+                          style: Theme.of(context).textTheme.titleMedium,
                         ),
                         const SizedBox(height: 12),
                         RoundedTextField(
@@ -270,10 +268,10 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           'Ссылка на регистрацию',
                           textAlign: TextAlign.left,
-                          style: AppTextStyles.mainTextStyle,
+                          style: Theme.of(context).textTheme.titleMedium,
                         ),
                         const SizedBox(height: 12),
                         RoundedTextField(
@@ -286,30 +284,36 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                     const SizedBox(height: 24),
                     ElevatedButton.icon(
                       icon: const Icon(Icons.image),
-                      label: const Row(
+                      label: Row(
                         children: [
                           Text(
                             'Добваить фото',
-                            style: AppTextStyles.inputTextStyle,
+                            style: Theme.of(context).textTheme.titleMedium,
                           ),
-                          SizedBox(width: 8),
+                          const SizedBox(width: 8),
                           // Дополнительные виджеты текста, если необходимо
                         ],
                       ),
                       onPressed: () {},
                       style: ButtonStyle(
                         shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                        MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(24.0),
-                            side: const BorderSide(
-                                color: AppColors.input, width: 1.0),
+                            side: BorderSide(
+                              color: Theme.of(context).dividerColor,
+                              width: 1.0,
+                            ),
                           ),
                         ),
                         backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.white),
+                        MaterialStateProperty.all<Color>(
+                            Theme.of(context).colorScheme.secondary
+                        ),
                         foregroundColor:
-                            MaterialStateProperty.all<Color>(AppColors.input),
+                        MaterialStateProperty.all<Color>(
+                          Theme.of(context).dividerColor,
+                        ),
                         maximumSize: MaterialStateProperty.all<Size>(
                             const Size(200, 40)),
                         elevation: MaterialStateProperty.all<double>(0),
@@ -327,17 +331,22 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                         },
                         style: ButtonStyle(
                           shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                          MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(24.0),
-                              side: const BorderSide(
-                                  color: AppColors.input, width: 1.0),
+                              side: BorderSide(
+                                color: Theme.of(context).dividerColor,
+                                width: 1.0,
+                              ),
                             ),
                           ),
                           backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.white),
+                          MaterialStateProperty.all<Color>(
+                              Theme.of(context).colorScheme.secondary
+                          ),
                           foregroundColor: MaterialStateProperty.all<Color>(
-                              AppColors.mainTextColor),
+                            Theme.of(context).dividerColor,
+                          ),
                           maximumSize: MaterialStateProperty.all<Size>(
                               const Size(200, 40)),
                           elevation: MaterialStateProperty.all<double>(0),
@@ -346,9 +355,9 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                                 vertical: 16, horizontal: 7),
                           ),
                         ),
-                        child: const Text(
+                        child: Text(
                           'Отмена',
-                          style: AppTextStyles.inputTextStyle,
+                          style: Theme.of(context).textTheme.titleMedium,
                         ),
                       ),
                       const SizedBox(width: 8),
@@ -356,17 +365,21 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                         onPressed: () {},
                         style: ButtonStyle(
                           shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                          MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(24.0),
-                              side: const BorderSide(
-                                  color: AppColors.input, width: 1.0),
+                              side: BorderSide(
+                                color: Theme.of(context).dividerColor,
+                                width: 1.0,
+                              ),
                             ),
                           ),
                           backgroundColor: MaterialStateProperty.all<Color>(
-                              AppColors.accent),
+                              Theme.of(context).primaryColor),
                           foregroundColor:
-                              MaterialStateProperty.all<Color>(Colors.white),
+                          MaterialStateProperty.all<Color>(
+                              Theme.of(context).colorScheme.secondary
+                          ),
                           maximumSize: MaterialStateProperty.all<Size>(
                               const Size(200, 40)),
                           elevation: MaterialStateProperty.all<double>(0),
@@ -375,8 +388,9 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                                 vertical: 16, horizontal: 7),
                           ),
                         ),
-                        child: const Text('Сохранить',
-                            style: AppTextStyles.inputTextStyleWhite),
+                        child: Text(
+                            'Сохранить',
+                            style: Theme.of(context).textTheme.titleMedium),
                       )
                     ]),
                   ],

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ows_events_mobile/resources/colors.dart';
-import 'package:ows_events_mobile/resources/text_styles.dart';
 
 class EventsListItem extends StatelessWidget {
   const EventsListItem({
@@ -43,11 +41,12 @@ class EventsListItem extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.fromLTRB(4, 10, 4, 10),
                     decoration: BoxDecoration(
-                        color: AppColors.accent,
+                        color: Theme.of(context).primaryColor,
                         borderRadius: BorderRadius.circular(16)),
                     child: Text(
                       price,
-                      style: AppTextStyles.priceTextStyle,
+                      style: Theme.of(context).
+                      textTheme.labelMedium?.copyWith(color: Colors.white),
                     ),
                   ),
                 ),
@@ -63,19 +62,19 @@ class EventsListItem extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
                   child: Text(
                     description,
-                    style: AppTextStyles.secondaryText,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
                   child: Text(
-                    title,
-                    style: AppTextStyles.mainTextStyle,
+                      title,
+                      style: Theme.of(context).textTheme.bodyLarge
                   ),
                 ),
                 Text(
                   date,
-                  style: AppTextStyles.secondaryText,
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 8, 0, 44),
@@ -83,7 +82,9 @@ class EventsListItem extends StatelessWidget {
                     onTap: venueLinkAction,
                     child: Text(
                       venueLinkText,
-                      style: AppTextStyles.linkTextStyle,
+                      style: Theme.of(context).
+                      textTheme.
+                      labelMedium?.copyWith(color:const Color(0xff5c9ad2)),
                     ),
                   ),
                 ),
