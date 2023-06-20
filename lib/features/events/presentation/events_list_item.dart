@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ows_events_mobile/resources/colors.dart';
-import 'package:ows_events_mobile/resources/text_styles.dart';
+import 'package:ows_events_mobile/theme/app_theme.dart';
 
 class EventsListItem extends StatelessWidget {
   const EventsListItem({
@@ -36,18 +35,24 @@ class EventsListItem extends StatelessWidget {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                Image.network(image, fit: BoxFit.fitWidth),
+                Image.network(
+                  image,
+                  fit: BoxFit.fitWidth,
+                ),
                 Positioned(
                   top: 12,
                   left: 16,
                   child: Container(
                     padding: const EdgeInsets.fromLTRB(4, 10, 4, 10),
                     decoration: BoxDecoration(
-                        color: AppColors.accent,
-                        borderRadius: BorderRadius.circular(16)),
+                      color: Theme.of(context).primaryColor,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
                     child: Text(
                       price,
-                      style: AppTextStyles.priceTextStyle,
+                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                            color: Theme.of(context).colorScheme.background,
+                          ),
                     ),
                   ),
                 ),
@@ -63,19 +68,19 @@ class EventsListItem extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
                   child: Text(
                     description,
-                    style: AppTextStyles.secondaryText,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
                   child: Text(
                     title,
-                    style: AppTextStyles.mainTextStyle,
+                    style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 ),
                 Text(
                   date,
-                  style: AppTextStyles.secondaryText,
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 8, 0, 44),
@@ -83,7 +88,9 @@ class EventsListItem extends StatelessWidget {
                     onTap: venueLinkAction,
                     child: Text(
                       venueLinkText,
-                      style: AppTextStyles.linkTextStyle,
+                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                            color: AppTheme.blue1,
+                          ),
                     ),
                   ),
                 ),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ows_events_mobile/common_widgets/max_width_container.dart';
 import 'package:ows_events_mobile/features/events/domain/event.dart';
-import 'package:ows_events_mobile/resources/text_styles.dart';
+
+import 'package:ows_events_mobile/theme/app_theme.dart';
 
 class EventScreen extends StatelessWidget {
   const EventScreen({
@@ -36,7 +37,10 @@ class EventScreen extends StatelessWidget {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  Image.network(eventData.image, fit: BoxFit.fitWidth),
+                  Image.network(
+                    eventData.image,
+                    fit: BoxFit.fitWidth,
+                  ),
                   Positioned(
                     top: 12,
                     left: 16,
@@ -48,7 +52,7 @@ class EventScreen extends StatelessWidget {
                       ),
                       child: Text(
                         eventData.price.toString(),
-                        style: AppTextStyles.priceTextStyle,
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ),
                   ),
@@ -60,21 +64,25 @@ class EventScreen extends StatelessWidget {
             ),
             Text(
               eventData.date.toString(),
-              style: AppTextStyles.secondaryText,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
             const SizedBox(
               height: 10,
             ),
             Text(
               '${eventData.location.country}, ${eventData.location.city}',
-              style: AppTextStyles.linkTextStyle,
+              style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                    color: AppTheme.blue1,
+                  ),
             ),
             const SizedBox(
               height: 10,
             ),
             Text(
               eventData.description,
-              style: AppTextStyles.linkTextStyle,
+              style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                    color: AppTheme.blue1,
+                  ),
             ),
             const SizedBox(
               height: 20,
@@ -85,7 +93,9 @@ class EventScreen extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
                     shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(20),
+                      ),
                     ),
                     minimumSize: const Size(400, 50),
                     backgroundColor: Theme.of(context).colorScheme.secondary,
