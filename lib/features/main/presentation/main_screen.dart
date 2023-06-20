@@ -19,7 +19,7 @@ class MainScreen extends ConsumerWidget {
     final screenSize = MediaQuery.of(context).size;
     final isSmallSizeScreen = screenSize.width <= 500;
     final PageController controller = PageController();
-    final int menuIndex = ref.watch(indexProvider) as int;
+    final int menuIndex = ref.watch(pageIndexProvider) ?? 0;
 
     return Container(
       color: Theme.of(context).colorScheme.background,
@@ -39,15 +39,15 @@ class MainScreen extends ConsumerWidget {
               controller: controller,
               children: screens,
               onPageChanged: (index) =>
-                  ref.read(indexProvider.notifier).value = index,
+                  ref.read(pageIndexProvider.notifier).update((state) => index),
             ),
             bottomNavigationBar: NavigationBar(
               selectedIndex: menuIndex,
               onDestinationSelected: (int index) {
-                ref.read(indexProvider.notifier).value = index;
+                ref.read(pageIndexProvider.notifier).update((state) => index);
                 controller.animateToPage(
                   index,
-                  duration: const Duration(seconds: 1),
+                  duration: const Duration(milliseconds: 500),
                   curve: Curves.easeInOut,
                 );
               },
