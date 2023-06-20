@@ -40,7 +40,7 @@ class EventsList extends ConsumerWidget {
               throw UnimplementedError();
             },
             onCityTextChanged: (value) {
-              // TODO: добавить реализацию поиска по списку событий.
+              // TODO: добавить реализацию фильтрации по городу.
               throw UnimplementedError();
             },
           ),
