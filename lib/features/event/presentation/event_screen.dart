@@ -83,10 +83,12 @@ class EventScreen extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            Text(eventData.description,
-                style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      color: AppTheme.blue1,
-                    )),
+            Text(
+              eventData.description,
+              style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                    color: AppTheme.blue1,
+                  ),
+            ),
             const SizedBox(
               height: 20,
             ),
