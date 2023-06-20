@@ -107,7 +107,7 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
             body: SingleChildScrollView(
               child: Container(
                 padding: const EdgeInsets.all(20),
-                color: Theme.of(context).colorScheme.secondary,
+                color: Theme.of(context).colorScheme.background,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -297,7 +297,7 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                       onPressed: () {},
                       style: ButtonStyle(
                         shape:
-                        MaterialStateProperty.all<RoundedRectangleBorder>(
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(24.0),
                             side: BorderSide(
@@ -306,12 +306,9 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                             ),
                           ),
                         ),
-                        backgroundColor:
-                        MaterialStateProperty.all<Color>(
-                            Theme.of(context).colorScheme.secondary
-                        ),
-                        foregroundColor:
-                        MaterialStateProperty.all<Color>(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Theme.of(context).colorScheme.background),
+                        foregroundColor: MaterialStateProperty.all<Color>(
                           Theme.of(context).dividerColor,
                         ),
                         maximumSize: MaterialStateProperty.all<Size>(
@@ -331,7 +328,7 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                         },
                         style: ButtonStyle(
                           shape:
-                          MaterialStateProperty.all<RoundedRectangleBorder>(
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(24.0),
                               side: BorderSide(
@@ -340,15 +337,17 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                               ),
                             ),
                           ),
-                          backgroundColor:
-                          MaterialStateProperty.all<Color>(
-                              Theme.of(context).colorScheme.secondary
-                          ),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Theme.of(context).colorScheme.background),
                           foregroundColor: MaterialStateProperty.all<Color>(
                             Theme.of(context).dividerColor,
                           ),
                           maximumSize: MaterialStateProperty.all<Size>(
-                              const Size(200, 40)),
+                            const Size(
+                              200,
+                              40,
+                            ),
+                          ),
                           elevation: MaterialStateProperty.all<double>(0),
                           padding: MaterialStateProperty.all<EdgeInsets>(
                             const EdgeInsets.symmetric(
@@ -365,7 +364,7 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                         onPressed: () {},
                         style: ButtonStyle(
                           shape:
-                          MaterialStateProperty.all<RoundedRectangleBorder>(
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(24.0),
                               side: BorderSide(
@@ -376,22 +375,27 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                           ),
                           backgroundColor: MaterialStateProperty.all<Color>(
                               Theme.of(context).primaryColor),
-                          foregroundColor:
-                          MaterialStateProperty.all<Color>(
-                              Theme.of(context).colorScheme.secondary
-                          ),
+                          foregroundColor: MaterialStateProperty.all<Color>(
+                              Theme.of(context).colorScheme.background),
                           maximumSize: MaterialStateProperty.all<Size>(
-                              const Size(200, 40)),
+                            const Size(
+                              200,
+                              40,
+                            ),
+                          ),
                           elevation: MaterialStateProperty.all<double>(0),
                           padding: MaterialStateProperty.all<EdgeInsets>(
                             const EdgeInsets.symmetric(
-                                vertical: 16, horizontal: 7),
+                              vertical: 16,
+                              horizontal: 7,
+                            ),
                           ),
                         ),
                         child: Text(
-                            'Сохранить',
-                            style: Theme.of(context).textTheme.titleMedium),
-                      )
+                          'Сохранить',
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                      ),
                     ]),
                   ],
                 ),

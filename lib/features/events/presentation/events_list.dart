@@ -17,17 +17,24 @@ class EventsList extends ConsumerWidget {
       data: (events) => CustomScrollView(
         slivers: [
           SliverAppBar.medium(
-            title: const Text('Мероприятия'),
+            title: const Text(
+              'Мероприятия',
+            ),
           ),
           SliverList.builder(
             itemCount: events.length,
-            itemBuilder: (context, index) {
+            itemBuilder: (
+              context,
+              index,
+            ) {
               final Event event = events[index];
 
               return EventsListItem(
                 title: event.title,
                 description: event.description,
-                date: TimeUtils.formatDateTime(event.date),
+                date: TimeUtils.formatDateTime(
+                  event.date,
+                ),
                 venueLinkText:
                     '${event.location.country}, ${event.location.city}',
                 image: event.image,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ows_events_mobile/theme/app_theme.dart';
 
 class EventsListItem extends StatelessWidget {
   const EventsListItem({
@@ -34,19 +35,29 @@ class EventsListItem extends StatelessWidget {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                Image.network(image, fit: BoxFit.fitWidth),
+                Image.network(
+                  image,
+                  fit: BoxFit.fitWidth,
+                ),
                 Positioned(
                   top: 12,
                   left: 16,
                   child: Container(
-                    padding: const EdgeInsets.fromLTRB(4, 10, 4, 10),
+                    padding: const EdgeInsets.fromLTRB(
+                      4,
+                      10,
+                      4,
+                      10,
+                    ),
                     decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
-                        borderRadius: BorderRadius.circular(16)),
+                      color: Theme.of(context).primaryColor,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
                     child: Text(
                       price,
-                      style: Theme.of(context).
-                      textTheme.labelMedium?.copyWith(color: Colors.white),
+                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                            color: Theme.of(context).colorScheme.background,
+                          ),
                     ),
                   ),
                 ),
@@ -54,22 +65,37 @@ class EventsListItem extends StatelessWidget {
             ),
           ),
           Container(
-            padding: const EdgeInsets.fromLTRB(16, 0, 15, 0),
+            padding: const EdgeInsets.fromLTRB(
+              16,
+              0,
+              15,
+              0,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
+                  padding: const EdgeInsets.fromLTRB(
+                    0,
+                    8,
+                    0,
+                    8,
+                  ),
                   child: Text(
                     description,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+                  padding: const EdgeInsets.fromLTRB(
+                    0,
+                    0,
+                    0,
+                    8,
+                  ),
                   child: Text(
-                      title,
-                      style: Theme.of(context).textTheme.bodyLarge
+                    title,
+                    style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 ),
                 Text(
@@ -77,14 +103,19 @@ class EventsListItem extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 8, 0, 44),
+                  padding: const EdgeInsets.fromLTRB(
+                    0,
+                    8,
+                    0,
+                    44,
+                  ),
                   child: GestureDetector(
                     onTap: venueLinkAction,
                     child: Text(
                       venueLinkText,
-                      style: Theme.of(context).
-                      textTheme.
-                      labelMedium?.copyWith(color:const Color(0xff5c9ad2)),
+                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                            color: AppTheme.blue1,
+                          ),
                     ),
                   ),
                 ),

@@ -12,17 +12,18 @@ class RoundedTextField extends StatelessWidget {
   final String text;
   final Function(String) onTextChanged;
 
-  const RoundedTextField(
-      {super.key,
-        this.hintText = '',
-        this.keyboardType = TextInputType.none,
-        this.inputFormatters,
-        this.maxLines = 1,
-        this.minLines = 1,
-        this.suffixIcon,
-        this.onPressedIcon,
-        required this.text,
-        required this.onTextChanged});
+  const RoundedTextField({
+    super.key,
+    this.hintText = '',
+    this.keyboardType = TextInputType.none,
+    this.inputFormatters,
+    this.maxLines = 1,
+    this.minLines = 1,
+    this.suffixIcon,
+    this.onPressedIcon,
+    required this.text,
+    required this.onTextChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -40,24 +41,30 @@ class RoundedTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(24),
         ),
         focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(24.0),
-            borderSide:  BorderSide(
-              color: Theme.of(context).focusColor,
-              width: 1.0,
-            )),
+          borderRadius: BorderRadius.circular(24.0),
+          borderSide: BorderSide(
+            color: Theme.of(context).focusColor,
+            width: 1.0,
+          ),
+        ),
         suffixIcon: text.isNotEmpty
             ? IconButton(
-          onPressed: () {
-            onTextChanged('');
-          },
-          icon: const Icon(Icons.cancel),
-        )
+                onPressed: () {
+                  onTextChanged('');
+                },
+                icon: const Icon(
+                  Icons.cancel,
+                ),
+              )
             : suffixIcon != null && onPressedIcon != null
-            ? IconButton(onPressed: onPressedIcon, icon: Icon(suffixIcon))
-            : suffixIcon != null
-            ? Icon(suffixIcon)
-            : null,
-        suffixIconColor: Colors.grey,
+                ? IconButton(
+                    onPressed: onPressedIcon,
+                    icon: Icon(suffixIcon),
+                  )
+                : suffixIcon != null
+                    ? Icon(suffixIcon)
+                    : null,
+        suffixIconColor: Theme.of(context).dividerColor,
       ),
     );
   }
