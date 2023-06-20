@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ows_events_mobile/features/event/presentation/event_screen.dart';
 import 'package:ows_events_mobile/features/events/domain/event.dart';
 import 'package:ows_events_mobile/features/events/presentation/events_filters.dart';
 import 'package:ows_events_mobile/features/events/presentation/events_list_controller.dart';
@@ -60,8 +61,11 @@ class EventsList extends ConsumerWidget {
                     throw UnimplementedError();
                   },
                   itemAction: () {
-                    // TODO: реализовать клик по эвенту
-                    throw UnimplementedError();
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => EventScreen(
+                        eventData: event,
+                      ),
+                    ));
                   },
                 );
               },
