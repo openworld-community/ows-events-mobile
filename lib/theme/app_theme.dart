@@ -24,4 +24,5 @@ class AppTheme {
   static Color gray1 = const Color(0xffDBDBDB);
   static Color gray2 = const Color(0xffC3C3C3);
   static Color blue1 = const Color(0xff5c9ad2);
+  static const double maxContainerWidth = 500;
 }
