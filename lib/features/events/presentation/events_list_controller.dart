@@ -41,7 +41,7 @@ class EventsListController
     final List<EventWithFavoriteMark> eventsWithFavoriteMarksList =
         _eventsList.map((event) {
       final bool favoriteMark = _favoriteEvents.checkIdInList(event.id);
-      ;
+
       return EventWithFavoriteMark(
         event: event,
         favoriteMark: favoriteMark,
