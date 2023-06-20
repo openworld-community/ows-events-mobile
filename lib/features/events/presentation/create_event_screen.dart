@@ -343,15 +343,14 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                             Theme.of(context).dividerColor,
                           ),
                           maximumSize: MaterialStateProperty.all<Size>(
-                            const Size(
-                              200,
-                              40,
-                            ),
+                            const Size(200, 40),
                           ),
                           elevation: MaterialStateProperty.all<double>(0),
                           padding: MaterialStateProperty.all<EdgeInsets>(
                             const EdgeInsets.symmetric(
-                                vertical: 16, horizontal: 7),
+                              vertical: 16,
+                              horizontal: 7,
+                            ),
                           ),
                         ),
                         child: Text(
@@ -378,10 +377,7 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                           foregroundColor: MaterialStateProperty.all<Color>(
                               Theme.of(context).colorScheme.background),
                           maximumSize: MaterialStateProperty.all<Size>(
-                            const Size(
-                              200,
-                              40,
-                            ),
+                            const Size(200, 40),
                           ),
                           elevation: MaterialStateProperty.all<double>(0),
                           padding: MaterialStateProperty.all<EdgeInsets>(

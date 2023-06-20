@@ -45,12 +45,7 @@ class EventScreen extends StatelessWidget {
                     top: 12,
                     left: 16,
                     child: Container(
-                      padding: const EdgeInsets.fromLTRB(
-                        4,
-                        10,
-                        4,
-                        10,
-                      ),
+                      padding: const EdgeInsets.fromLTRB(4, 10, 4, 10),
                       decoration: BoxDecoration(
                         color: Theme.of(context).colorScheme.secondary,
                         borderRadius: BorderRadius.circular(16),
@@ -102,10 +97,7 @@ class EventScreen extends StatelessWidget {
                         Radius.circular(20),
                       ),
                     ),
-                    minimumSize: const Size(
-                      400,
-                      50,
-                    ),
+                    minimumSize: const Size(400, 50),
                     backgroundColor: Theme.of(context).colorScheme.secondary,
                   ),
                   onPressed: () {
@@ -120,10 +112,7 @@ class EventScreen extends StatelessWidget {
                   children: [
                     OutlinedButton(
                       style: OutlinedButton.styleFrom(
-                        minimumSize: const Size(
-                          160,
-                          50,
-                        ),
+                        minimumSize: const Size(160, 50),
                         foregroundColor: Colors.black,
                       ),
                       onPressed: () {
@@ -135,10 +124,7 @@ class EventScreen extends StatelessWidget {
                     const SizedBox(width: 40),
                     OutlinedButton(
                       style: OutlinedButton.styleFrom(
-                        minimumSize: const Size(
-                          160,
-                          50,
-                        ),
+                        minimumSize: const Size(160, 50),
                         foregroundColor: Colors.red,
                       ),
                       onPressed: () {

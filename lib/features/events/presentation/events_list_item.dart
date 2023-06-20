@@ -43,12 +43,7 @@ class EventsListItem extends StatelessWidget {
                   top: 12,
                   left: 16,
                   child: Container(
-                    padding: const EdgeInsets.fromLTRB(
-                      4,
-                      10,
-                      4,
-                      10,
-                    ),
+                    padding: const EdgeInsets.fromLTRB(4, 10, 4, 10),
                     decoration: BoxDecoration(
                       color: Theme.of(context).primaryColor,
                       borderRadius: BorderRadius.circular(16),
@@ -65,34 +60,19 @@ class EventsListItem extends StatelessWidget {
             ),
           ),
           Container(
-            padding: const EdgeInsets.fromLTRB(
-              16,
-              0,
-              15,
-              0,
-            ),
+            padding: const EdgeInsets.fromLTRB(16, 0, 15, 0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(
-                    0,
-                    8,
-                    0,
-                    8,
-                  ),
+                  padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
                   child: Text(
                     description,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(
-                    0,
-                    0,
-                    0,
-                    8,
-                  ),
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
                   child: Text(
                     title,
                     style: Theme.of(context).textTheme.bodyLarge,
@@ -103,12 +83,7 @@ class EventsListItem extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(
-                    0,
-                    8,
-                    0,
-                    44,
-                  ),
+                  padding: const EdgeInsets.fromLTRB(0, 8, 0, 44),
                   child: GestureDetector(
                     onTap: venueLinkAction,
                     child: Text(
