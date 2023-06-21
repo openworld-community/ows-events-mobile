@@ -5,15 +5,17 @@ import 'package:ows_events_mobile/features/events/domain/event.dart';
 import 'package:ows_events_mobile/features/events/presentation/events_filters.dart';
 import 'package:ows_events_mobile/features/events/presentation/events_list_controller.dart';
 import 'package:ows_events_mobile/features/events/presentation/events_list_item.dart';
-import 'package:ows_events_mobile/util/time_utils.dart';
+import 'package:ows_events_mobile/features/favorite_events/domain/event_with_favorite_mark.dart';
 
 class EventsList extends ConsumerWidget {
   const EventsList({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<List<Event>> asyncEventsListData =
+    final AsyncValue<List<EventWithFavoriteMark>> asyncEventsListData =
         ref.watch(eventsListControllerProvider);
+    final EventsListController controller =
+        ref.read(eventsListControllerProvider.notifier);
 
     return asyncEventsListData.when(
       data: (events) => Column(
@@ -38,7 +40,7 @@ class EventsList extends ConsumerWidget {
               throw UnimplementedError();
             },
             onCityTextChanged: (value) {
-              // TODO: добавить реализацию поиска по списку событий.
+              // TODO: добавить реализацию фильтрации по городу.
               throw UnimplementedError();
             },
           ),
@@ -46,17 +48,13 @@ class EventsList extends ConsumerWidget {
             child: ListView.builder(
               itemCount: events.length,
               itemBuilder: (context, index) {
-                final Event event = events[index];
+                final Event event = events[index].event;
+                final bool favoriteMark = events[index].favoriteMark;
 
                 return EventsListItem(
-                  title: event.title,
-                  description: event.description,
-                  date: TimeUtils.formatDateTime(event.date),
-                  venueLinkText:
-                      '${event.location.country}, ${event.location.city}',
-                  image: event.image,
-                  price: event.price.toString(),
-                  venueLinkAction: () {
+                  eventData: event,
+                  favorite: favoriteMark,
+                  locationLinkAction: () {
                     // TODO: реализовать клик по месту проведения
                     throw UnimplementedError();
                   },
@@ -66,6 +64,9 @@ class EventsList extends ConsumerWidget {
                         eventData: event,
                       ),
                     ));
+                  },
+                  onAddToFavorite: () {
+                    controller.toggleEventToFavorites(event.id);
                   },
                 );
               },
