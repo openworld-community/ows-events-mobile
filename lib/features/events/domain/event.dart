@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'location.dart';
@@ -17,4 +19,19 @@ class Event with _$Event {
     required final String url,
     required final String image,
   }) = _Event;
+
+  factory Event.fromJson(String json) {
+    final eventData = jsonDecode(json);
+    return Event(
+      id: eventData['id'],
+      title: eventData['title'],
+      description: eventData['description'],
+      date: DateTime.parse(eventData['date']),
+      duration: eventData['duration'] as Duration,
+      location: eventData['location'],
+      price: eventData['price'] as int,
+      url: eventData['url'],
+      image: eventData['image'],
+    );
+  }
 }
