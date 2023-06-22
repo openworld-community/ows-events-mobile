@@ -45,6 +45,7 @@ dependencies:
   intl: ^0.18.1
   flutter_riverpod: ^2.3.6
   shared_preferences: ^2.1.2
+  custom_refresh_indicator: ^2.2.1
 
 dev_dependencies:
   flutter_test:

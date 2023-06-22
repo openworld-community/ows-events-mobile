@@ -6,6 +6,7 @@ import 'package:ows_events_mobile/features/events/presentation/events_filters.da
 import 'package:ows_events_mobile/features/events/presentation/events_list_controller.dart';
 import 'package:ows_events_mobile/features/events/presentation/events_list_item.dart';
 import 'package:ows_events_mobile/features/favorite_events/domain/event_with_favorite_mark.dart';
+import 'package:ows_events_mobile/common_widgets/refresh_indicator.dart';
 
 class EventsList extends ConsumerWidget {
   const EventsList({super.key});
@@ -45,31 +46,36 @@ class EventsList extends ConsumerWidget {
             },
           ),
           Expanded(
-            child: ListView.builder(
-              itemCount: events.length,
-              itemBuilder: (context, index) {
-                final Event event = events[index].event;
-                final bool favoriteMark = events[index].favoriteMark;
-
-                return EventsListItem(
-                  eventData: event,
-                  favorite: favoriteMark,
-                  locationLinkAction: () {
-                    // TODO: реализовать клик по месту проведения
-                    throw UnimplementedError();
-                  },
-                  itemAction: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => EventScreen(
-                        eventData: event,
-                      ),
-                    ));
-                  },
-                  onAddToFavorite: () {
-                    controller.toggleEventToFavorites(event.id);
-                  },
-                );
+            child: AppRefreshIndicator(
+              onRefresh: () async {
+                ref.invalidate(eventsListControllerProvider);
               },
+              child: ListView.builder(
+                itemCount: events.length,
+                itemBuilder: (context, index) {
+                  final Event event = events[index].event;
+                  final bool favoriteMark = events[index].favoriteMark;
+
+                  return EventsListItem(
+                    eventData: event,
+                    favorite: favoriteMark,
+                    locationLinkAction: () {
+                      // TODO: реализовать клик по месту проведения
+                      throw UnimplementedError();
+                    },
+                    itemAction: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => EventScreen(
+                          eventData: event,
+                        ),
+                      ));
+                    },
+                    onAddToFavorite: () {
+                      controller.toggleEventToFavorites(event.id);
+                    },
+                  );
+                },
+              ),
             ),
           ),
         ],
