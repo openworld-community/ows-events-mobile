@@ -35,6 +35,16 @@ class EventsListItem extends StatelessWidget {
                 Image.network(
                   eventData.image,
                   fit: BoxFit.fitWidth,
+                  errorBuilder: (
+                    context,
+                    exception,
+                    stackTrace,
+                  ) {
+                    return Image.asset(
+                      'image_event_placeholder.png',
+                      fit: BoxFit.fitWidth,
+                    );
+                  },
                 ),
                 Positioned(
                   top: 12,
