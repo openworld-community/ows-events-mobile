@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ows_events_mobile/common_widgets/favorite_icon_button.dart';
 import 'package:ows_events_mobile/features/events/domain/event.dart';
-import 'package:ows_events_mobile/features/events/presentation/event_list_item_controller.dart';
+import 'package:ows_events_mobile/features/events/presentation/events_list_item_controller.dart';
 import 'package:ows_events_mobile/theme/app_theme.dart';
 import 'package:ows_events_mobile/util/time_utils.dart';
 

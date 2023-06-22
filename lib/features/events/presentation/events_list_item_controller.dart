@@ -2,8 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:ows_events_mobile/core/logger.dart';
 
-class EventListItemController {
-  EventListItemController({
+class EventsListItemController {
+  EventsListItemController({
     required this.logger,
   });
 
@@ -23,7 +23,7 @@ class EventListItemController {
 }
 
 final eventsListItemControllerProvider =
-    Provider((ref) => EventListItemController(
+    Provider((ref) => EventsListItemController(
           logger: ref.read(
             loggerProvider,
           ),
