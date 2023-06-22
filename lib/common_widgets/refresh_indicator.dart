@@ -1,11 +1,11 @@
 import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import 'package:flutter/material.dart';
 
-class ListRefreshIndicator extends StatelessWidget {
+class AppRefreshIndicator extends StatelessWidget {
   final Widget child;
   final Future<void> Function() onRefresh;
 
-  const ListRefreshIndicator({
+  const AppRefreshIndicator({
     super.key,
     required this.child,
     required this.onRefresh,
