@@ -28,8 +28,8 @@ class StoredEvents {
 
   Map<String, dynamic> toJson() {
     return {
-      'saveTime': saveTime,
-      'list': list,
+      'saveTime': saveTime.toString(),
+      'list': list.map((event) => event.toString()).toString(),
     };
   }
 }
