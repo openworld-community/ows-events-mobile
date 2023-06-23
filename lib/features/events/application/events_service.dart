@@ -9,8 +9,8 @@ import 'package:ows_events_mobile/features/favorite_events/data/favorite_events_
 import 'package:ows_events_mobile/features/favorite_events/domain/event_with_favorite_mark.dart';
 import 'package:ows_events_mobile/features/favorite_events/domain/favorite_events.dart';
 
-class FavoriteEventsService {
-  FavoriteEventsService({
+class EventsService {
+  EventsService({
     required this.ref,
     required this.eventsProvider,
     required this.favoriteEventsRepository,
@@ -85,12 +85,10 @@ class FavoriteEventsService {
   }
 }
 
-final favoriteEventsServiceProvider =
-    Provider<FavoriteEventsService>((ref) => FavoriteEventsService(
-          ref: ref,
-          eventsProvider: eventsProvider,
-          favoriteEventsRepository: ref.read(favoriteEventsRepositoryProvider),
-          eventsLocalStoreRepository:
-              ref.read(eventsLocalStoreRepositoryProvider),
-          logger: ref.read(loggerProvider),
-        ));
+final eventsServiceProvider = Provider<EventsService>((ref) => EventsService(
+      ref: ref,
+      eventsProvider: eventsProvider,
+      favoriteEventsRepository: ref.read(favoriteEventsRepositoryProvider),
+      eventsLocalStoreRepository: ref.read(eventsLocalStoreRepositoryProvider),
+      logger: ref.read(loggerProvider),
+    ));

@@ -37,6 +37,7 @@ class EventsLocalStore {
     try {
       final SharedPreferences localStorage =
           await ref.read(localStoreProvider.future);
+      await localStorage.remove(EventsLocalStore.key);
 
       return await localStorage.setString(EventsLocalStore.key, eventsJson);
     } catch (error) {

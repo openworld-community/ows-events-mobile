@@ -1,23 +1,23 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ows_events_mobile/features/favorite_events/application/favorite_events_service.dart';
+import 'package:ows_events_mobile/features/events/application/events_service.dart';
 import 'package:ows_events_mobile/features/favorite_events/domain/event_with_favorite_mark.dart';
 
 class EventsListController
     extends StateNotifier<AsyncValue<List<EventWithFavoriteMark>>> {
   EventsListController({
-    required this.favoriteEventsService,
+    required this.eventsService,
   }) : super(const AsyncData([])) {
     init();
   }
 
-  final FavoriteEventsService favoriteEventsService;
+  final EventsService eventsService;
 
   init() async {
     state = const AsyncLoading();
 
     try {
       final List<EventWithFavoriteMark> eventsWithFavoriteMarksList =
-          await favoriteEventsService.getEventsWidthFavoriteMark();
+          await eventsService.getEventsWidthFavoriteMark();
       if (mounted == true) {
         state = AsyncData(eventsWithFavoriteMarksList);
       }
@@ -29,7 +29,7 @@ class EventsListController
   void toggleEventToFavorites(String id) async {
     try {
       final List<EventWithFavoriteMark> eventsWithFavoriteMarksList =
-          await favoriteEventsService.toggleEventToFavorites(id);
+          await eventsService.toggleEventToFavorites(id);
       if (mounted == true) {
         state = AsyncData(eventsWithFavoriteMarksList);
       }
@@ -42,5 +42,5 @@ class EventsListController
 final eventsListControllerProvider = StateNotifierProvider<
         EventsListController, AsyncValue<List<EventWithFavoriteMark>>>(
     (ref) => EventsListController(
-          favoriteEventsService: ref.read(favoriteEventsServiceProvider),
+          eventsService: ref.read(eventsServiceProvider),
         ));
