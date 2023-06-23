@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ows_events_mobile/common_widgets/favorite_icon_button.dart';
 import 'package:ows_events_mobile/features/events/domain/event.dart';
+import 'package:ows_events_mobile/features/events/presentation/events_list_item_controller.dart';
 import 'package:ows_events_mobile/theme/app_theme.dart';
 import 'package:ows_events_mobile/util/time_utils.dart';
 
-class EventsListItem extends StatelessWidget {
+class EventsListItem extends ConsumerWidget {
   const EventsListItem({
     super.key,
     required this.eventData,
@@ -21,7 +23,7 @@ class EventsListItem extends StatelessWidget {
   final VoidCallback onAddToFavorite;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return InkWell(
       onTap: itemAction,
       child: Column(
@@ -35,6 +37,21 @@ class EventsListItem extends StatelessWidget {
                 Image.network(
                   eventData.image,
                   fit: BoxFit.fitWidth,
+                  errorBuilder: (
+                    context,
+                    exception,
+                    stackTrace,
+                  ) {
+                    ref.read(eventsListItemControllerProvider).log(
+                          exception.toString(),
+                          exception,
+                          stackTrace,
+                        );
+                    return Image.asset(
+                      'assets/image_event_placeholder.png',
+                      fit: BoxFit.fitWidth,
+                    );
+                  },
                 ),
                 Positioned(
                   top: 12,
