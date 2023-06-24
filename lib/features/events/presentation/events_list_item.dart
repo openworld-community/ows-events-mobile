@@ -34,17 +34,16 @@ class EventsListItem extends ConsumerWidget {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                eventData.image == ''
-                    ? Image.asset(
-                        'assets/image_event_placeholder.png',
-                        fit: BoxFit.fitWidth,
-                      )
-                    : CachedNetworkImage(
-                        placeholder: (context, url) =>
-                            const CircularProgressIndicator(),
-                        imageUrl: eventData.image,
-                        fit: BoxFit.fitWidth,
-                      ),
+                CachedNetworkImage(
+                  placeholder: (context, url) =>
+                      const CircularProgressIndicator(),
+                  imageUrl: eventData.image,
+                  fit: BoxFit.fitWidth,
+                  errorWidget: (context, url, error) => Image.asset(
+                    'assets/image_event_placeholder.png',
+                    fit: BoxFit.fitWidth,
+                  ),
+                ),
                 Positioned(
                   top: 12,
                   left: 16,
