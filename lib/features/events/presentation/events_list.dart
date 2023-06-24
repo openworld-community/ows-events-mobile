@@ -82,7 +82,10 @@ class EventsList extends ConsumerWidget {
       ),
       // TODO: в дальнейшем заменить на виджет для вывода ошибки
       error: (error, _) => Text(error.toString()),
-      loading: () => const CircularProgressIndicator(),
+      loading: () => const Align(
+        alignment: Alignment.topCenter,
+        child: LinearProgressIndicator(),
+      ),
     );
   }
 }
