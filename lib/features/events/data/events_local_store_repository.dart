@@ -12,7 +12,7 @@ class EventsLocalStoreRepository {
 
   final EventsLocalStore api;
 
-  Future<StoredEvents?> getEvets() async {
+  Future<StoredEvents?> getEvents() async {
     final String? json = await api.getEvents();
 
     return json != null ? StoredEvents.fromJson(json) : null;

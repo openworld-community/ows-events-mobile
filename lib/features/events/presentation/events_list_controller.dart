@@ -17,7 +17,7 @@ class EventsListController
 
     try {
       final List<EventWithFavoriteMark> eventsWithFavoriteMarksList =
-          await eventsService.getEventsWidthFavoriteMark();
+          await eventsService.getEvents();
       if (mounted == true) {
         state = AsyncData(eventsWithFavoriteMarksList);
       }
