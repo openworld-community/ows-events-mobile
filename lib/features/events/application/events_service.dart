@@ -1,37 +1,59 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:ows_events_mobile/core/logger.dart';
-import 'package:ows_events_mobile/features/events/data/events_repository.dart';
+import 'package:ows_events_mobile/features/events/data/events_local_store_repository.dart';
+import 'package:ows_events_mobile/features/events/data/events_provider.dart';
 import 'package:ows_events_mobile/features/events/domain/event.dart';
+import 'package:ows_events_mobile/features/events/domain/stored_events.dart';
 import 'package:ows_events_mobile/features/favorite_events/data/favorite_events_repository.dart';
 import 'package:ows_events_mobile/features/favorite_events/domain/event_with_favorite_mark.dart';
 import 'package:ows_events_mobile/features/favorite_events/domain/favorite_events.dart';
 
-class FavoriteEventsService {
-  FavoriteEventsService({
-    required this.logger,
-    required this.eventsRepository,
+class EventsService {
+  EventsService({
+    required this.ref,
+    required this.eventsProvider,
     required this.favoriteEventsRepository,
+    required this.eventsLocalStoreRepository,
+    required this.logger,
   });
 
-  final EventsRepository eventsRepository;
+  final Ref ref;
+  final FutureProvider<List<Event>> eventsProvider;
   final FavoriteEventsRepository favoriteEventsRepository;
+  final EventsLocalStoreRepository eventsLocalStoreRepository;
   final Logger logger;
 
   late List<Event> _eventsList;
   late FavoriteEvents _favoriteEvents;
 
-  Future<List<EventWithFavoriteMark>> getEventsWidthFavoriteMark() async {
+  Future<List<EventWithFavoriteMark>> getEvents() async {
     try {
-      _eventsList = await eventsRepository.getEvents();
+      _eventsList =
+          await ref.read(eventsProvider.future).catchError((error) async {
+        final StoredEvents? storedEvents =
+            await eventsLocalStoreRepository.getEvents();
+        if (storedEvents != null) {
+          return storedEvents.list;
+        }
+        throw Exception('$error. Ошибка при получении сохраненных событий.');
+      });
+    } catch (error) {
+      logger.e(
+          'Ошибка при получении списка событий', error, StackTrace.current);
+      rethrow;
+    }
+
+    try {
       _favoriteEvents = await favoriteEventsRepository.getFavoriteEvents();
 
       return _mapMarksToEvents(_eventsList, _favoriteEvents);
     } catch (error) {
       logger.e(
-          'Ошибка при получении списка событий и списка id избранных событий',
-          error,
-          StackTrace.current);
+        'Ошибка при получении списка id избранных событий',
+        error,
+        StackTrace.current,
+      );
       rethrow;
     }
   }
@@ -63,9 +85,10 @@ class FavoriteEventsService {
   }
 }
 
-final favoriteEventsServiceProvider =
-    Provider<FavoriteEventsService>((ref) => FavoriteEventsService(
-          eventsRepository: ref.read(eventsRepositoryProvider),
-          favoriteEventsRepository: ref.read(favoriteEventsRepositoryProvider),
-          logger: ref.read(loggerProvider),
-        ));
+final eventsServiceProvider = Provider<EventsService>((ref) => EventsService(
+      ref: ref,
+      eventsProvider: eventsProvider,
+      favoriteEventsRepository: ref.read(favoriteEventsRepositoryProvider),
+      eventsLocalStoreRepository: ref.read(eventsLocalStoreRepositoryProvider),
+      logger: ref.read(loggerProvider),
+    ));

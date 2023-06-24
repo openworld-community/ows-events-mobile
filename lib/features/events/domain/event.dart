@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:ows_events_mobile/util/parser_utils.dart';
 
 import 'location.dart';
 
@@ -17,4 +18,19 @@ class Event with _$Event {
     required final String url,
     required final String image,
   }) = _Event;
+
+  factory Event.fromJson(Map<String, dynamic> json) {
+    final eventData = json;
+    return Event(
+      id: eventData['id'],
+      title: eventData['title'],
+      description: eventData['description'],
+      date: DateTime.parse(eventData['date']),
+      duration: ParserUtils.durationFromString(eventData['duration']),
+      location: ParserUtils.locationFromString(eventData['location']),
+      price: int.parse(eventData['price']),
+      url: eventData['url'],
+      image: eventData['image'],
+    );
+  }
 }
