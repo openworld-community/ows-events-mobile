@@ -7,6 +7,7 @@ import 'package:ows_events_mobile/features/events/presentation/events_list_contr
 import 'package:ows_events_mobile/features/events/presentation/events_list_item.dart';
 import 'package:ows_events_mobile/features/favorite_events/domain/event_with_favorite_mark.dart';
 import 'package:ows_events_mobile/common_widgets/refresh_indicator.dart';
+import 'package:ows_events_mobile/features/main/presentation/filter_button_provaider.dart';
 
 class EventsList extends ConsumerWidget {
   const EventsList({super.key});
@@ -17,6 +18,7 @@ class EventsList extends ConsumerWidget {
         ref.watch(eventsListControllerProvider);
     final EventsListController controller =
         ref.read(eventsListControllerProvider.notifier);
+    final isShowFilterButton = ref.watch(filterButtonProvider);
 
     return asyncEventsListData.when(
       data: (events) => Column(
@@ -31,19 +33,35 @@ class EventsList extends ConsumerWidget {
               textAlign: TextAlign.center,
             ),
           ),
-          EventsFilters(
-            onSearchTextChanged: (value) {
-              // TODO: добавить реализацию поиска по списку событий.
-              throw UnimplementedError();
+          AnimatedSwitcher(
+            duration: const Duration(seconds: 5),
+            transitionBuilder: (child, animation) {
+              final slideAnimation = Tween<AlignmentGeometry>(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ).animate(animation);
+
+              return AlignTransition(
+                alignment: slideAnimation,
+                child: child,
+              );
             },
-            onCountryTextChanged: (value) {
-              // TODO: добавить реализацию фильтрации по стране.
-              throw UnimplementedError();
-            },
-            onCityTextChanged: (value) {
-              // TODO: добавить реализацию фильтрации по городу.
-              throw UnimplementedError();
-            },
+            child: isShowFilterButton
+                ? EventsFilters(
+                    onSearchTextChanged: (value) {
+                      // TODO: добавить реализацию поиска по списку событий.
+                      throw UnimplementedError();
+                    },
+                    onCountryTextChanged: (value) {
+                      // TODO: добавить реализацию фильтрации по стране.
+                      throw UnimplementedError();
+                    },
+                    onCityTextChanged: (value) {
+                      // TODO: добавить реализацию фильтрации по городу.
+                      throw UnimplementedError();
+                    },
+                  )
+                : const SizedBox(),
           ),
           Expanded(
             child: AppRefreshIndicator(

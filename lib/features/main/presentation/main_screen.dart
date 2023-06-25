@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ows_events_mobile/common_widgets/filters_icon_button.dart';
 import 'package:ows_events_mobile/common_widgets/info_icon_button.dart';
 import 'package:ows_events_mobile/common_widgets/logo.dart';
 import 'package:ows_events_mobile/common_widgets/max_width_container.dart';
 import 'package:ows_events_mobile/features/events/presentation/events_screen.dart';
 import 'package:ows_events_mobile/features/favorite_events/presentation/favorite_events_list_screen.dart';
+import 'package:ows_events_mobile/features/main/presentation/filter_button_provaider.dart';
 import 'package:ows_events_mobile/features/main/presentation/main_screen_controller.dart';
 
 class MainScreen extends ConsumerWidget {
@@ -25,9 +27,15 @@ class MainScreen extends ConsumerWidget {
         appBar: AppBar(
           leading: const Logo(),
           leadingWidth: 150,
-          actions: const [
-            Text("30 дней"),
-            InfoIconButton(),
+          actions: [
+            FiltersIconButton(
+              onPressed: () => {
+                ref.read(filterButtonProvider.notifier).state =
+                    !ref.read(filterButtonProvider)
+              },
+            ),
+            const Text("30 дней"),
+            const InfoIconButton(),
           ],
         ),
         body: PageView(
