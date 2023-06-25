@@ -13,7 +13,8 @@ class EventResponse with _$EventResponse {
     @JsonKey(name: "id") required final String id,
     @JsonKey(name: "title") required final String title,
     @JsonKey(name: "description") required final String description,
-    @JsonKey(name: "date") final int? date,
+    //TODO разобраться почему дата в дабле
+    @JsonKey(name: "date") final double? date,
     @JsonKey(name: "durationInSeconds") final int? durationInSeconds,
     @JsonKey(name: "location") required final LocationResponse location,
     @JsonKey(name: "price") required final String price,
