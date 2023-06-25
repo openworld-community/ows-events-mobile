@@ -16,7 +16,7 @@ class EventResponse with _$EventResponse {
     @JsonKey(name: "date") final int? date,
     @JsonKey(name: "durationInSeconds") final int? durationInSeconds,
     @JsonKey(name: "location") required final LocationResponse location,
-    @JsonKey(name: "price") required final int price,
+    @JsonKey(name: "price") required final String price,
     @JsonKey(name: "timezone") required final TimezoneResponse timezone,
     @JsonKey(name: "url") required final String url,
     @JsonKey(name: "image") required final String image,

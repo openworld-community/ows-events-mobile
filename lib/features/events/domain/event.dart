@@ -14,7 +14,7 @@ class Event with _$Event {
     required final DateTime? date,
     required final Duration? duration,
     required final Location location,
-    required final int price,
+    required final String price,
     required final String url,
     required final String image,
   }) = _Event;
@@ -28,7 +28,7 @@ class Event with _$Event {
       date: DateTime.parse(eventData['date']),
       duration: ParserUtils.durationFromString(eventData['duration']),
       location: ParserUtils.locationFromString(eventData['location']),
-      price: int.parse(eventData['price']),
+      price: eventData['price'],
       url: eventData['url'],
       image: eventData['image'],
     );

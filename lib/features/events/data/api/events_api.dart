@@ -6,7 +6,7 @@ import 'package:retrofit/retrofit.dart';
 
 part 'events_api.g.dart';
 
-@RestApi(baseUrl: "https://api.afisha.peredelano.com/api/")
+@RestApi(baseUrl: "api.poster-test-peredelano.orby-tech.space")
 abstract class EventsApi {
   factory EventsApi(Dio dio, {String baseUrl}) = _EventsApi;
 
