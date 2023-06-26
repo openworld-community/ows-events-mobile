@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ows_events_mobile/common_widgets/filters_icon_button.dart';
-import 'package:ows_events_mobile/common_widgets/info_icon_button.dart';
 import 'package:ows_events_mobile/common_widgets/logo.dart';
 import 'package:ows_events_mobile/common_widgets/max_width_container.dart';
 import 'package:ows_events_mobile/features/events/presentation/events_screen.dart';
@@ -34,8 +33,6 @@ class MainScreen extends ConsumerWidget {
                     !ref.read(filterButtonProvider)
               },
             ),
-            const Text("30 дней"),
-            const InfoIconButton(),
           ],
         ),
         body: PageView(

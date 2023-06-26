@@ -27,7 +27,7 @@ class Event with _$Event {
       description: eventData['description'],
       date: DateTime.parse(eventData['date']),
       duration: ParserUtils.durationFromString(eventData['duration']),
-      location: ParserUtils.locationFromString(eventData['location']),
+      location: ParserUtils.locationFromJson(eventData['location']),
       price: eventData['price'],
       url: eventData['url'],
       image: eventData['image'],
