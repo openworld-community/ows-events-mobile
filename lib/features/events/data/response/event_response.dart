@@ -17,10 +17,10 @@ class EventResponse with _$EventResponse {
     @JsonKey(name: "date") final double? date,
     @JsonKey(name: "durationInSeconds") final int? durationInSeconds,
     @JsonKey(name: "location") required final LocationResponse location,
-    @JsonKey(name: "price") required final String price,
+    @JsonKey(name: "price") required final String? price,
     @JsonKey(name: "timezone") required final TimezoneResponse timezone,
     @JsonKey(name: "url") required final String url,
-    @JsonKey(name: "image") required final String image,
+    @JsonKey(name: "image") required final String? image,
   }) = _EventResponse;
 
   factory EventResponse.fromJson(Map<String, Object?> json) =>

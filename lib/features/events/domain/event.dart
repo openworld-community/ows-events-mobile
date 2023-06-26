@@ -14,9 +14,9 @@ class Event with _$Event {
     required final DateTime? date,
     required final Duration? duration,
     required final Location location,
-    required final String price,
+    required final String? price,
     required final String url,
-    required final String image,
+    required final String? image,
   }) = _Event;
 
   factory Event.fromJson(Map<String, dynamic> json) {
