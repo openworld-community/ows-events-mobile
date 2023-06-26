@@ -8,8 +8,8 @@ class ParserUtils {
       "title": event.title,
       "description": event.description,
       "date": event.date.toString(),
-      "duration": event.duration.toString(),
-      "location": event.location.toString(),
+      "duration": event.duration?.inMicroseconds.toString(),
+      "location": locationToJson(event.location),
       "price": event.price.toString(),
       "url": event.url,
       "image": event.image,
@@ -19,12 +19,20 @@ class ParserUtils {
   static Duration? durationFromString(String durationString) {
     if (durationString == 'null') return null;
 
-    // TODO: Добавить парсинг Duration из строки
-    return const Duration();
+    return Duration(milliseconds: int.parse(durationString));
   }
 
-  static Location locationFromString(String locationString) {
-    // TODO: Добавить парсинг Location из строки
-    return const Location(country: '', city: '');
+  static Location locationFromJson(Map<String, dynamic> locationJson) {
+    return Location(
+      country: locationJson['country'],
+      city: locationJson['city'],
+    );
+  }
+
+  static Map<String, dynamic> locationToJson(Location location) {
+    return {
+      "country": location.country,
+      "city": location.city,
+    };
   }
 }
