@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ows_events_mobile/common_widgets/info_icon_button.dart';
 import 'package:ows_events_mobile/common_widgets/logo.dart';
 import 'package:ows_events_mobile/common_widgets/max_width_container.dart';
 import 'package:ows_events_mobile/features/events/presentation/events_screen.dart';
@@ -25,10 +24,6 @@ class MainScreen extends ConsumerWidget {
         appBar: AppBar(
           leading: const Logo(),
           leadingWidth: 150,
-          actions: const [
-            Text("30 дней"),
-            InfoIconButton(),
-          ],
         ),
         body: PageView(
           controller: controller,
