@@ -6,7 +6,7 @@ import 'package:retrofit/retrofit.dart';
 
 part 'events_api.g.dart';
 
-@RestApi(baseUrl: "https://api.afisha.peredelano.com/api/")
+@RestApi(baseUrl: "https://api.poster-demo-peredelano.orby-tech.space/api/")
 abstract class EventsApi {
   factory EventsApi(Dio dio, {String baseUrl}) = _EventsApi;
 
@@ -14,4 +14,8 @@ abstract class EventsApi {
   Future<List<EventResponse>> getEvents();
 }
 
-final eventsApiProvider = Provider((ref) => EventsApi(ref.read(dioProvider)));
+final eventsApiProvider = Provider(
+  (ref) => EventsApi(
+    ref.read(dioProvider),
+  ),
+);
