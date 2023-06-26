@@ -25,10 +25,6 @@ class MainScreen extends ConsumerWidget {
         appBar: AppBar(
           leading: const Logo(),
           leadingWidth: 150,
-          actions: const [
-            Text("30 дней"),
-            InfoIconButton(),
-          ],
         ),
         body: PageView(
           controller: controller,
