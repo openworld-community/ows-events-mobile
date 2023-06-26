@@ -20,7 +20,9 @@ class EventsRepository {
         id: e.id,
         title: e.title,
         description: e.description,
-        date: date != null ? DateTime.fromMillisecondsSinceEpoch(date) : null,
+        date: date != null
+            ? DateTime.fromMillisecondsSinceEpoch(date.toInt())
+            : null,
         duration: durationInSeconds != null
             ? Duration(seconds: durationInSeconds)
             : null,

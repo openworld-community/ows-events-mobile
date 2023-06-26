@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ows_events_mobile/common_widgets/max_width_container.dart';
 import 'package:ows_events_mobile/features/events/domain/event.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:ows_events_mobile/theme/app_theme.dart';
 
@@ -37,9 +38,15 @@ class EventScreen extends StatelessWidget {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  Image.network(
-                    eventData.image,
+                  CachedNetworkImage(
+                    placeholder: (context, url) =>
+                        const CircularProgressIndicator(),
+                    imageUrl: eventData.image.toString(),
                     fit: BoxFit.fitWidth,
+                    errorWidget: (context, url, error) => Image.asset(
+                      'assets/image_event_placeholder.png',
+                      fit: BoxFit.fitWidth,
+                    ),
                   ),
                   Positioned(
                     top: 12,

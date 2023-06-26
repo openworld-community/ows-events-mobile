@@ -45,7 +45,10 @@ dependencies:
   intl: ^0.18.1
   flutter_riverpod: ^2.3.6
   shared_preferences: ^2.1.2
-
+  custom_refresh_indicator: ^2.2.1
+  cached_network_image: ^3.2.3
+  flutter_svg: ^2.0.7
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
