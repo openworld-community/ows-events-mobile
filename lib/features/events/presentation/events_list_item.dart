@@ -37,7 +37,7 @@ class EventsListItem extends ConsumerWidget {
                 CachedNetworkImage(
                   placeholder: (context, url) =>
                       const CircularProgressIndicator(),
-                  imageUrl: eventData.image,
+                  imageUrl: eventData.image.toString(),
                   fit: BoxFit.fitWidth,
                   errorWidget: (context, url, error) => Image.asset(
                     'assets/image_event_placeholder.png',
