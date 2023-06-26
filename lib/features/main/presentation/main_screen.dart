@@ -28,10 +28,8 @@ class MainScreen extends ConsumerWidget {
           leadingWidth: 150,
           actions: [
             FiltersIconButton(
-              onPressed: () => {
-                ref.read(filterButtonProvider.notifier).state =
-                    !ref.read(filterButtonProvider)
-              },
+              onPressed: () => ref.read(filterButtonProvider.notifier).state =
+                  !ref.read(filterButtonProvider),
             ),
           ],
         ),
