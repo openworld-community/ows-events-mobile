@@ -8,6 +8,7 @@ import 'package:ows_events_mobile/features/events/presentation/events_filters.da
 import 'package:ows_events_mobile/features/events/presentation/events_list_controller.dart';
 import 'package:ows_events_mobile/features/events/presentation/events_list_item.dart';
 import 'package:ows_events_mobile/features/favorite_events/domain/event_with_favorite_mark.dart';
+import 'package:ows_events_mobile/util/time_utils.dart';
 
 class EventsList extends ConsumerWidget {
   const EventsList({super.key});
@@ -22,14 +23,17 @@ class EventsList extends ConsumerWidget {
     return asyncEventsListData.when(
       data: (events) {
         final bool connectionError = controller.connectionError;
+        final String saveDateTime =
+            TimeUtils.formatDateTime(controller.saveDataTime);
+
         if (connectionError == true) {
           Future.delayed(
             Duration.zero,
             () => showDialog(
               context: context,
               builder: (context) {
-                return const InfoDialog(
-                  message: 'Оффлайн данные. Актуальны на момент',
+                return InfoDialog(
+                  message: 'Оффлайн данные. Актуальны на момент $saveDateTime',
                 );
               },
             ),
