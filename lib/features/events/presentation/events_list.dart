@@ -24,15 +24,16 @@ class EventsList extends ConsumerWidget {
         final bool connectionError = controller.connectionError;
         if (connectionError == true) {
           Future.delayed(
-              Duration.zero,
-              () => showDialog(
-                    context: context,
-                    builder: (context) {
-                      return const InfoDialog(
-                        message: 'Оффлайн данные. Актуальны на момент',
-                      );
-                    },
-                  ));
+            Duration.zero,
+            () => showDialog(
+              context: context,
+              builder: (context) {
+                return const InfoDialog(
+                  message: 'Оффлайн данные. Актуальны на момент',
+                );
+              },
+            ),
+          );
         }
         return Column(
           children: [
