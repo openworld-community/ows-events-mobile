@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ows_events_mobile/common_widgets/refresh_indicator.dart';
 import 'package:ows_events_mobile/features/event/presentation/event_screen.dart';
 import 'package:ows_events_mobile/features/events/domain/event.dart';
 import 'package:ows_events_mobile/features/events/presentation/events_filters.dart';
 import 'package:ows_events_mobile/features/events/presentation/events_list_controller.dart';
 import 'package:ows_events_mobile/features/events/presentation/events_list_item.dart';
 import 'package:ows_events_mobile/features/favorite_events/domain/event_with_favorite_mark.dart';
-import 'package:ows_events_mobile/common_widgets/refresh_indicator.dart';
 
 class EventsList extends ConsumerWidget {
   const EventsList({super.key});
@@ -21,16 +21,6 @@ class EventsList extends ConsumerWidget {
     return asyncEventsListData.when(
       data: (events) => Column(
         children: [
-          Container(
-            color: Theme.of(context).colorScheme.background,
-            padding: const EdgeInsets.only(top: 20),
-            width: double.infinity,
-            child: Text(
-              'Мероприятия',
-              style: Theme.of(context).textTheme.titleLarge,
-              textAlign: TextAlign.center,
-            ),
-          ),
           EventsFilters(
             onSearchTextChanged: (value) {
               // TODO: добавить реализацию поиска по списку событий.
