@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../main/presentation/filter_button_provaider.dart';
+import 'package:ows_events_mobile/features/main/data/filter_button_provider.dart';
 
 class EventsFilters extends ConsumerWidget {
   const EventsFilters({
