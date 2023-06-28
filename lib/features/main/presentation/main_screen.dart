@@ -24,8 +24,12 @@ class MainScreen extends ConsumerWidget {
     return MaxWidthContainer(
       child: Scaffold(
         appBar: AppBar(
-          leading: const Logo(),
-          leadingWidth: 150,
+          title: const Text('Мероприятия'),
+          leading: Container(
+            padding: const EdgeInsets.all(15),
+            child: const Logo(),
+          ),
+          leadingWidth: 100,
           actions: [
             FiltersIconButton(
               onPressed: () => ref.read(filterButtonProvider.notifier).state =
