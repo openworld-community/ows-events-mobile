@@ -57,6 +57,10 @@ class EventsList extends ConsumerWidget {
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => EventScreen(
                           eventData: event,
+                          favorite: favoriteMark,
+                          onAddToFavorite: () {
+                            controller.toggleEventToFavorites(event.id);
+                          },
                         ),
                       ));
                     },
