@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ows_events_mobile/common_widgets/favorite_icon_button.dart';
+import 'package:ows_events_mobile/common_widgets/price.dart';
 import 'package:ows_events_mobile/features/events/domain/event.dart';
 import 'package:ows_events_mobile/theme/app_theme.dart';
 import 'package:ows_events_mobile/util/time_utils.dart';
@@ -47,19 +48,7 @@ class EventsListItem extends ConsumerWidget {
                 Positioned(
                   top: 12,
                   left: 16,
-                  child: Container(
-                    padding: const EdgeInsets.fromLTRB(4, 10, 4, 10),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: Text(
-                      eventData.price.toString(),
-                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                            color: Theme.of(context).colorScheme.background,
-                          ),
-                    ),
-                  ),
+                  child: Price(price: eventData.price),
                 ),
                 Positioned(
                   top: 12,
