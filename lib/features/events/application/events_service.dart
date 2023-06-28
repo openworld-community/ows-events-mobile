@@ -27,6 +27,7 @@ class EventsService {
   late List<Event> _eventsList;
   late FavoriteEvents _favoriteEvents;
   bool connectionError = false;
+  DateTime? saveDataTime;
 
   Future<List<EventWithFavoriteMark>> getEvents() async {
     try {
@@ -36,6 +37,7 @@ class EventsService {
         final StoredEvents? storedEvents =
             await eventsLocalStoreRepository.getEvents();
         if (storedEvents != null) {
+          saveDataTime = storedEvents.saveTime;
           return storedEvents.list;
         }
         throw Exception('$error. Ошибка при получении сохраненных событий.');
