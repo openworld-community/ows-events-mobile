@@ -91,59 +91,6 @@ class EventScreen extends StatelessWidget {
                     color: AppTheme.blue1,
                   ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            Column(
-              children: [
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20),
-                      ),
-                    ),
-                    minimumSize: const Size(400, 50),
-                    backgroundColor: Theme.of(context).colorScheme.secondary,
-                  ),
-                  onPressed: () {
-                    // TODO: добавить реализацию действия Зарегестрироваться
-                    throw UnimplementedError();
-                  },
-                  child: const Text('Зарегистрироваться'),
-                ),
-                const SizedBox(height: 15),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                        minimumSize: const Size(160, 50),
-                        foregroundColor: Colors.black,
-                      ),
-                      onPressed: () {
-                        // TODO: добавить реализацию действия Редактировать событие
-                        throw UnimplementedError();
-                      },
-                      child: const Text('Редактировать'),
-                    ),
-                    const SizedBox(width: 40),
-                    OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                        minimumSize: const Size(160, 50),
-                        foregroundColor: Colors.red,
-                      ),
-                      onPressed: () {
-                        // TODO: добавить реализацию действия Удалить событие
-                        throw UnimplementedError();
-                      },
-                      child: const Text('Удалить'),
-                    ),
-                  ],
-                ),
-              ],
-            ),
           ],
         ),
       ),
