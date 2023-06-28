@@ -26,11 +26,13 @@ class EventsService {
 
   late List<Event> _eventsList;
   late FavoriteEvents _favoriteEvents;
+  bool connectionError = false;
 
   Future<List<EventWithFavoriteMark>> getEvents() async {
     try {
       _eventsList =
           await ref.read(eventsProvider.future).catchError((error) async {
+        connectionError = true;
         final StoredEvents? storedEvents =
             await eventsLocalStoreRepository.getEvents();
         if (storedEvents != null) {

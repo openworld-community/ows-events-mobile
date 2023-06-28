@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ows_events_mobile/common_widgets/info_dialog.dart';
 import 'package:ows_events_mobile/common_widgets/refresh_indicator.dart';
 import 'package:ows_events_mobile/features/event/presentation/event_screen.dart';
 import 'package:ows_events_mobile/features/events/domain/event.dart';
@@ -19,57 +20,83 @@ class EventsList extends ConsumerWidget {
         ref.read(eventsListControllerProvider.notifier);
 
     return asyncEventsListData.when(
-      data: (events) => Column(
-        children: [
-          EventsFilters(
-            onSearchTextChanged: (value) {
-              // TODO: добавить реализацию поиска по списку событий.
-              throw UnimplementedError();
-            },
-            onCountryTextChanged: (value) {
-              // TODO: добавить реализацию фильтрации по стране.
-              throw UnimplementedError();
-            },
-            onCityTextChanged: (value) {
-              // TODO: добавить реализацию фильтрации по городу.
-              throw UnimplementedError();
-            },
-          ),
-          Expanded(
-            child: AppRefreshIndicator(
-              onRefresh: () async {
-                ref.invalidate(eventsListControllerProvider);
+      data: (events) {
+        final bool connectionError = controller.connectionError;
+        if (connectionError == true) {
+          Future.delayed(
+            Duration.zero,
+            () => showDialog(
+              context: context,
+              builder: (context) {
+                return const InfoDialog(
+                  message: 'Оффлайн данные. Актуальны на момент',
+                );
               },
-              child: ListView.builder(
-                itemCount: events.length,
-                itemBuilder: (context, index) {
-                  final Event event = events[index].event;
-                  final bool favoriteMark = events[index].favoriteMark;
-
-                  return EventsListItem(
-                    eventData: event,
-                    favorite: favoriteMark,
-                    locationLinkAction: () {
-                      // TODO: реализовать клик по месту проведения
-                      throw UnimplementedError();
-                    },
-                    itemAction: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => EventScreen(
-                          eventData: event,
-                        ),
-                      ));
-                    },
-                    onAddToFavorite: () {
-                      controller.toggleEventToFavorites(event.id);
-                    },
-                  );
-                },
+            ),
+          );
+        }
+        return Column(
+          children: [
+            Container(
+              color: Theme.of(context).colorScheme.background,
+              padding: const EdgeInsets.only(top: 20),
+              width: double.infinity,
+              child: Text(
+                'Мероприятия',
+                style: Theme.of(context).textTheme.titleLarge,
+                textAlign: TextAlign.center,
               ),
             ),
-          ),
-        ],
-      ),
+            EventsFilters(
+              onSearchTextChanged: (value) {
+                // TODO: добавить реализацию поиска по списку событий.
+                throw UnimplementedError();
+              },
+              onCountryTextChanged: (value) {
+                // TODO: добавить реализацию фильтрации по стране.
+                throw UnimplementedError();
+              },
+              onCityTextChanged: (value) {
+                // TODO: добавить реализацию фильтрации по городу.
+                throw UnimplementedError();
+              },
+            ),
+            Expanded(
+              child: AppRefreshIndicator(
+                onRefresh: () async {
+                  ref.invalidate(eventsListControllerProvider);
+                },
+                child: ListView.builder(
+                  itemCount: events.length,
+                  itemBuilder: (context, index) {
+                    final Event event = events[index].event;
+                    final bool favoriteMark = events[index].favoriteMark;
+
+                    return EventsListItem(
+                      eventData: event,
+                      favorite: favoriteMark,
+                      locationLinkAction: () {
+                        // TODO: реализовать клик по месту проведения
+                        throw UnimplementedError();
+                      },
+                      itemAction: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => EventScreen(
+                            eventData: event,
+                          ),
+                        ));
+                      },
+                      onAddToFavorite: () {
+                        controller.toggleEventToFavorites(event.id);
+                      },
+                    );
+                  },
+                ),
+              ),
+            ),
+          ],
+        );
+      },
       // TODO: в дальнейшем заменить на виджет для вывода ошибки
       error: (error, _) => Text(error.toString()),
       loading: () => const Align(
