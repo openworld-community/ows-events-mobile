@@ -1,52 +1,37 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ows_events_mobile/common_widgets/offline_message.dart';
 import 'package:ows_events_mobile/common_widgets/refresh_indicator.dart';
 import 'package:ows_events_mobile/features/event/presentation/event_screen.dart';
 import 'package:ows_events_mobile/features/events/domain/event.dart';
-import 'package:ows_events_mobile/features/events/presentation/events_filters.dart';
-import 'package:ows_events_mobile/features/events/presentation/events_list_controller.dart';
 import 'package:ows_events_mobile/common_widgets/events_list_item.dart';
 import 'package:ows_events_mobile/features/favorite_events/domain/event_with_favorite_mark.dart';
+import 'package:ows_events_mobile/features/favorite_events/presentation/favorite_events_list_controller.dart';
 import 'package:ows_events_mobile/util/time_utils.dart';
 
-class EventsList extends ConsumerWidget {
-  const EventsList({super.key});
+class FavoriteEventsList extends ConsumerWidget {
+  const FavoriteEventsList({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<List<EventWithFavoriteMark>> asyncEventsListData =
-        ref.watch(eventsListControllerProvider);
-    final EventsListController controller =
-        ref.read(eventsListControllerProvider.notifier);
+    final AsyncValue<List<EventWithFavoriteMark>> asyncEventListData =
+        ref.watch(favoriteEventsListControllerProvider);
+    final FavoriteEventsListController controller =
+        ref.read(favoriteEventsListControllerProvider.notifier);
 
-    return asyncEventsListData.when(
+    return asyncEventListData.when(
       data: (events) {
         final bool connectionError = controller.connectionError;
         String? offlineMessage;
-
-        if (connectionError == true) {
+        if (connectionError) {
           final String saveDateTime =
               TimeUtils.formatDateTime(controller.saveDataTime);
           offlineMessage = 'Оффлайн данные. Актуальны на момент $saveDateTime';
         }
         return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            EventsFilters(
-              onSearchTextChanged: (value) {
-                // TODO: добавить реализацию поиска по списку событий.
-                throw UnimplementedError();
-              },
-              onCountryTextChanged: (value) {
-                // TODO: добавить реализацию фильтрации по стране.
-                throw UnimplementedError();
-              },
-              onCityTextChanged: (value) {
-                // TODO: добавить реализацию фильтрации по городу.
-                throw UnimplementedError();
-              },
-            ),
             if (offlineMessage != null)
               OfflineMessage(
                 message: offlineMessage,
@@ -54,7 +39,7 @@ class EventsList extends ConsumerWidget {
             Expanded(
               child: AppRefreshIndicator(
                 onRefresh: () async {
-                  ref.invalidate(eventsListControllerProvider);
+                  ref.invalidate(favoriteEventsListControllerProvider);
                 },
                 child: ListView.builder(
                   itemCount: events.length,
@@ -77,7 +62,8 @@ class EventsList extends ConsumerWidget {
                         ));
                       },
                       onAddToFavorite: () {
-                        controller.toggleEventToFavorites(event.id);
+                        // TODO: Добавить диалог для подверждения удаления из избранного
+                        throw UnimplementedError();
                       },
                     );
                   },
