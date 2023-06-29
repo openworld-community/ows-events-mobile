@@ -19,32 +19,46 @@ class EventsList extends ConsumerWidget {
         ref.read(eventsListControllerProvider.notifier);
 
     return asyncEventsListData.when(
-      data: (events) => Column(
-        children: [
-          EventsFilters(
-            onSearchTextChanged: (value) {
-              // TODO: добавить реализацию поиска по списку событий.
-              throw UnimplementedError();
-            },
-            onCountryTextChanged: (value) {
-              // TODO: добавить реализацию фильтрации по стране.
-              throw UnimplementedError();
-            },
-            onCityTextChanged: (value) {
-              // TODO: добавить реализацию фильтрации по городу.
-              throw UnimplementedError();
-            },
-          ),
-          Expanded(
-            child: AppRefreshIndicator(
-              onRefresh: () async {
-                ref.invalidate(eventsListControllerProvider);
+      data: (events) {
+        final bool connectionError = controller.connectionError;
+        String? offlineMessage;
+
+        if (connectionError == true) {
+          final String saveDateTime =
+              TimeUtils.formatDateTime(controller.saveDataTime);
+          offlineMessage = 'Оффлайн данные. Актуальны на момент $saveDateTime';
+        }
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            EventsFilters(
+              onSearchTextChanged: (value) {
+                // TODO: добавить реализацию поиска по списку событий.
+                throw UnimplementedError();
               },
-              child: ListView.builder(
-                itemCount: events.length,
-                itemBuilder: (context, index) {
-                  final Event event = events[index].event;
-                  final bool favoriteMark = events[index].favoriteMark;
+              onCountryTextChanged: (value) {
+                // TODO: добавить реализацию фильтрации по стране.
+                throw UnimplementedError();
+              },
+              onCityTextChanged: (value) {
+                // TODO: добавить реализацию фильтрации по городу.
+                throw UnimplementedError();
+              },
+            ),
+            if (offlineMessage != null)
+              OfflineMessage(
+                message: offlineMessage,
+              ),
+            Expanded(
+              child: AppRefreshIndicator(
+                onRefresh: () async {
+                  ref.invalidate(eventsListControllerProvider);
+                },
+                child: ListView.builder(
+                  itemCount: events.length,
+                  itemBuilder: (context, index) {
+                    final Event event = events[index].event;
+                    final bool favoriteMark = events[index].favoriteMark;
 
                   return EventsListItem(
                     eventData: event,

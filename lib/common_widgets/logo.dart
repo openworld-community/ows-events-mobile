@@ -6,6 +6,9 @@ class Logo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SvgPicture.asset('assets/peredelano-afisha.svg');
+    return SvgPicture.asset('assets/peredelano-afisha.svg',
+      fit: BoxFit.fitWidth,
+      width: 80,
+    );
   }
 }

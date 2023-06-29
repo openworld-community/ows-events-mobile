@@ -8,7 +8,7 @@ class ParserUtils {
       "title": event.title,
       "description": event.description,
       "date": event.date.toString(),
-      "duration": event.duration?.inMicroseconds.toString(),
+      "duration": event.duration?.inMicroseconds.toString() ?? '0',
       "location": locationToJson(event.location),
       "price": event.price.toString(),
       "url": event.url,
@@ -16,8 +16,8 @@ class ParserUtils {
     };
   }
 
-  static Duration? durationFromString(String durationString) {
-    if (durationString == 'null') return null;
+  static Duration? durationFromString(String? durationString) {
+    if (durationString == null) return null;
 
     return Duration(milliseconds: int.parse(durationString));
   }
