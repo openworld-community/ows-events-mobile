@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ows_events_mobile/common_widgets/max_width_container.dart';
+import 'package:ows_events_mobile/features/event/presentation/favorite_button.dart';
 import 'package:ows_events_mobile/theme/app_theme.dart';
 
 import 'package:ows_events_mobile/features/events/presentation/events_list_controller.dart';
@@ -28,6 +29,8 @@ class EventScreen extends ConsumerWidget {
         final eventWithFavoriteMark =
             events.firstWhere((element) => element.event.id == id);
         final eventData = eventWithFavoriteMark.event;
+        toggleEventToFavorites() =>
+            controller.toggleEventToFavorites(eventData.id);
         return MaxWidthContainer(
           child: Scaffold(
             appBar: AppBar(
@@ -107,72 +110,19 @@ class EventScreen extends ConsumerWidget {
                 const SizedBox(height: 20),
                 Center(
                   child: eventWithFavoriteMark.favoriteMark
-                      ? TextButton(
-                          onPressed: () =>
-                              controller.toggleEventToFavorites(eventData.id),
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                                Theme.of(context).dividerColor),
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(24.0),
-                                side: BorderSide(
-                                  color: Theme.of(context).dividerColor,
-                                  width: 1.0,
-                                ),
-                              ),
-                            ),
-                            maximumSize: MaterialStateProperty.all<Size>(
-                              const Size(200, 40),
-                            ),
-                            elevation: MaterialStateProperty.all<double>(0),
-                            padding: MaterialStateProperty.all<EdgeInsets>(
-                              const EdgeInsets.symmetric(
-                                vertical: 16,
-                                horizontal: 7,
-                              ),
-                            ),
-                          ),
-                          child: Text(
-                            'Удалить из избранного',
-                            style: Theme.of(context).textTheme.bodyLarge,
-                          ),
+                      ? FavoriteButton(
+                          onPressed: toggleEventToFavorites,
+                          text: 'Удалить из избранного',
+                          backgroundColor: Theme.of(context).dividerColor,
+                          textColor:
+                              Theme.of(context).textTheme.bodyLarge?.color,
                         )
-                      : TextButton(
-                          onPressed: () =>
-                              controller.toggleEventToFavorites(eventData.id),
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                                Theme.of(context).colorScheme.primaryContainer),
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(24.0),
-                                side: BorderSide(
-                                  color: Theme.of(context).dividerColor,
-                                  width: 1.0,
-                                ),
-                              ),
-                            ),
-                            maximumSize: MaterialStateProperty.all<Size>(
-                              const Size(200, 40),
-                            ),
-                            elevation: MaterialStateProperty.all<double>(0),
-                            padding: MaterialStateProperty.all<EdgeInsets>(
-                              const EdgeInsets.symmetric(
-                                vertical: 16,
-                                horizontal: 7,
-                              ),
-                            ),
-                          ),
-                          child: Text(
-                            'Добавить в избранное',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyLarge
-                                ?.copyWith(color: Colors.white),
-                          ),
+                      : FavoriteButton(
+                          onPressed: toggleEventToFavorites,
+                          text: 'Добавить в избранное',
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primaryContainer,
+                          textColor: Colors.white,
                         ),
                 ),
               ],
