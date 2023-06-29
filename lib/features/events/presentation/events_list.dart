@@ -8,6 +8,9 @@ import 'package:ows_events_mobile/features/events/presentation/events_list_contr
 import 'package:ows_events_mobile/features/events/presentation/events_list_item.dart';
 import 'package:ows_events_mobile/features/favorite_events/domain/event_with_favorite_mark.dart';
 
+import '../../../common_widgets/offline_message.dart';
+import '../../../util/time_utils.dart';
+
 class EventsList extends ConsumerWidget {
   const EventsList({super.key});
 
@@ -60,30 +63,31 @@ class EventsList extends ConsumerWidget {
                     final Event event = events[index].event;
                     final bool favoriteMark = events[index].favoriteMark;
 
-                  return EventsListItem(
-                    eventData: event,
-                    favorite: favoriteMark,
-                    locationLinkAction: () {
-                      // TODO: реализовать клик по месту проведения
-                      throw UnimplementedError();
-                    },
-                    itemAction: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => EventScreen(
-                          id: event.id,
-                        ),
-                      ));
-                    },
-                    onAddToFavorite: () {
-                      controller.toggleEventToFavorites(event.id);
-                    },
-                  );
-                },
+                    return EventsListItem(
+                      eventData: event,
+                      favorite: favoriteMark,
+                      locationLinkAction: () {
+                        // TODO: реализовать клик по месту проведения
+                        throw UnimplementedError();
+                      },
+                      itemAction: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => EventScreen(
+                            id: event.id,
+                          ),
+                        ));
+                      },
+                      onAddToFavorite: () {
+                        controller.toggleEventToFavorites(event.id);
+                      },
+                    );
+                  },
+                ),
               ),
             ),
-          ),
-        ],
-      ),
+          ],
+        );
+      },
       // TODO: в дальнейшем заменить на виджет для вывода ошибки
       error: (error, _) => Text(error.toString()),
       loading: () => const Align(
