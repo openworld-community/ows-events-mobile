@@ -25,6 +25,7 @@ class MainScreen extends ConsumerWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Мероприятия'),
+          centerTitle: true,
           leading: Container(
             padding: const EdgeInsets.all(15),
             child: const Logo(),
