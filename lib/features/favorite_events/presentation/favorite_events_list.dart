@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ows_events_mobile/common_widgets/events_list_item.dart';
-import 'package:ows_events_mobile/common_widgets/offline_message.dart';
 import 'package:ows_events_mobile/common_widgets/refresh_indicator.dart';
 import 'package:ows_events_mobile/features/event/presentation/event_screen.dart';
 import 'package:ows_events_mobile/features/events/domain/event.dart';
 import 'package:ows_events_mobile/features/favorite_events/domain/event_with_favorite_mark.dart';
 import 'package:ows_events_mobile/features/favorite_events/presentation/favorite_events_list_controller.dart';
-import 'package:ows_events_mobile/util/time_utils.dart';
 
 class FavoriteEventsList extends ConsumerWidget {
   const FavoriteEventsList({super.key});
@@ -21,22 +19,11 @@ class FavoriteEventsList extends ConsumerWidget {
 
     return asyncEventListData.when(
       data: (events) {
-        final bool connectionError = controller.connectionError;
-        String? offlineMessage;
         final favoriteList =
             events.where((element) => element.favoriteMark).toList();
 
-        if (connectionError) {
-          final String saveDateTime =
-              TimeUtils.formatDateTime(controller.saveDataTime);
-          offlineMessage = 'Оффлайн данные. Актуальны на момент $saveDateTime';
-        }
         return Column(
           children: [
-            if (offlineMessage != null)
-              OfflineMessage(
-                message: offlineMessage,
-              ),
             Expanded(
               child: AppRefreshIndicator(
                 onRefresh: () async {
@@ -62,8 +49,7 @@ class FavoriteEventsList extends ConsumerWidget {
                         ));
                       },
                       onAddToFavorite: () {
-                        // TODO: Добавить диалог для подверждения удаления из избранного
-                        throw UnimplementedError();
+                        controller.toggleEventToFavorites(event.id);
                       },
                     );
                   },
