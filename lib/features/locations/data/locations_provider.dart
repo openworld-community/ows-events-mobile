@@ -17,3 +17,7 @@ final FutureProvider<List<String>> citiesListProvider = FutureProvider(
     return citiesList;
   },
 );
+
+//Переделать в провайдер с именем currentCountryProvider
+// для хранения текущей страны, по которой будет вытаскиваться город
+const String currentCountryProvider = 'Serbia';
