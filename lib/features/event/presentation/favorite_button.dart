@@ -1,25 +1,22 @@
 import 'package:flutter/material.dart';
 
 class FavoriteButton extends StatelessWidget {
-  const FavoriteButton({
-    super.key,
-    required this.onPressed,
-    required this.text,
-    required this.backgroundColor,
-    required this.textColor,
-  });
+  const FavoriteButton(
+      {super.key, required this.onPressed, required this.favorite});
 
   final VoidCallback onPressed;
-  final String text;
-  final Color? backgroundColor;
-  final Color? textColor;
+  final bool favorite;
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: onPressed,
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(backgroundColor),
+        backgroundColor: MaterialStateProperty.all(
+          favorite
+              ? Theme.of(context).dividerColor
+              : Theme.of(context).colorScheme.primaryContainer,
+        ),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(24.0),
@@ -41,9 +38,12 @@ class FavoriteButton extends StatelessWidget {
         ),
       ),
       child: Text(
-        text,
-        style:
-            Theme.of(context).textTheme.bodyLarge?.copyWith(color: textColor),
+        favorite ? 'Удалить из избранного' : 'Добавить в избранное',
+        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+              color: favorite
+                  ? Theme.of(context).textTheme.bodyLarge?.color
+                  : Colors.white,
+            ),
       ),
     );
   }

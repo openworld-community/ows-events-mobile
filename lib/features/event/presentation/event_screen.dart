@@ -109,21 +109,10 @@ class EventScreen extends ConsumerWidget {
                 ),
                 const SizedBox(height: 20),
                 Center(
-                  child: eventWithFavoriteMark.favoriteMark
-                      ? FavoriteButton(
-                          onPressed: toggleEventToFavorites,
-                          text: 'Удалить из избранного',
-                          backgroundColor: Theme.of(context).dividerColor,
-                          textColor:
-                              Theme.of(context).textTheme.bodyLarge?.color,
-                        )
-                      : FavoriteButton(
-                          onPressed: toggleEventToFavorites,
-                          text: 'Добавить в избранное',
-                          backgroundColor:
-                              Theme.of(context).colorScheme.primaryContainer,
-                          textColor: Colors.white,
-                        ),
+                  child: FavoriteButton(
+                    onPressed: toggleEventToFavorites,
+                    favorite: eventWithFavoriteMark.favoriteMark,
+                  ),
                 ),
               ],
             ),
