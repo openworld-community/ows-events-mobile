@@ -5,7 +5,7 @@ import 'package:ows_events_mobile/features/event/presentation/event_screen.dart'
 import 'package:ows_events_mobile/features/events/domain/event.dart';
 import 'package:ows_events_mobile/features/events/presentation/events_filters.dart';
 import 'package:ows_events_mobile/features/events/presentation/events_list_controller.dart';
-import 'package:ows_events_mobile/features/events/presentation/events_list_item.dart';
+import 'package:ows_events_mobile/common_widgets/events_list_item.dart';
 import 'package:ows_events_mobile/features/favorite_events/domain/event_with_favorite_mark.dart';
 
 import '../../../common_widgets/offline_message.dart';
