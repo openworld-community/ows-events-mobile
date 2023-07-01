@@ -4,7 +4,7 @@ import 'package:ows_events_mobile/features/locations/data/repository/countries_r
 
 final FutureProvider<List<String>> countriesListProvider = FutureProvider(
   (ref) async {
-    final repository = await ref.read(countriesRepositoryProvider);
+    final repository = ref.read(countriesRepositoryProvider);
     final countriesList = await repository.getCountries();
     return countriesList;
   },
@@ -12,7 +12,7 @@ final FutureProvider<List<String>> countriesListProvider = FutureProvider(
 
 final FutureProvider<List<String>> citiesListProvider = FutureProvider(
   (ref) async {
-    final repository = await ref.read(citiesRepositoryProvider);
+    final repository = ref.read(citiesRepositoryProvider);
     final citiesList = await repository.getCities();
     return citiesList;
   },

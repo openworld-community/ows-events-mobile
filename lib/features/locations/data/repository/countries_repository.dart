@@ -15,7 +15,7 @@ class CountriesRepository {
 }
 
 final countriesRepositoryProvider = Provider(
-  (ref) async => CountriesRepository(
-    api: await ref.read(locationsApiProvider),
+  (ref) => CountriesRepository(
+    api: ref.read(locationsApiProvider),
   ),
 );

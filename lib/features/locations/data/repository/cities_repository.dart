@@ -17,7 +17,7 @@ class CitiesRepository {
 }
 
 final citiesRepositoryProvider = Provider(
-  (ref) async => CitiesRepository(
-    api: await ref.read(locationsApiProvider),
+  (ref) => CitiesRepository(
+    api: ref.read(locationsApiProvider),
   ),
 );
