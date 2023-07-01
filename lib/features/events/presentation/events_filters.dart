@@ -19,7 +19,6 @@ class EventsFilters extends ConsumerStatefulWidget {
 
 class _EventsFiltersState extends ConsumerState<EventsFilters> {
   String? _selectedCountry;
-  String? _initCityValue;
 
   @override
   Widget build(BuildContext context) {
@@ -79,9 +78,6 @@ class _EventsFiltersState extends ConsumerState<EventsFilters> {
                                 onChanged: (value) {
                                   setState(() {
                                     _selectedCountry = value;
-                                    if (citiesList != null) {
-                                      _initCityValue = citiesList[0];
-                                    }
                                   });
                                 },
                               ),
