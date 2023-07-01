@@ -24,6 +24,8 @@ class AppTheme {
         inputDecorationTheme: inputDecorationTheme.copyWith(
           constraints: const BoxConstraints(
             maxHeight: 40,
+            minWidth: 50,
+            maxWidth: 150,
           ),
         ),
       ),

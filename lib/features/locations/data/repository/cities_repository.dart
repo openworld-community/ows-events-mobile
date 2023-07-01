@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ows_events_mobile/features/locations/data/api/locations_api.dart';
-import 'package:ows_events_mobile/features/locations/data/locations_provider.dart';
 
 class CitiesRepository {
   const CitiesRepository({
@@ -9,9 +8,8 @@ class CitiesRepository {
 
   final LocationsApi api;
 
-  Future<List<String>> getCities() async {
-    final List<String> citiesResponse =
-        await api.getCities(currentCountryProvider);
+  Future<List<String>> getCities(String country) async {
+    final List<String> citiesResponse = await api.getCities(country);
     return citiesResponse;
   }
 }

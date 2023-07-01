@@ -7,9 +7,8 @@ import 'package:ows_events_mobile/features/events/presentation/events_filters.da
 import 'package:ows_events_mobile/features/events/presentation/events_list_controller.dart';
 import 'package:ows_events_mobile/common_widgets/events_list_item.dart';
 import 'package:ows_events_mobile/features/favorite_events/domain/event_with_favorite_mark.dart';
-
-import '../../../common_widgets/offline_message.dart';
-import '../../../util/time_utils.dart';
+import 'package:ows_events_mobile/common_widgets/offline_message.dart';
+import 'package:ows_events_mobile/util/time_utils.dart';
 
 class EventsList extends ConsumerWidget {
   const EventsList({super.key});
@@ -79,10 +78,6 @@ class EventsList extends ConsumerWidget {
               child: EventsFilters(
                 onSearchTextChanged: (value) {
                   // TODO: добавить реализацию поиска по списку событий.
-                  throw UnimplementedError();
-                },
-                onCountryTextChanged: (value) {
-                  // TODO: добавить реализацию фильтрации по стране.
                   throw UnimplementedError();
                 },
                 onCityTextChanged: (value) {

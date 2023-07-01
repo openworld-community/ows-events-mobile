@@ -1,22 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ows_events_mobile/features/locations/data/locations_provider.dart';
 import 'package:ows_events_mobile/features/main/data/filter_button_provider.dart';
 
-class EventsFilters extends ConsumerWidget {
+class EventsFilters extends ConsumerStatefulWidget {
   const EventsFilters({
     super.key,
     required this.onSearchTextChanged,
-    required this.onCountryTextChanged,
     required this.onCityTextChanged,
   });
 
   final void Function(String) onSearchTextChanged;
-  final void Function(String) onCountryTextChanged;
   final void Function(String) onCityTextChanged;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<EventsFilters> createState() => _EventsFiltersState();
+}
+
+class _EventsFiltersState extends ConsumerState<EventsFilters> {
+  String? _selectedCountry;
+  String? _initCityValue;
+
+  @override
+  Widget build(BuildContext context) {
     final isShowFilterButton = ref.watch(filterButtonProvider);
+    final asyncCountriesListData = ref.watch(countriesListProvider);
+    final List<String>? countriesList = asyncCountriesListData.value;
+    List<String>? citiesList;
+
+    if (_selectedCountry != null) {
+      final asyncCitiesListData =
+          ref.watch(citiesListProvider(_selectedCountry!));
+      citiesList = asyncCitiesListData.value;
+    }
+
     return Column(
       children: [
         AnimatedSwitcher(
@@ -40,7 +57,7 @@ class EventsFilters extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         TextField(
-                          onChanged: onSearchTextChanged,
+                          onChanged: widget.onSearchTextChanged,
                           decoration: const InputDecoration(
                             suffixIcon: Icon(
                               Icons.search,
@@ -53,39 +70,41 @@ class EventsFilters extends ConsumerWidget {
                         const SizedBox(height: 15),
                         Row(
                           children: [
-                            const DropdownMenu(
-                              hintText: 'Страна',
-                              dropdownMenuEntries: [
-                                DropdownMenuEntry(
-                                  value: '1',
-                                  label: 'country 1',
-                                ),
-                                DropdownMenuEntry(
-                                  value: '2',
-                                  label: 'country 2',
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            const DropdownMenu(
-                              hintText: 'Город',
-                              dropdownMenuEntries: [
-                                DropdownMenuEntry(
-                                  value: '1',
-                                  label: 'city 1',
-                                ),
-                                DropdownMenuEntry(
-                                  value: '2',
-                                  label: 'city 2',
-                                ),
-                              ],
+                            Expanded(
+                              flex: 1,
+                              child: DropdownButtonFormField(
+                                isExpanded: true,
+                                hint: const Text('Страна'),
+                                items: _getDropdownMenuItems(countriesList),
+                                onChanged: (value) {
+                                  setState(() {
+                                    _selectedCountry = value;
+                                    if (citiesList != null) {
+                                      _initCityValue = citiesList[0];
+                                    }
+                                  });
+                                },
+                              ),
                             ),
                             const SizedBox(
                               width: 20,
                             ),
                             Expanded(
+                              flex: 1,
+                              child: DropdownButtonFormField(
+                                value:
+                                    citiesList != null ? citiesList[0] : null,
+                                isExpanded: true,
+                                hint: const Text('Город'),
+                                items: _getDropdownMenuItems(citiesList),
+                                onChanged: (value) {},
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            Expanded(
+                              flex: 1,
                               child: TextField(
                                 decoration: const InputDecoration(
                                   hintText: 'Даты',
@@ -112,5 +131,16 @@ class EventsFilters extends ConsumerWidget {
         ),
       ],
     );
+  }
+
+  List<DropdownMenuItem> _getDropdownMenuItems(List<String>? entitiesList) {
+    if (entitiesList == null) return [];
+
+    return entitiesList
+        .map((country) => DropdownMenuItem<String>(
+              value: country,
+              child: Text(country),
+            ))
+        .toList();
   }
 }
