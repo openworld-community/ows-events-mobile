@@ -11,7 +11,8 @@ class EventsListController
   }
 
   final EventsService eventsService;
-  late bool connectionError;
+  bool connectionError = false;
+  DateTime? saveDataTime;
 
   init() async {
     state = const AsyncLoading();
@@ -19,7 +20,10 @@ class EventsListController
     try {
       final List<EventWithFavoriteMark> eventsWithFavoriteMarksList =
           await eventsService.getEvents();
+
       connectionError = eventsService.connectionError;
+      saveDataTime = eventsService.saveDataTime;
+
       if (mounted == true) {
         state = AsyncData(eventsWithFavoriteMarksList);
       }

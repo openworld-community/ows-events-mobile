@@ -4,7 +4,7 @@ import 'package:ows_events_mobile/common_widgets/filters_icon_button.dart';
 import 'package:ows_events_mobile/common_widgets/logo.dart';
 import 'package:ows_events_mobile/common_widgets/max_width_container.dart';
 import 'package:ows_events_mobile/features/events/presentation/events_screen.dart';
-import 'package:ows_events_mobile/features/favorite_events/presentation/favorite_events_list_screen.dart';
+import 'package:ows_events_mobile/features/favorite_events/presentation/favorite_events_screen.dart';
 import 'package:ows_events_mobile/features/main/data/filter_button_provider.dart';
 import 'package:ows_events_mobile/features/main/presentation/main_screen_controller.dart';
 
@@ -13,7 +13,7 @@ class MainScreen extends ConsumerWidget {
 
   final List<Widget> screens = const [
     EventsScreen(),
-    FavoriteEventsListScreen(),
+    FavoriteEventsScreen(),
   ];
 
   @override

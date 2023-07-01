@@ -6,6 +6,7 @@ import 'package:ows_events_mobile/features/events/data/events_provider.dart';
 import 'package:ows_events_mobile/features/events/domain/event.dart';
 import 'package:ows_events_mobile/features/events/domain/stored_events.dart';
 import 'package:ows_events_mobile/features/favorite_events/data/favorite_events_repository.dart';
+import 'package:ows_events_mobile/features/favorite_events/data/favotire_events_provider.dart';
 import 'package:ows_events_mobile/features/favorite_events/domain/event_with_favorite_mark.dart';
 import 'package:ows_events_mobile/features/favorite_events/domain/favorite_events.dart';
 
@@ -13,6 +14,7 @@ class EventsService {
   EventsService({
     required this.ref,
     required this.eventsProvider,
+    required this.favoriteEventsProvider,
     required this.favoriteEventsRepository,
     required this.eventsLocalStoreRepository,
     required this.logger,
@@ -20,6 +22,7 @@ class EventsService {
 
   final Ref ref;
   final FutureProvider<List<Event>> eventsProvider;
+  final FutureProvider<FavoriteEvents> favoriteEventsProvider;
   final FavoriteEventsRepository favoriteEventsRepository;
   final EventsLocalStoreRepository eventsLocalStoreRepository;
   final Logger logger;
@@ -27,6 +30,7 @@ class EventsService {
   late List<Event> _eventsList;
   late FavoriteEvents _favoriteEvents;
   bool connectionError = false;
+  DateTime? saveDataTime;
 
   Future<List<EventWithFavoriteMark>> getEvents() async {
     try {
@@ -36,6 +40,7 @@ class EventsService {
         final StoredEvents? storedEvents =
             await eventsLocalStoreRepository.getEvents();
         if (storedEvents != null) {
+          saveDataTime = storedEvents.saveTime;
           return storedEvents.list;
         }
         throw Exception('$error. Ошибка при получении сохраненных событий.');
@@ -47,7 +52,7 @@ class EventsService {
     }
 
     try {
-      _favoriteEvents = await favoriteEventsRepository.getFavoriteEvents();
+      _favoriteEvents = await ref.read(favoriteEventsProvider.future);
 
       return _mapMarksToEvents(_eventsList, _favoriteEvents);
     } catch (error) {
@@ -90,6 +95,7 @@ class EventsService {
 final eventsServiceProvider = Provider<EventsService>((ref) => EventsService(
       ref: ref,
       eventsProvider: eventsProvider,
+      favoriteEventsProvider: favoriteEventsProvider,
       favoriteEventsRepository: ref.read(favoriteEventsRepositoryProvider),
       eventsLocalStoreRepository: ref.read(eventsLocalStoreRepositoryProvider),
       logger: ref.read(loggerProvider),
