@@ -44,7 +44,7 @@ class FavoriteEventsList extends ConsumerWidget {
                       itemAction: () {
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => EventScreen(
-                            eventData: event,
+                            id: event.id,
                           ),
                         ));
                       },
