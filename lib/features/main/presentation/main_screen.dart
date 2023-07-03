@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ows_events_mobile/common_widgets/filters_icon_button.dart';
@@ -24,7 +25,7 @@ class MainScreen extends ConsumerWidget {
     return MaxWidthContainer(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Мероприятия'),
+          title: Text('mainScreenTitle'.tr()),
           centerTitle: true,
           leading: Container(
             padding: const EdgeInsets.all(15),
@@ -54,16 +55,16 @@ class MainScreen extends ConsumerWidget {
               curve: Curves.easeInOut,
             );
           },
-          destinations: const <NavigationDestination>[
+          destinations: <NavigationDestination>[
             NavigationDestination(
-              selectedIcon: Icon(Icons.local_activity),
-              icon: Icon(Icons.local_activity_outlined),
-              label: 'Афиша',
+              selectedIcon: const Icon(Icons.local_activity),
+              icon: const Icon(Icons.local_activity_outlined),
+              label: 'billboardTab'.tr(),
             ),
             NavigationDestination(
-              selectedIcon: Icon(Icons.favorite),
-              icon: Icon(Icons.favorite_outline),
-              label: 'Избранное',
+              selectedIcon: const Icon(Icons.favorite),
+              icon: const Icon(Icons.favorite_outline),
+              label: 'favoritesTab'.tr(),
             ),
           ],
         ),

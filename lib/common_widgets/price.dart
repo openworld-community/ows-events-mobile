@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class Price extends StatelessWidget {
@@ -25,9 +26,9 @@ class Price extends StatelessWidget {
   }
 
   String _getPriceText(String? price) {
-    if (price == null || price == '') return 'Цена не указана';
+    if (price == null || price == '') return 'priceNull'.tr();
 
-    if (price == '0') return 'Бесплатно';
+    if (price == '0') return 'priceFree'.tr();
 
     return price;
   }

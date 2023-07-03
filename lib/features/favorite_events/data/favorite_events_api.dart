@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:ows_events_mobile/core/local_store.dart';
@@ -23,7 +24,7 @@ class FavoriteEventsApi {
       return localStorage.getStringList(FavoriteEventsApi.key);
     } catch (error) {
       logger.e(
-        'Error in the process of getting IDs of favorite events',
+        'getFavoriteEventsIdsError'.tr(),
         error,
         StackTrace.current,
       );
@@ -40,7 +41,7 @@ class FavoriteEventsApi {
       return await localStorage.setStringList(FavoriteEventsApi.key, ids);
     } catch (error) {
       logger.e(
-        'Error in the process of setting IDs of favorite events',
+        'setFavoriteEventsIdsError'.tr(),
         error,
         StackTrace.current,
       );
