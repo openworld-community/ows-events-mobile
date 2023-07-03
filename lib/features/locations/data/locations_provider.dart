@@ -10,14 +10,10 @@ final FutureProvider<List<String>> countriesListProvider = FutureProvider(
   },
 );
 
-final FutureProvider<List<String>> citiesListProvider = FutureProvider(
-  (ref) async {
+final citiesListProvider = FutureProvider.family<List<String>, String>(
+  (ref, country) async {
     final repository = ref.read(citiesRepositoryProvider);
-    final citiesList = await repository.getCities();
+    final citiesList = await repository.getCities(country);
     return citiesList;
   },
 );
-
-//Переделать в провайдер с именем currentCountryProvider
-// для хранения текущей страны, по которой будет вытаскиваться город
-const String currentCountryProvider = 'Serbia';

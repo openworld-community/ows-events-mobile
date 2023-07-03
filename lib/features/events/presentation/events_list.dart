@@ -7,9 +7,8 @@ import 'package:ows_events_mobile/features/events/presentation/events_filters.da
 import 'package:ows_events_mobile/features/events/presentation/events_list_controller.dart';
 import 'package:ows_events_mobile/common_widgets/events_list_item.dart';
 import 'package:ows_events_mobile/features/favorite_events/domain/event_with_favorite_mark.dart';
-
-import '../../../common_widgets/offline_message.dart';
-import '../../../util/time_utils.dart';
+import 'package:ows_events_mobile/common_widgets/offline_message.dart';
+import 'package:ows_events_mobile/util/time_utils.dart';
 
 class EventsList extends ConsumerWidget {
   const EventsList({super.key});
@@ -31,60 +30,62 @@ class EventsList extends ConsumerWidget {
               TimeUtils.formatDateTime(controller.saveDataTime);
           offlineMessage = 'Оффлайн данные. Актуальны на момент $saveDateTime';
         }
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        return Stack(
           children: [
-            EventsFilters(
-              onSearchTextChanged: (value) {
-                // TODO: добавить реализацию поиска по списку событий.
-                throw UnimplementedError();
-              },
-              onCountryTextChanged: (value) {
-                // TODO: добавить реализацию фильтрации по стране.
-                throw UnimplementedError();
-              },
-              onCityTextChanged: (value) {
-                // TODO: добавить реализацию фильтрации по городу.
-                throw UnimplementedError();
-              },
-            ),
-            if (offlineMessage != null)
-              OfflineMessage(
-                message: offlineMessage,
-              ),
-            Expanded(
-              child: AppRefreshIndicator(
-                onRefresh: () async {
-                  ref.invalidate(eventsListControllerProvider);
-                },
-                child: ListView.builder(
-                  itemCount: events.length,
-                  itemBuilder: (context, index) {
-                    final Event event = events[index].event;
-                    final bool favoriteMark = events[index].favoriteMark;
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (offlineMessage != null)
+                  OfflineMessage(
+                    message: offlineMessage,
+                  ),
+                Expanded(
+                  child: AppRefreshIndicator(
+                    onRefresh: () async {
+                      ref.invalidate(eventsListControllerProvider);
+                    },
+                    child: ListView.builder(
+                      itemCount: events.length,
+                      itemBuilder: (context, index) {
+                        final Event event = events[index].event;
+                        final bool favoriteMark = events[index].favoriteMark;
 
-                    return EventsListItem(
-                      eventData: event,
-                      favorite: favoriteMark,
-                      locationLinkAction: () {
-                        // TODO: реализовать клик по месту проведения
-                        throw UnimplementedError();
+                        return EventsListItem(
+                          eventData: event,
+                          favorite: favoriteMark,
+                          locationLinkAction: () {
+                            // TODO: реализовать клик по месту проведения
+                            throw UnimplementedError();
+                          },
+                          itemAction: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => EventScreen(
+                                id: event.id,
+                              ),
+                            ));
+                          },
+                          onAddToFavorite: () {
+                            controller.toggleEventToFavorites(event.id);
+                          },
+                        );
                       },
-                      itemAction: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => EventScreen(
-                            id: event.id,
-                          ),
-                        ));
-                      },
-                      onAddToFavorite: () {
-                        controller.toggleEventToFavorites(event.id);
-                      },
-                    );
-                  },
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
+            Positioned(
+              child: EventsFilters(
+                onSearchTextChanged: (value) {
+                  // TODO: добавить реализацию поиска по списку событий.
+                  throw UnimplementedError();
+                },
+                onCityTextChanged: (value) {
+                  // TODO: добавить реализацию фильтрации по городу.
+                  throw UnimplementedError();
+                },
+              ),
+            )
           ],
         );
       },
