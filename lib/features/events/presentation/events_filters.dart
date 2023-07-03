@@ -26,6 +26,7 @@ class _EventsFiltersState extends ConsumerState<EventsFilters> {
     final asyncCountriesListData = ref.watch(countriesListProvider);
     final List<String>? countriesList = asyncCountriesListData.value;
     List<String>? citiesList;
+    final GlobalKey<FormState> citiesKey = GlobalKey<FormState>();
 
     if (_selectedCountry != null) {
       final asyncCitiesListData =
@@ -78,6 +79,7 @@ class _EventsFiltersState extends ConsumerState<EventsFilters> {
                                 onChanged: (value) {
                                   setState(() {
                                     _selectedCountry = value;
+                                    citiesKey.currentState?.reset();
                                   });
                                 },
                               ),
@@ -88,8 +90,7 @@ class _EventsFiltersState extends ConsumerState<EventsFilters> {
                             Expanded(
                               flex: 1,
                               child: DropdownButtonFormField(
-                                value:
-                                    citiesList != null ? citiesList[0] : null,
+                                key: citiesKey,
                                 isExpanded: true,
                                 hint: const Text('Город'),
                                 items: _getDropdownMenuItems(citiesList),
