@@ -29,5 +29,5 @@
     "getEventsError": "Ошибка при получении списка событий.",
     "getFavoriteEventsIdsError": "Ошибка при получении списка id избранных событий",
     "setFavoriteEventsIdsError": "Ошибка при записи списка id избранных событий",
-    "toggleFavoriteEventError": "Ошибка при переключении избранности события"
+    "toggleFavoriteEventError": "Ошибка: не удалось изменить статус нахождения события в списке избранного"
 }
