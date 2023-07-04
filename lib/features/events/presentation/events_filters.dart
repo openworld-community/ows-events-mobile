@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ows_events_mobile/common_widgets/date_picker_field.dart';
@@ -27,6 +28,7 @@ class _EventsFiltersState extends ConsumerState<EventsFilters> {
     final asyncCountriesListData = ref.watch(countriesListProvider);
     final List<String>? countriesList = asyncCountriesListData.value;
     List<String>? citiesList;
+    final GlobalKey<FormState> citiesKey = GlobalKey<FormState>();
 
     if (_selectedCountry != null) {
       final asyncCitiesListData =
@@ -58,13 +60,13 @@ class _EventsFiltersState extends ConsumerState<EventsFilters> {
                       children: [
                         TextField(
                           onChanged: widget.onSearchTextChanged,
-                          decoration: const InputDecoration(
-                            suffixIcon: Icon(
+                          decoration: InputDecoration(
+                            suffixIcon: const Icon(
                               Icons.search,
                               size: 25.0,
                               color: Colors.grey,
                             ),
-                            hintText: 'Поиск',
+                            hintText: 'search'.tr(),
                           ),
                         ),
                         const SizedBox(height: 15),
@@ -74,11 +76,12 @@ class _EventsFiltersState extends ConsumerState<EventsFilters> {
                               flex: 1,
                               child: DropdownButtonFormField(
                                 isExpanded: true,
-                                hint: const Text('Страна'),
+                                hint: Text('country'.tr()),
                                 items: _getDropdownMenuItems(countriesList),
                                 onChanged: (value) {
                                   setState(() {
                                     _selectedCountry = value;
+                                    citiesKey.currentState?.reset();
                                   });
                                 },
                               ),
@@ -89,10 +92,9 @@ class _EventsFiltersState extends ConsumerState<EventsFilters> {
                             Expanded(
                               flex: 1,
                               child: DropdownButtonFormField(
-                                value:
-                                    citiesList != null ? citiesList[0] : null,
+                                key: citiesKey,
                                 isExpanded: true,
-                                hint: const Text('Город'),
+                                hint: Text('city'.tr()),
                                 items: _getDropdownMenuItems(citiesList),
                                 onChanged: (value) {},
                               ),
