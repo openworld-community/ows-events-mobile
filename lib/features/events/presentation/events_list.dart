@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ows_events_mobile/common_widgets/events_list_item.dart';
+import 'package:ows_events_mobile/common_widgets/offline_message.dart';
 import 'package:ows_events_mobile/common_widgets/refresh_indicator.dart';
+import 'package:ows_events_mobile/core/location_provider.dart';
 import 'package:ows_events_mobile/features/event/presentation/event_screen.dart';
 import 'package:ows_events_mobile/features/events/domain/event.dart';
 import 'package:ows_events_mobile/features/events/presentation/events_filters.dart';
 import 'package:ows_events_mobile/features/events/presentation/events_list_controller.dart';
-import 'package:ows_events_mobile/common_widgets/events_list_item.dart';
 import 'package:ows_events_mobile/features/favorite_events/domain/event_with_favorite_mark.dart';
-import 'package:ows_events_mobile/common_widgets/offline_message.dart';
 import 'package:ows_events_mobile/util/time_utils.dart';
 
 class EventsList extends ConsumerWidget {
@@ -19,6 +20,7 @@ class EventsList extends ConsumerWidget {
         ref.watch(eventsListControllerProvider);
     final EventsListController controller =
         ref.read(eventsListControllerProvider.notifier);
+    final AsyncValue<String> location = ref.watch(locationProvider);
 
     return asyncEventsListData.when(
       data: (events) {
@@ -39,6 +41,13 @@ class EventsList extends ConsumerWidget {
                   OfflineMessage(
                     message: offlineMessage,
                   ),
+                Center(
+                  child: Text(
+                    '${location.value}',
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                ),
+                const SizedBox(height: 10),
                 Expanded(
                   child: AppRefreshIndicator(
                     onRefresh: () async {

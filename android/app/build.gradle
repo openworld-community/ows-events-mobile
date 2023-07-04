@@ -29,8 +29,7 @@ android {
     namespace "com.example.ows_events_mobile"
     compileSdkVersion 33
     ndkVersion flutter.ndkVersion
-    android.useAndroidX = true
-    android.enableJetifier = true
+
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
