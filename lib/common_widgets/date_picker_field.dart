@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:ows_events_mobile/common_widgets/max_width_container.dart';
 
@@ -20,8 +21,8 @@ class _DatePickerFieldState extends State<DatePickerField> {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      decoration: const InputDecoration(
-        hintText: 'Даты',
+      decoration: InputDecoration(
+        hintText: 'dates'.tr(),
       ),
       controller: _controller,
       readOnly: true,

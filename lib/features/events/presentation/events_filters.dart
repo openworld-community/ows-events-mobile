@@ -133,6 +133,5 @@ class _EventsFiltersState extends ConsumerState<EventsFilters> {
 
   void _onDateRangeSave(DateTimeRange dateTimeRange) {
     // TODO: добавить сохранение дат в провайдер
-    print(dateTimeRange);
   }
 }
