@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ows_events_mobile/common_widgets/date_picker_field.dart';
 import 'package:ows_events_mobile/features/locations/data/locations_provider.dart';
 import 'package:ows_events_mobile/features/main/data/filter_button_provider.dart';
 
@@ -103,20 +104,8 @@ class _EventsFiltersState extends ConsumerState<EventsFilters> {
                             ),
                             Expanded(
                               flex: 1,
-                              child: TextField(
-                                decoration: InputDecoration(
-                                  hintText: 'dates'.tr(),
-                                ),
-                                readOnly: true,
-                                onTap: () => showDateRangePicker(
-                                  context: context,
-                                  firstDate: DateTime.now(),
-                                  lastDate: DateTime.now().add(
-                                    const Duration(
-                                      days: 365,
-                                    ),
-                                  ),
-                                ),
+                              child: DatePickerField(
+                                onSave: _onDateRangeSave,
                               ),
                             ),
                           ],
@@ -140,5 +129,10 @@ class _EventsFiltersState extends ConsumerState<EventsFilters> {
               child: Text(country),
             ))
         .toList();
+  }
+
+  void _onDateRangeSave(DateTimeRange dateTimeRange) {
+    // TODO: добавить сохранение дат в провайдер
+    print(dateTimeRange);
   }
 }
