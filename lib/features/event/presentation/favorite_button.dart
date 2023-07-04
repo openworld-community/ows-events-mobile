@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class FavoriteButton extends StatelessWidget {
@@ -38,7 +39,7 @@ class FavoriteButton extends StatelessWidget {
         ),
       ),
       child: Text(
-        favorite ? 'Удалить из избранного' : 'Добавить в избранное',
+        favorite ? 'favoriteButtonDelete'.tr() : 'favoriteButtonAdd'.tr(),
         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
               color: favorite
                   ? Theme.of(context).textTheme.bodyLarge?.color

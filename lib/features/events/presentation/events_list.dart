@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ows_events_mobile/common_widgets/refresh_indicator.dart';
@@ -28,7 +29,7 @@ class EventsList extends ConsumerWidget {
         if (connectionError == true) {
           final String saveDateTime =
               TimeUtils.formatDateTime(controller.saveDataTime);
-          offlineMessage = 'Оффлайн данные. Актуальны на момент $saveDateTime';
+          offlineMessage = '${"offlineDataMessage".tr()} $saveDateTime';
         }
         return Stack(
           children: [
