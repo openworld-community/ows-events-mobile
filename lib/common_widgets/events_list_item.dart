@@ -72,6 +72,8 @@ class EventsListItem extends ConsumerWidget {
                   child: Text(
                     eventData.description,
                     style: Theme.of(context).textTheme.bodyMedium,
+                    overflow: TextOverflow.fade,
+                    maxLines: 3,
                   ),
                 ),
                 Padding(
