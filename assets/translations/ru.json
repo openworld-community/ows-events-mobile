@@ -16,7 +16,7 @@
   "priceNull": "Цена не указана",
   "priceFree": "Бесплатно",
   "registrationLink": "Ссылка на регистрацию",
-  "addImage": "Добваить фото",
+  "addImage": "Добавить фото",
   "cancel": "Отмена",
   "save": "Сохранить",
   "favoriteButtonAdd": "Добавить в избранное",
@@ -33,5 +33,6 @@
   "getLocationNotFoundError": "Ошибка при определении местонахождения",
   "locationNotFound": "Локация не определена",
   "placeMarksListIsEmptyError": "Ошибка список меток местоположения пуст",
-  "locationPermissionHaveBeenDenied": "Ошибка: Разрешения на местоположение были отклонены"
+  "locationPermissionHaveBeenDenied": "Ошибка: Разрешения на местоположение были отклонены",
+  "shareEventLinkMessageText": "Скоро {title} в {location}. Информацию о мероприятии ищите в \"Афише\": {URL}."
 }
