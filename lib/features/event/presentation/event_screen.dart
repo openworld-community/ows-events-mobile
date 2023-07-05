@@ -1,6 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:share_plus/share_plus.dart';
+
 import 'package:ows_events_mobile/common_widgets/max_width_container.dart';
 import 'package:ows_events_mobile/features/event/presentation/favorite_button.dart';
 import 'package:ows_events_mobile/theme/app_theme.dart';
@@ -38,8 +41,14 @@ class EventScreen extends ConsumerWidget {
               actions: [
                 IconButton(
                   onPressed: () {
-                    // TODO: добавить реализацию "Поделиться событием"
-                    throw UnimplementedError();
+                    Share.share("shareEventLinkMessageText".tr(
+                      namedArgs: {
+                        "title": eventData.title,
+                        "location": eventData.location.city,
+                        "URL":
+                            "https://afisha.peredelano.com/event/${eventData.id}",
+                      },
+                    ));
                   },
                   icon: const Icon(Icons.ios_share),
                   color: Colors.black,

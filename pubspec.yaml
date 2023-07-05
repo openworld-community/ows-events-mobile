@@ -48,8 +48,9 @@ dependencies:
   custom_refresh_indicator: ^2.2.1
   cached_network_image: ^3.2.3
   flutter_svg: ^2.0.7
+  share_plus: ^6.0.2
   easy_localization: ^3.0.2
-  
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
