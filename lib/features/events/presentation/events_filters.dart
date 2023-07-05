@@ -58,18 +58,6 @@ class _EventsFiltersState extends ConsumerState<EventsFilters> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        TextField(
-                          onChanged: widget.onSearchTextChanged,
-                          decoration: InputDecoration(
-                            suffixIcon: const Icon(
-                              Icons.search,
-                              size: 25.0,
-                              color: Colors.grey,
-                            ),
-                            hintText: 'search'.tr(),
-                          ),
-                        ),
-                        const SizedBox(height: 15),
                         Row(
                           children: [
                             Expanded(

@@ -12,7 +12,7 @@ class FiltersIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: onPressed,
-      icon: const Icon(Icons.search),
+      icon: const Icon(Icons.filter_list),
     );
   }
 }
