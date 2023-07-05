@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:ows_events_mobile/core/logger.dart';
@@ -43,11 +44,10 @@ class EventsService {
           saveDataTime = storedEvents.saveTime;
           return storedEvents.list;
         }
-        throw Exception('$error. Ошибка при получении сохраненных событий.');
+        throw Exception('$error. ${"getStoredEventsError".tr()}');
       });
     } catch (error) {
-      logger.e(
-          'Ошибка при получении списка событий', error, StackTrace.current);
+      logger.e('getEventsError'.tr(), error, StackTrace.current);
       rethrow;
     }
 
@@ -57,7 +57,7 @@ class EventsService {
       return _mapMarksToEvents(_eventsList, _favoriteEvents);
     } catch (error) {
       logger.e(
-        'Ошибка при получении списка id избранных событий',
+        'getFavoriteEventsIdsError'.tr(),
         error,
         StackTrace.current,
       );
@@ -73,8 +73,7 @@ class EventsService {
 
       return _mapMarksToEvents(_eventsList, _favoriteEvents);
     } catch (error) {
-      logger.e('Ошибка при переключении избранности события', error,
-          StackTrace.current);
+      logger.e('toggleFavoriteEventError'.tr(), error, StackTrace.current);
       rethrow;
     }
   }

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -102,7 +103,7 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
           child: Scaffold(
             appBar: AppBar(
               centerTitle: true,
-              title: const Text('Добавьте мероприятие'),
+              title: Text('createEventScreenTitle'.tr()),
             ),
             body: SingleChildScrollView(
               child: Container(
@@ -115,7 +116,7 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Локация',
+                            'location'.tr(),
                             textAlign: TextAlign.left,
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
@@ -123,21 +124,21 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                           Column(
                             children: [
                               RoundedTextField(
-                                hintText: 'Страна',
+                                hintText: 'country'.tr(),
                                 suffixIcon: Icons.arrow_drop_down_sharp,
                                 text: _countryText,
                                 onTextChanged: _updateCountryText,
                               ),
                               const SizedBox(height: 16),
                               RoundedTextField(
-                                hintText: 'Город',
+                                hintText: 'city'.tr(),
                                 suffixIcon: Icons.arrow_drop_down_sharp,
                                 text: _cityText,
                                 onTextChanged: _updateCityText,
                               ),
                               const SizedBox(height: 16),
                               RoundedTextField(
-                                hintText: 'Часовой пояс',
+                                hintText: 'timeZone'.tr(),
                                 suffixIcon: Icons.arrow_drop_down_sharp,
                                 text: _timezoneText,
                                 onTextChanged: _updateTimezoneText,
@@ -150,7 +151,7 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Общая информация',
+                          'generalInformation'.tr(),
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.titleMedium,
                         ),
@@ -158,13 +159,13 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                         Column(
                           children: [
                             RoundedTextField(
-                              hintText: 'Название',
+                              hintText: 'title'.tr(),
                               text: _nameText,
                               onTextChanged: _updateNameText,
                             ),
                             const SizedBox(height: 16),
                             RoundedTextField(
-                              hintText: 'Описание',
+                              hintText: 'description'.tr(),
                               maxLines: 3,
                               minLines: 3,
                               text: _descriptionText,
@@ -179,7 +180,7 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Начало',
+                          'start'.tr(),
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.titleMedium,
                         ),
@@ -188,7 +189,7 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                           children: [
                             Expanded(
                               child: RoundedTextField(
-                                hintText: 'дд.мм.гг',
+                                hintText: 'dateFormat'.tr(),
                                 keyboardType: TextInputType.datetime,
                                 suffixIcon: Icons.calendar_today_outlined,
                                 text: _startDateText,
@@ -214,7 +215,7 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Окончание',
+                          'end'.tr(),
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.titleMedium,
                         ),
@@ -223,7 +224,7 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                           children: [
                             Expanded(
                               child: RoundedTextField(
-                                hintText: 'дд.мм.гг',
+                                hintText: 'dateFormat'.tr(),
                                 keyboardType: TextInputType.datetime,
                                 suffixIcon: Icons.calendar_today_outlined,
                                 text: _endDateText,
@@ -249,7 +250,7 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Стоимость',
+                          'price'.tr(),
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.titleMedium,
                         ),
@@ -269,7 +270,7 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Ссылка на регистрацию',
+                          'registrationLink'.tr(),
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.titleMedium,
                         ),
@@ -287,7 +288,7 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                       label: Row(
                         children: [
                           Text(
-                            'Добваить фото',
+                            'addImage'.tr(),
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
                           const SizedBox(width: 8),
@@ -354,7 +355,7 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                           ),
                         ),
                         child: Text(
-                          'Отмена',
+                          'cancel'.tr(),
                           style: Theme.of(context).textTheme.titleMedium,
                         ),
                       ),
@@ -388,7 +389,7 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                           ),
                         ),
                         child: Text(
-                          'Сохранить',
+                          'save'.tr(),
                           style: Theme.of(context).textTheme.titleMedium,
                         ),
                       ),
