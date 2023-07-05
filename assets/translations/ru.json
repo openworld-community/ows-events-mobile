@@ -30,5 +30,9 @@
   "getFavoriteEventsIdsError": "Ошибка при получении списка id избранных событий",
   "setFavoriteEventsIdsError": "Ошибка при записи списка id избранных событий",
   "toggleFavoriteEventError": "Ошибка: не удалось изменить статус нахождения события в списке избранного",
+  "getLocationNotFoundError": "Ошибка при определении местонахождения",
+  "locationNotFound": "Локация не определена",
+  "placeMarksListIsEmptyError": "Ошибка список меток местоположения пуст",
+  "locationPermissionHaveBeenDenied": "Ошибка: Разрешения на местоположение были отклонены",
   "shareEventLinkMessageText": "Скоро {title} в {location}. Информацию о мероприятии ищите в \"Афише\": {URL}."
 }
