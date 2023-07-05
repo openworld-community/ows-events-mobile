@@ -10,17 +10,20 @@ import 'package:ows_events_mobile/features/events/presentation/events_filters.da
 import 'package:ows_events_mobile/features/events/presentation/events_list_controller.dart';
 import 'package:ows_events_mobile/features/favorite_events/domain/event_with_favorite_mark.dart';
 import 'package:ows_events_mobile/util/time_utils.dart';
+import 'package:universal_platform/universal_platform.dart';
 
 class EventsList extends ConsumerWidget {
   const EventsList({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isMobile = UniversalPlatform.isAndroid || UniversalPlatform.isIOS;
     final AsyncValue<List<EventWithFavoriteMark>> asyncEventsListData =
         ref.watch(eventsListControllerProvider);
     final EventsListController controller =
         ref.read(eventsListControllerProvider.notifier);
-    final AsyncValue<String> location = ref.watch(locationProvider);
+    final AsyncValue<String> location =
+        isMobile ? ref.watch(locationProvider) : const AsyncValue.data('');
 
     return asyncEventsListData.when(
       data: (events) {
@@ -41,13 +44,15 @@ class EventsList extends ConsumerWidget {
                   OfflineMessage(
                     message: offlineMessage,
                   ),
-                Center(
-                  child: Text(
-                    '${location.value}',
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                ),
-                const SizedBox(height: 10),
+                isMobile && location.value != null
+                    ? Center(
+                        child: Text(
+                          '${location.value}',
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                      )
+                    : const SizedBox(),
+                SizedBox(height: isMobile ? 10 : 0),
                 Expanded(
                   child: AppRefreshIndicator(
                     onRefresh: () async {
