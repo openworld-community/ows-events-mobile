@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
@@ -40,10 +41,14 @@ class EventScreen extends ConsumerWidget {
               actions: [
                 IconButton(
                   onPressed: () {
-                    Share.share(
-                        'Скоро ${eventData.title} в ${eventData.location.city}. '
-                        'Информацию о мероприятии ищите в "Афише": '
-                        'https://afisha.peredelano.com/event/${eventData.id}');
+                    Share.share("shareEventLinkMessageText".tr(
+                      namedArgs: {
+                        "title": eventData.title,
+                        "location": eventData.location.city,
+                        "URL":
+                            "https://afisha.peredelano.com/event/${eventData.id}",
+                      },
+                    ));
                   },
                   icon: const Icon(Icons.ios_share),
                   color: Colors.black,
