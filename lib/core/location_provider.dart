@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:ows_events_mobile/core/logger.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 final locationProvider = FutureProvider<String>((ref) async {
   final logger = ref.read(loggerProvider);
@@ -17,18 +18,18 @@ final locationProvider = FutureProvider<String>((ref) async {
           '${placemark.locality == '' ? '' : ', ${placemark.locality}'}';
     }
     logger.e(
-      'Местоположение не найдено',
-      Exception('placemarksList is empty'),
+      'getLocationNotFoundError'.tr(),
+      Exception('placeMarksListIsEmptyError'.tr()),
       StackTrace.current,
     );
-    return 'Локация не определена';
+    return 'locationNotFound'.tr();
   } catch (error) {
     logger.e(
-      'Error in locationProvider',
+      'getLocationNotFoundError'.tr(),
       error,
       StackTrace.current,
     );
-    return 'Локация не определена';
+    return 'locationNotFound'.tr();
   }
 });
 
@@ -38,7 +39,9 @@ Future<Position> _determinePosition() async {
   if (permission == LocationPermission.denied) {
     permission = await Geolocator.requestPermission();
     if (permission == LocationPermission.denied) {
-      return Future.error('Location Permission are denied');
+      return Future.error(
+        'locationPermissionHaveBeenDenied'.tr(),
+      );
     }
   }
   return await Geolocator.getCurrentPosition();
