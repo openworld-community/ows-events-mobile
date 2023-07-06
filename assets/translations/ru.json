@@ -34,5 +34,7 @@
   "locationNotFound": "Локация не определена",
   "placeMarksListIsEmptyError": "Ошибка список меток местоположения пуст",
   "locationPermissionHaveBeenDenied": "Ошибка: Разрешения на местоположение были отклонены",
-  "shareEventLinkMessageText": "Скоро {title} в {location}. Информацию о мероприятии ищите в \"Афише\": {URL}."
+  "shareEventLinkMessageText": "Скоро {title} в {location}. Информацию о мероприятии ищите в \"Афише\": {URL}.",
+  "trimCollapsedText": "Показать",
+  "trimExpandedText": "Скрыть"
 }
