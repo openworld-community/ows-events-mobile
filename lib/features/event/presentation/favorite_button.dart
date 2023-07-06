@@ -28,12 +28,12 @@ class FavoriteButton extends StatelessWidget {
           ),
         ),
         maximumSize: MaterialStateProperty.all<Size>(
-          const Size(200, 40),
+          const Size(200, double.infinity),
         ),
         elevation: MaterialStateProperty.all<double>(0),
         padding: MaterialStateProperty.all<EdgeInsets>(
           const EdgeInsets.symmetric(
-            vertical: 16,
+            vertical: 10,
             horizontal: 7,
           ),
         ),
