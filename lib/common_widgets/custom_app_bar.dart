@@ -1,41 +1,52 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ows_events_mobile/common_widgets/filters_icon_button.dart';
 import 'package:ows_events_mobile/common_widgets/logo.dart';
 import 'package:ows_events_mobile/common_widgets/search_field.dart';
 import 'package:ows_events_mobile/common_widgets/search_icon_button.dart';
+import 'package:ows_events_mobile/features/main/data/filter_button_provider.dart';
 
-class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
+class CustomAppBar extends ConsumerStatefulWidget
+    implements PreferredSizeWidget {
   const CustomAppBar({
     super.key,
-    this.onFilterIconButtomPressed,
+    required this.title,
+    this.onSearch,
+    this.withFilters,
   });
 
-  final VoidCallback? onFilterIconButtomPressed;
+  final String title;
+  final void Function(String)? onSearch;
+  final bool? withFilters;
 
   @override
-  State<CustomAppBar> createState() => _CustomAppBar();
+  ConsumerState<CustomAppBar> createState() => _CustomAppBar();
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
 
-class _CustomAppBar extends State<CustomAppBar> {
+class _CustomAppBar extends ConsumerState<CustomAppBar> {
   bool _searchShown = false;
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      title: _searchShown
+    Widget titleWidget = Text(widget.title);
+
+    if (widget.onSearch != null) {
+      titleWidget = _searchShown
           ? SearchField(
-              onChange: (value) {},
+              onChange: widget.onSearch!,
               onClose: () {
                 setState(() {
                   _searchShown = false;
                 });
               },
             )
-          : Text('mainScreenTitle'.tr()),
+          : titleWidget;
+    }
+    return AppBar(
+      title: titleWidget,
       centerTitle: true,
       titleSpacing: 0,
       leading: !_searchShown
@@ -46,17 +57,22 @@ class _CustomAppBar extends State<CustomAppBar> {
           : null,
       leadingWidth: !_searchShown ? 100 : 0,
       actions: [
-        if (!_searchShown)
+        if (widget.onSearch != null && !_searchShown)
           SearchIconButton(onPressed: () {
             setState(() {
               _searchShown = true;
             });
           }),
-        if (widget.onFilterIconButtomPressed != null)
+        if (widget.withFilters != null)
           FiltersIconButton(
-            onPressed: widget.onFilterIconButtomPressed!,
+            onPressed: _toggleFilter,
           ),
       ],
     );
+  }
+
+  void _toggleFilter() {
+    ref.read(filterButtonProvider.notifier).state =
+        !ref.read(filterButtonProvider);
   }
 }

@@ -1,5 +1,6 @@
 {
-  "mainScreenTitle": "Мероприятия",
+  "eventsScreenTitle": "Мероприятия",
+  "favoriteEventsScreenTitle": "Избранное",
   "createEventScreenTitle": "Добавьте мероприятие",
   "billboardTab": "Афиша",
   "favoritesTab": "Избранное",
