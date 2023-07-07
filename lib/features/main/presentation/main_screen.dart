@@ -1,8 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ows_events_mobile/common_widgets/filters_icon_button.dart';
-import 'package:ows_events_mobile/common_widgets/logo.dart';
+import 'package:ows_events_mobile/common_widgets/custom_app_bar.dart';
 import 'package:ows_events_mobile/common_widgets/max_width_container.dart';
 import 'package:ows_events_mobile/features/events/presentation/events_screen.dart';
 import 'package:ows_events_mobile/features/favorite_events/presentation/favorite_events_screen.dart';
@@ -24,20 +23,10 @@ class MainScreen extends ConsumerWidget {
 
     return MaxWidthContainer(
       child: Scaffold(
-        appBar: AppBar(
-          title: Text('mainScreenTitle'.tr()),
-          centerTitle: true,
-          leading: Container(
-            padding: const EdgeInsets.all(15),
-            child: const Logo(),
-          ),
-          leadingWidth: 100,
-          actions: [
-            FiltersIconButton(
-              onPressed: () => ref.read(filterButtonProvider.notifier).state =
-                  !ref.read(filterButtonProvider),
-            ),
-          ],
+        appBar: CustomAppBar(
+          onFilterIconButtomPressed: () => ref
+              .read(filterButtonProvider.notifier)
+              .state = !ref.read(filterButtonProvider),
         ),
         body: PageView(
           controller: controller,
