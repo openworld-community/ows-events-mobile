@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:ows_events_mobile/common_widgets/max_width_container.dart';
+import 'package:ows_events_mobile/util/time_utils.dart';
 
 class DatePickerField extends StatefulWidget {
   const DatePickerField({
@@ -15,6 +16,7 @@ class DatePickerField extends StatefulWidget {
 }
 
 class _DatePickerFieldState extends State<DatePickerField> {
+  final String dateFormat = 'dd.MM.yy';
   final TextEditingController _controller = TextEditingController();
   DateTimeRange? _selectedDateRange;
 
@@ -43,11 +45,19 @@ class _DatePickerFieldState extends State<DatePickerField> {
           ),
         );
 
-        _controller.value = TextEditingValue(
-          text: _selectedDateRange.toString(),
-        );
-
         if (_selectedDateRange != null) {
+          final String startDateString = TimeUtils.formatDateTime(
+            _selectedDateRange!.start,
+            format: dateFormat,
+          );
+          final String endDateString = TimeUtils.formatDateTime(
+            _selectedDateRange!.end,
+            format: dateFormat,
+          );
+
+          _controller.value = TextEditingValue(
+            text: '$startDateString - $endDateString',
+          );
           widget.onSave(_selectedDateRange!);
         }
       },
