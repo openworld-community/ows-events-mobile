@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ows_events_mobile/common_widgets/date_picker_field.dart';
-import 'package:ows_events_mobile/features/locations/data/locations_provider.dart';
+import 'package:ows_events_mobile/features/locations/data/api/locations_collector.dart';
 import 'package:ows_events_mobile/features/main/data/filter_button_provider.dart';
 
 class EventsFilters extends ConsumerStatefulWidget {
@@ -20,21 +20,26 @@ class EventsFilters extends ConsumerStatefulWidget {
 }
 
 class _EventsFiltersState extends ConsumerState<EventsFilters> {
-  String? _selectedCountry;
+  LocationsCollector? _locationsCollector;
+  List<String>? _countriesList;
+  List<String>? _citiesList;
+
+  @override
+  void initState() {
+    Future.delayed(Duration.zero, () async {
+      _locationsCollector = await ref.read(locationsCollectorProvider.future);
+
+      setState(() {
+        _countriesList = _locationsCollector!.getCountries();
+      });
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final isShowFilterButton = ref.watch(filterButtonProvider);
-    final asyncCountriesListData = ref.watch(countriesListProvider);
-    final List<String>? countriesList = asyncCountriesListData.value;
-    List<String>? citiesList;
     final GlobalKey<FormState> citiesKey = GlobalKey<FormState>();
-
-    if (_selectedCountry != null) {
-      final asyncCitiesListData =
-          ref.watch(citiesListProvider(_selectedCountry!));
-      citiesList = asyncCitiesListData.value;
-    }
 
     return Column(
       children: [
@@ -65,12 +70,18 @@ class _EventsFiltersState extends ConsumerState<EventsFilters> {
                               child: DropdownButtonFormField(
                                 isExpanded: true,
                                 hint: Text('country'.tr()),
-                                items: _getDropdownMenuItems(countriesList),
+                                items: _getDropdownMenuItems(_countriesList),
                                 onChanged: (value) {
-                                  setState(() {
-                                    _selectedCountry = value;
-                                    citiesKey.currentState?.reset();
-                                  });
+                                  if (_locationsCollector != null) {
+                                    final List<String> citiesList =
+                                        _locationsCollector!
+                                            .getCitiesForCountry(value);
+                                    setState(() {
+                                      _citiesList = citiesList;
+                                    });
+                                  }
+
+                                  citiesKey.currentState?.reset();
                                 },
                               ),
                             ),
@@ -83,7 +94,7 @@ class _EventsFiltersState extends ConsumerState<EventsFilters> {
                                 key: citiesKey,
                                 isExpanded: true,
                                 hint: Text('city'.tr()),
-                                items: _getDropdownMenuItems(citiesList),
+                                items: _getDropdownMenuItems(_citiesList),
                                 onChanged: (value) {},
                               ),
                             ),
