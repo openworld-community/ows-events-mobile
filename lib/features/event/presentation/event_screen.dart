@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ows_events_mobile/util/time_utils.dart';
 import 'package:readmore/readmore.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -98,7 +99,7 @@ class EventScreen extends ConsumerWidget {
                     height: 20,
                   ),
                   Text(
-                    eventData.date.toString(),
+                    TimeUtils.formatDateTime(eventData.date),
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   const SizedBox(
