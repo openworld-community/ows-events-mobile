@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ows_events_mobile/util/time_utils.dart';
 import 'package:readmore/readmore.dart';
@@ -12,6 +13,7 @@ import 'package:ows_events_mobile/theme/app_theme.dart';
 
 import 'package:ows_events_mobile/features/events/presentation/events_list_controller.dart';
 import 'package:ows_events_mobile/features/favorite_events/domain/event_with_favorite_mark.dart';
+import 'package:latlong2/latlong.dart';
 
 class EventScreen extends ConsumerWidget {
   const EventScreen({super.key, required this.id});
@@ -126,6 +128,41 @@ class EventScreen extends ConsumerWidget {
                     lessStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: AppTheme.blue1,
                         ),
+                  ),
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    height: 200,
+                    child: FlutterMap(
+                      options: const MapOptions(
+                        //TODO: Добавить координаты эвента
+                        initialCenter: LatLng(51.509364, -0.128928),
+                        initialZoom: 12,
+                      ),
+                      children: [
+                        TileLayer(
+                          urlTemplate:
+                              'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                        ),
+                        MarkerLayer(
+                          markers: [
+                            Marker(
+                              //TODO: Добавить координаты эвента
+                              point: LatLng(51.509364, -0.128928),
+                              width: 80,
+                              height: 80,
+                              //TODO: Добваить иконку эвента
+                              builder: (context) => Icon(Icons.add_business),
+                            ),
+                            Marker(
+                              point: LatLng(30, 40),
+                              width: 80,
+                              height: 80,
+                              builder: (context) => Icon(Icons.home),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                   const SizedBox(height: 20),
                   Center(
