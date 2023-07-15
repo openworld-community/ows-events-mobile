@@ -59,6 +59,8 @@ class _DatePickerFieldState extends State<DatePickerField> {
             text: '$startDateString - $endDateString',
           );
           widget.onSave(_selectedDateRange!);
+        } else {
+          _controller.clear();
         }
       },
     );

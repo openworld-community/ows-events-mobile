@@ -6,8 +6,8 @@ import 'package:ows_events_mobile/common_widgets/offline_message.dart';
 import 'package:ows_events_mobile/common_widgets/refresh_indicator.dart';
 import 'package:ows_events_mobile/core/location_provider.dart';
 import 'package:ows_events_mobile/features/event/presentation/event_screen.dart';
+import 'package:ows_events_mobile/features/events/data/filters_providers.dart';
 import 'package:ows_events_mobile/features/events/domain/event.dart';
-import 'package:ows_events_mobile/features/events/presentation/events_filters.dart';
 import 'package:ows_events_mobile/features/events/presentation/events_list_controller.dart';
 import 'package:ows_events_mobile/features/favorite_events/domain/event_with_favorite_mark.dart';
 import 'package:ows_events_mobile/util/time_utils.dart';
@@ -28,6 +28,13 @@ class EventsList extends ConsumerWidget {
 
     return asyncEventsListData.when(
       data: (events) {
+        final List<EventWithFavoriteMark> filteredEvents = controller.filter(
+          events,
+          ref.watch(selectedCountryProvider),
+          ref.watch(selectedCityProvider),
+          ref.watch(selectedDatesProvider),
+        );
+
         final bool connectionError = controller.connectionError;
         String? offlineMessage;
 
@@ -36,71 +43,57 @@ class EventsList extends ConsumerWidget {
               TimeUtils.formatDateTime(controller.saveDataTime);
           offlineMessage = '${"offlineDataMessage".tr()} $saveDateTime';
         }
-        return Stack(
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if (offlineMessage != null)
-                  OfflineMessage(
-                    message: offlineMessage,
-                  ),
-                isMobile && location.value != null
-                    ? Center(
-                        child: Text(
-                          '${location.value}',
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                      )
-                    : const SizedBox(),
-                SizedBox(height: isMobile ? 10 : 0),
-                Expanded(
-                  child: AppRefreshIndicator(
-                    onRefresh: () async {
-                      ref.invalidate(eventsListControllerProvider);
-                    },
-                    child: ListView.builder(
-                      itemCount: events.length,
-                      itemBuilder: (context, index) {
-                        final Event event = events[index].event;
-                        final bool favoriteMark = events[index].favoriteMark;
-
-                        return EventsListItem(
-                          eventData: event,
-                          favorite: favoriteMark,
-                          locationLinkAction: () {
-                            // TODO: реализовать клик по месту проведения
-                            throw UnimplementedError();
-                          },
-                          itemAction: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => EventScreen(
-                                id: event.id,
-                              ),
-                            ));
-                          },
-                          onAddToFavorite: () {
-                            controller.toggleEventToFavorites(event.id);
-                          },
-                        );
-                      },
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Positioned(
-              child: EventsFilters(
-                onSearchTextChanged: (value) {
-                  // TODO: добавить реализацию поиска по списку событий.
-                  throw UnimplementedError();
-                },
-                onCityTextChanged: (value) {
-                  // TODO: добавить реализацию фильтрации по городу.
-                  throw UnimplementedError();
-                },
+            if (offlineMessage != null)
+              OfflineMessage(
+                message: offlineMessage,
               ),
-            )
+            if (isMobile && location.value != null)
+              Center(
+                child: Text(
+                  '${location.value}',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+              ),
+            SizedBox(height: isMobile ? 10 : 0),
+            Expanded(
+              child: AppRefreshIndicator(
+                onRefresh: () async {
+                  ref.invalidate(eventsListControllerProvider);
+                },
+                child: filteredEvents.isNotEmpty
+                    ? ListView.builder(
+                        itemCount: filteredEvents.length,
+                        itemBuilder: (context, index) {
+                          final Event event = filteredEvents[index].event;
+                          final bool favoriteMark =
+                              filteredEvents[index].favoriteMark;
+
+                          return EventsListItem(
+                            eventData: event,
+                            favorite: favoriteMark,
+                            locationLinkAction: () {
+                              // TODO: реализовать клик по месту проведения
+                              throw UnimplementedError();
+                            },
+                            itemAction: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => EventScreen(
+                                  id: event.id,
+                                ),
+                              ));
+                            },
+                            onAddToFavorite: () {
+                              controller.toggleEventToFavorites(event.id);
+                            },
+                          );
+                        },
+                      )
+                    : Center(child: Text('eventsNotFound'.tr())),
+              ),
+            ),
           ],
         );
       },

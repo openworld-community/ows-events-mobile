@@ -8,12 +8,14 @@ import 'package:ows_events_mobile/features/main/data/filter_button_provider.dart
 class EventsFilters extends ConsumerStatefulWidget {
   const EventsFilters({
     super.key,
-    required this.onSearchTextChanged,
-    required this.onCityTextChanged,
+    required this.onCountrySelected,
+    required this.onCitySelected,
+    required this.onDatesSelected,
   });
 
-  final void Function(String) onSearchTextChanged;
-  final void Function(String) onCityTextChanged;
+  final void Function(String?) onCountrySelected;
+  final void Function(String?) onCitySelected;
+  final void Function(DateTimeRange) onDatesSelected;
 
   @override
   ConsumerState<EventsFilters> createState() => _EventsFiltersState();
@@ -67,20 +69,13 @@ class _EventsFiltersState extends ConsumerState<EventsFilters> {
                           children: [
                             Expanded(
                               flex: 1,
-                              child: DropdownButtonFormField(
+                              child: DropdownButtonFormField<String>(
                                 isExpanded: true,
                                 hint: Text('country'.tr()),
                                 items: _getDropdownMenuItems(_countriesList),
                                 onChanged: (value) {
-                                  if (_locationsCollector != null) {
-                                    final List<String> citiesList =
-                                        _locationsCollector!
-                                            .getCitiesForCountry(value);
-                                    setState(() {
-                                      _citiesList = citiesList;
-                                    });
-                                  }
-
+                                  _updateCitiesList(value);
+                                  widget.onCountrySelected(value);
                                   citiesKey.currentState?.reset();
                                 },
                               ),
@@ -90,12 +85,14 @@ class _EventsFiltersState extends ConsumerState<EventsFilters> {
                             ),
                             Expanded(
                               flex: 1,
-                              child: DropdownButtonFormField(
+                              child: DropdownButtonFormField<String>(
                                 key: citiesKey,
                                 isExpanded: true,
                                 hint: Text('city'.tr()),
                                 items: _getDropdownMenuItems(_citiesList),
-                                onChanged: (value) {},
+                                onChanged: (value) {
+                                  widget.onCitySelected(value);
+                                },
                               ),
                             ),
                             const SizedBox(
@@ -104,7 +101,7 @@ class _EventsFiltersState extends ConsumerState<EventsFilters> {
                             Expanded(
                               flex: 1,
                               child: DatePickerField(
-                                onSave: _onDateRangeSave,
+                                onSave: widget.onDatesSelected,
                               ),
                             ),
                           ],
@@ -119,18 +116,27 @@ class _EventsFiltersState extends ConsumerState<EventsFilters> {
     );
   }
 
-  List<DropdownMenuItem> _getDropdownMenuItems(List<String>? entitiesList) {
+  List<DropdownMenuItem<String>> _getDropdownMenuItems(
+      List<String>? entitiesList) {
     if (entitiesList == null) return [];
 
     return entitiesList
-        .map((country) => DropdownMenuItem<String>(
-              value: country,
-              child: Text(country),
+        .map((entity) => DropdownMenuItem<String>(
+              value: entity,
+              child: Text(entity),
             ))
         .toList();
   }
 
-  void _onDateRangeSave(DateTimeRange dateTimeRange) {
-    // TODO: добавить сохранение дат в провайдер
+  void _updateCitiesList(String? value) {
+    if (value == null) return;
+
+    if (_locationsCollector != null) {
+      final List<String> citiesList =
+          _locationsCollector!.getCitiesForCountry(value);
+      setState(() {
+        _citiesList = citiesList;
+      });
+    }
   }
 }
