@@ -33,6 +33,22 @@ final locationProvider = FutureProvider<String>((ref) async {
   }
 });
 
+final positionProvider = FutureProvider<Position?>((ref) async {
+  final logger = ref.read(loggerProvider);
+
+  try {
+    final position = _determinePosition();
+    return position;
+  } catch (error) {
+    logger.e(
+      'getLocationNotFoundError'.tr(),
+      error,
+      StackTrace.current,
+    );
+  }
+  return null;
+});
+
 Future<Position> _determinePosition() async {
   var permission = await Geolocator.requestPermission();
 
