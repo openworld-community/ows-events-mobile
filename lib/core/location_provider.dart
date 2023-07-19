@@ -37,7 +37,7 @@ final positionProvider = FutureProvider<Position?>((ref) async {
   final logger = ref.read(loggerProvider);
 
   try {
-    final position = _determinePosition();
+    final position = await _determinePosition();
     return position;
   } catch (error) {
     logger.e(
