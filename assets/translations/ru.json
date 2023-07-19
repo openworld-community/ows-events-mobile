@@ -37,5 +37,6 @@
   "locationPermissionHaveBeenDenied": "Ошибка: Разрешения на местоположение были отклонены",
   "shareEventLinkMessageText": "Скоро {title} в {location}. Информацию о мероприятии ищите в \"Афише\": {URL}.",
   "trimCollapsedText": "Показать",
-  "trimExpandedText": "Скрыть"
+  "trimExpandedText": "Скрыть",
+  "eventsNotFound": "События не найдены"
 }
