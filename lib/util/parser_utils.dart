@@ -1,4 +1,5 @@
 import 'package:ows_events_mobile/features/events/domain/event.dart';
+import 'package:ows_events_mobile/features/events/domain/event_price.dart';
 import 'package:ows_events_mobile/features/events/domain/location.dart';
 
 class ParserUtils {
@@ -10,7 +11,7 @@ class ParserUtils {
       "date": event.date.toString(),
       "duration": event.duration?.inMicroseconds.toString() ?? '0',
       "location": locationToJson(event.location),
-      "price": event.price.toString(),
+      "price": priceToJson(event.price) ?? '0',
       "url": event.url,
       "image": event.image,
     };
@@ -34,5 +35,23 @@ class ParserUtils {
       "country": location.country,
       "city": location.city,
     };
+  }
+
+  static Map<String, dynamic> priceToJson(EventPrice? price) {
+    return {
+      "minValue": price?.minValue,
+      "value": price?.value,
+      "maxValue": price?.maxValue,
+      "currency": price?.currency,
+    };
+  }
+
+  static EventPrice priceFromJson(Map<String, dynamic> priceJson) {
+    return EventPrice(
+      minValue: priceJson['minValue'],
+      value: priceJson['value'],
+      maxValue: priceJson['maxValue'],
+      currency: priceJson['currency'],
+    );
   }
 }
