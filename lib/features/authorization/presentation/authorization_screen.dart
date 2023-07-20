@@ -13,40 +13,42 @@ class AuthorizationScreen extends StatelessWidget {
           title: Text('authorization'.tr()),
         ),
         body: MaxWidthContainer(
-          child: Container(
-            margin: const EdgeInsets.symmetric(
-              horizontal: 30,
-            ),
-            child: Column(
-              children: [
-                const SizedBox(height: 15),
-                TextField(
-                  decoration: InputDecoration(
-                    filled: false,
-                    border: const OutlineInputBorder(),
-                    hintText: 'login'.tr(),
+          child: SingleChildScrollView(
+            child: Container(
+              margin: const EdgeInsets.symmetric(
+                horizontal: 30,
+              ),
+              child: Column(
+                children: [
+                  const SizedBox(height: 15),
+                  TextField(
+                    decoration: InputDecoration(
+                      filled: false,
+                      border: const OutlineInputBorder(),
+                      hintText: 'login'.tr(),
+                    ),
                   ),
-                ),
-                const SizedBox(height: 20),
-                TextField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    filled: false,
-                    border: const OutlineInputBorder(),
-                    hintText: 'password'.tr(),
+                  const SizedBox(height: 20),
+                  TextField(
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      filled: false,
+                      border: const OutlineInputBorder(),
+                      hintText: 'password'.tr(),
+                    ),
                   ),
-                ),
-                const SizedBox(height: 20),
-                TextButton(
-                  onPressed: () => {},
-                  child: Text('enter'.tr()),
-                ),
-                const SizedBox(height: 30),
-                TextButton(
-                  onPressed: () => {},
-                  child: Text('register'.tr()),
-                ),
-              ],
+                  const SizedBox(height: 20),
+                  TextButton(
+                    onPressed: () => {},
+                    child: Text('enter'.tr()),
+                  ),
+                  const SizedBox(height: 30),
+                  TextButton(
+                    onPressed: () => {},
+                    child: Text('register'.tr()),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
