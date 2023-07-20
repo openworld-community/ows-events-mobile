@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ows_events_mobile/features/events/data/response/price_response.dart';
-import 'package:ows_events_mobile/features/events/domain/event_price.dart';
 
 import 'location_response.dart';
 import 'timezone_response.dart';

@@ -11,7 +11,7 @@ class ParserUtils {
       "date": event.date.toString(),
       "duration": event.duration?.inMicroseconds.toString() ?? '0',
       "location": locationToJson(event.location),
-      "price": priceToJson(event.price) ?? '0',
+      "price": priceToJson(event.price),
       "url": event.url,
       "image": event.image,
     };
