@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ows_events_mobile/common_widgets/authorization_icon_button.dart';
 import 'package:ows_events_mobile/common_widgets/filters_icon_button.dart';
 import 'package:ows_events_mobile/common_widgets/logo.dart';
 import 'package:ows_events_mobile/common_widgets/search_field.dart';
 import 'package:ows_events_mobile/common_widgets/search_icon_button.dart';
 import 'package:ows_events_mobile/features/main/data/filter_button_provider.dart';
+import 'package:ows_events_mobile/features/authorization/presentation/authorization_screen.dart';
 
 class CustomAppBar extends ConsumerStatefulWidget
     implements PreferredSizeWidget {
@@ -67,6 +69,15 @@ class _CustomAppBar extends ConsumerState<CustomAppBar> {
           FiltersIconButton(
             onPressed: _toggleFilter,
           ),
+        AuthorizationIconButton(
+          onPressed: () => {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const AuthorizationScreen(),
+              ),
+            ),
+          },
+        ),
       ],
     );
   }

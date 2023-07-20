@@ -38,5 +38,10 @@
   "shareEventLinkMessageText": "Скоро {title} в {location}. Информацию о мероприятии ищите в \"Афише\": {URL}.",
   "trimCollapsedText": "Показать",
   "trimExpandedText": "Скрыть",
-  "eventsNotFound": "События не найдены"
+  "eventsNotFound": "События не найдены",
+  "authorization": "Авторизация",
+  "enter": "Войти",
+  "register": "Зарегистрироваться",
+  "login": "Логин",
+  "password": "Пароль"
 }
