@@ -138,7 +138,7 @@ class EventScreen extends ConsumerWidget {
                       markers.add(
                         Marker(
                           //TODO: Добавить координаты эвента
-                          point: LatLng(51.509364, -0.128928),
+                          point: const LatLng(51.509364, -0.128928),
                           width: 80,
                           height: 80,
                           //TODO: Добваить иконку эвента
