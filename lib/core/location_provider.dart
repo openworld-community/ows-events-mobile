@@ -3,11 +3,12 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:ows_events_mobile/core/logger.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ows_events_mobile/core/position_manager.dart';
 
 final locationProvider = FutureProvider<String>((ref) async {
   final logger = ref.read(loggerProvider);
   try {
-    final position = await _determinePosition();
+    final position = await PositionManager.determinePosition();
     final placemarksList = await placemarkFromCoordinates(
       position.latitude,
       position.longitude,
@@ -33,16 +34,18 @@ final locationProvider = FutureProvider<String>((ref) async {
   }
 });
 
-Future<Position> _determinePosition() async {
-  var permission = await Geolocator.requestPermission();
+final positionProvider = FutureProvider<Position?>((ref) async {
+  final logger = ref.read(loggerProvider);
 
-  if (permission == LocationPermission.denied) {
-    permission = await Geolocator.requestPermission();
-    if (permission == LocationPermission.denied) {
-      return Future.error(
-        'locationPermissionHaveBeenDenied'.tr(),
-      );
-    }
+  try {
+    final position = await PositionManager.determinePosition();
+    return position;
+  } catch (error) {
+    logger.e(
+      'getLocationNotFoundError'.tr(),
+      error,
+      StackTrace.current,
+    );
   }
-  return await Geolocator.getCurrentPosition();
-}
+  return null;
+});
