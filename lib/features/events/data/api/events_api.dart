@@ -1,6 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ows_events_mobile/core/dio.dart';
 import 'package:ows_events_mobile/features/events/data/response/event_response.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -12,10 +10,10 @@ abstract class EventsApi {
 
   @GET("events")
   Future<List<EventResponse>> getEvents();
-}
 
-final eventsApiProvider = Provider(
-  (ref) => EventsApi(
-    ref.read(dioProvider),
-  ),
-);
+  @GET("/usedCountries")
+  Future<List<String>> getCountries();
+
+  @GET("/usedCities/{country}")
+  Future<List<String>> getCities(@Path("country") String country);
+}
