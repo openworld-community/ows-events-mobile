@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ows_events_mobile/core/location_provider.dart';
 import 'package:ows_events_mobile/util/time_utils.dart';
 import 'package:readmore/readmore.dart';
 import 'package:share_plus/share_plus.dart';
@@ -12,6 +14,7 @@ import 'package:ows_events_mobile/theme/app_theme.dart';
 
 import 'package:ows_events_mobile/features/events/presentation/events_list_controller.dart';
 import 'package:ows_events_mobile/features/favorite_events/domain/event_with_favorite_mark.dart';
+import 'package:latlong2/latlong.dart';
 
 class EventScreen extends ConsumerWidget {
   const EventScreen({super.key, required this.id});
@@ -28,6 +31,7 @@ class EventScreen extends ConsumerWidget {
         ref.watch(eventsListControllerProvider);
     final EventsListController controller =
         ref.read(eventsListControllerProvider.notifier);
+    final asyncPositionData = ref.watch(positionProvider);
 
     return asyncEventsListData.when(
       data: (events) {
@@ -126,6 +130,56 @@ class EventScreen extends ConsumerWidget {
                     lessStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: AppTheme.blue1,
                         ),
+                  ),
+                  const SizedBox(height: 20),
+                  asyncPositionData.when(
+                    data: (position) {
+                      List<Marker> markers = [];
+                      markers.add(
+                        Marker(
+                          //TODO: Добавить координаты эвента
+                          point: const LatLng(51.509364, -0.128928),
+                          width: 80,
+                          height: 80,
+                          //TODO: Добваить иконку эвента
+                          builder: (context) => const Icon(Icons.add_business),
+                        ),
+                      );
+                      if (position != null) {
+                        markers.add(
+                          Marker(
+                            point:
+                                LatLng(position.latitude, position.longitude),
+                            width: 80,
+                            height: 80,
+                            //TODO: Добваить иконку дома
+                            builder: (context) => const Icon(Icons.home),
+                          ),
+                        );
+                      }
+                      return SizedBox(
+                        height: 200,
+                        child: FlutterMap(
+                          options: const MapOptions(
+                            //TODO: Добавить координаты эвента
+                            initialCenter: LatLng(51.509364, -0.128928),
+                            initialZoom: 12,
+                          ),
+                          children: [
+                            TileLayer(
+                              urlTemplate:
+                                  'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                            ),
+                            MarkerLayer(markers: markers),
+                          ],
+                        ),
+                      );
+                    },
+                    error: (error, _) => Text(error.toString()),
+                    loading: () => const Align(
+                      alignment: Alignment.topCenter,
+                      child: LinearProgressIndicator(),
+                    ),
                   ),
                   const SizedBox(height: 20),
                   Center(
