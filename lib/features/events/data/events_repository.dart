@@ -33,10 +33,10 @@ class EventsRepository {
         ),
         price: e.price != null
             ? EventPrice(
-                minValue: e.price!.minValue,
-                value: e.price!.value,
-                maxValue: e.price!.maxValue,
-                currency: e.price!.currency,
+                minValue: e.price?.minValue,
+                value: e.price?.value,
+                maxValue: e.price?.maxValue,
+                currency: e.price?.currency,
               )
             : null,
         url: e.url,
