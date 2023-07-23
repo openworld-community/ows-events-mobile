@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 import 'package:ows_events_mobile/core/logger.dart';
 import 'package:ows_events_mobile/features/events/data/events_local_store_repository.dart';
 import 'package:ows_events_mobile/features/events/data/events_provider.dart';
@@ -18,7 +17,6 @@ class EventsService {
     required this.favoriteEventsProvider,
     required this.favoriteEventsRepository,
     required this.eventsLocalStoreRepository,
-    required this.logger,
   });
 
   final Ref ref;
