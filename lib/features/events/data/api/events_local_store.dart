@@ -1,19 +1,17 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
+import 'package:get_it/get_it.dart';
 import 'package:ows_events_mobile/core/local_store.dart';
-import 'package:ows_events_mobile/core/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:talker_flutter/talker_flutter.dart';
 
 class EventsLocalStore {
   EventsLocalStore({
     required this.ref,
     required this.localStoreProvider,
-    required this.logger,
   });
 
   final Ref ref;
   final FutureProvider<SharedPreferences> localStoreProvider;
-  final Logger logger;
 
   static const String key = 'events';
 
@@ -22,11 +20,11 @@ class EventsLocalStore {
       final SharedPreferences localStorage =
           await ref.read(localStoreProvider.future);
       return localStorage.getString(EventsLocalStore.key);
-    } catch (error) {
-      logger.e(
-        'Error in the process of getting saved events',
+    } catch (error, stack) {
+      GetIt.I<Talker>().handle(
         error,
-        StackTrace.current,
+        stack,
+        'Error in the process of getting saved events',
       );
 
       rethrow;
@@ -40,11 +38,11 @@ class EventsLocalStore {
       await localStorage.remove(EventsLocalStore.key);
 
       return await localStorage.setString(EventsLocalStore.key, eventsJson);
-    } catch (error) {
-      logger.e(
-        'Error in the process of saving events list json',
+    } catch (error, stack) {
+      GetIt.I<Talker>().handle(
         error,
-        StackTrace.current,
+        stack,
+        'Error in the process of saving events list json',
       );
 
       rethrow;
@@ -52,9 +50,9 @@ class EventsLocalStore {
   }
 }
 
-final eventsLocalStoreProvider =
-    Provider<EventsLocalStore>((ref) => EventsLocalStore(
-          ref: ref,
-          localStoreProvider: localStoreProvider,
-          logger: ref.read(loggerProvider),
-        ));
+final eventsLocalStoreProvider = Provider<EventsLocalStore>(
+  (ref) => EventsLocalStore(
+    ref: ref,
+    localStoreProvider: localStoreProvider,
+  ),
+);

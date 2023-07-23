@@ -1,20 +1,18 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
+import 'package:get_it/get_it.dart';
 import 'package:ows_events_mobile/core/local_store.dart';
-import 'package:ows_events_mobile/core/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:talker_flutter/talker_flutter.dart';
 
 class FavoriteEventsApi {
   const FavoriteEventsApi({
     required this.ref,
     required this.localStoreProvider,
-    required this.logger,
   });
 
   final Ref ref;
   final FutureProvider<SharedPreferences> localStoreProvider;
-  final Logger logger;
   static const key = 'favoriteEventsIds';
 
   Future<List<String>?> getFavoriteEventsIds() async {
@@ -22,11 +20,11 @@ class FavoriteEventsApi {
       final SharedPreferences localStorage =
           await ref.read(localStoreProvider.future);
       return localStorage.getStringList(FavoriteEventsApi.key);
-    } catch (error) {
-      logger.e(
-        'getFavoriteEventsIdsError'.tr(),
+    } catch (error, stack) {
+      GetIt.I<Talker>().handle(
         error,
-        StackTrace.current,
+        stack,
+        'getFavoriteEventsIdsError'.tr(),
       );
 
       rethrow;
@@ -39,20 +37,20 @@ class FavoriteEventsApi {
           await ref.read(localStoreProvider.future);
 
       return await localStorage.setStringList(FavoriteEventsApi.key, ids);
-    } catch (error) {
-      logger.e(
-        'setFavoriteEventsIdsError'.tr(),
+    } catch (error, stack) {
+      GetIt.I<Talker>().handle(
         error,
-        StackTrace.current,
+        stack,
+        'setFavoriteEventsIdsError'.tr(),
       );
-
       rethrow;
     }
   }
 }
 
-final favoriteEventsApiProvider = Provider((ref) => FavoriteEventsApi(
-      ref: ref,
-      localStoreProvider: localStoreProvider,
-      logger: ref.read(loggerProvider),
-    ));
+final favoriteEventsApiProvider = Provider(
+  (ref) => FavoriteEventsApi(
+    ref: ref,
+    localStoreProvider: localStoreProvider,
+  ),
+);
