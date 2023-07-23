@@ -36,16 +36,18 @@ final locationProvider = FutureProvider<String>(
   },
 );
 
-Future<Position> _determinePosition() async {
-  var permission = await Geolocator.requestPermission();
+final positionProvider = FutureProvider<Position?>((ref) async {
+  final logger = ref.read(loggerProvider);
 
-  if (permission == LocationPermission.denied) {
-    permission = await Geolocator.requestPermission();
-    if (permission == LocationPermission.denied) {
-      return Future.error(
-        'locationPermissionHaveBeenDenied'.tr(),
-      );
-    }
+  try {
+    final position = await PositionManager.determinePosition();
+    return position;
+  } catch (error) {
+    logger.e(
+      'getLocationNotFoundError'.tr(),
+      error,
+      StackTrace.current,
+    );
   }
-  return await Geolocator.getCurrentPosition();
-}
+  return null;
+});
