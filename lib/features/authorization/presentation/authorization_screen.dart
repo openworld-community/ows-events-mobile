@@ -38,12 +38,12 @@ class AuthorizationScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  TextButton(
+                  ElevatedButton(
                     onPressed: () => {},
                     child: Text('enter'.tr()),
                   ),
                   const SizedBox(height: 30),
-                  TextButton(
+                  ElevatedButton(
                     onPressed: () => {},
                     child: Text('register'.tr()),
                   ),
