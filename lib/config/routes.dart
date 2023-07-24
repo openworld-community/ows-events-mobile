@@ -36,8 +36,8 @@ final routerConfig = GoRouter(
       ],
     ),
     GoRoute(
-      name: 'favouriteEventsScreen',
-      path: '/favourite',
+      name: 'favouritesEventsScreen',
+      path: 'favourite',
       builder: (context, state) => const FavoriteEventsScreen(),
     ),
   ],
