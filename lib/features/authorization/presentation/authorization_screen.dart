@@ -39,11 +39,13 @@ class AuthorizationScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   ElevatedButton(
+                    //TODO: Реализовать авторизацию при клике
                     onPressed: () => {},
                     child: Text('enter'.tr()),
                   ),
                   const SizedBox(height: 30),
                   ElevatedButton(
+                    //TODO: Реализовать переход на экран регистрации
                     onPressed: () => {},
                     child: Text('register'.tr()),
                   ),
