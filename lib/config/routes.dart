@@ -20,11 +20,18 @@ final routerConfig = GoRouter(
       builder: (context, state) => const MainScreen(),
       routes: [
         GoRoute(
-          name: 'eventScreen',
-          path: ':id',
-          builder: (context, state) => EventScreen(
-            id: state.pathParameters['id']!,
-          ),
+          name: 'eventsList',
+          path: 'events',
+          builder: (context, state) => const MainScreen(),
+          routes: [
+            GoRoute(
+              name: 'eventScreen',
+              path: ':id',
+              builder: (context, state) => EventScreen(
+                id: state.pathParameters['id']!,
+              ),
+            ),
+          ],
         ),
       ],
     ),

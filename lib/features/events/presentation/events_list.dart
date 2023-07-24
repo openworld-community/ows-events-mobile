@@ -79,7 +79,7 @@ class EventsList extends ConsumerWidget {
                               throw UnimplementedError();
                             },
                             itemAction: () {
-                              context.go('/${event.id}');
+                              context.go('/events/${event.id}');
                             },
                             onAddToFavorite: () {
                               controller.toggleEventToFavorites(event.id);
