@@ -17,13 +17,24 @@ class MainScaffold extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final int menuIndex = ref.watch(pageIndexProvider);
 
+    ref.listen(
+      pageIndexProvider,
+      (previous, current) {
+        switch (current) {
+          case 0:
+            context.go('/');
+          case 1:
+            context.go('/favourites');
+        }
+      },
+    );
+
     return Scaffold(
       body: child,
       bottomNavigationBar: NavigationBar(
         selectedIndex: menuIndex,
         onDestinationSelected: (int index) {
           ref.read(pageIndexProvider.notifier).update((state) => index);
-          _goToPage(index, context);
         },
         destinations: <NavigationDestination>[
           NavigationDestination(
@@ -41,14 +52,14 @@ class MainScaffold extends ConsumerWidget {
     );
   }
 
-  void _goToPage(int index, BuildContext context) {
-    switch (index) {
-      case 0:
-        context.go('/');
-        break;
-      case 1:
-        context.go('/favourites');
-        break;
-    }
-  }
+  // void _goToPage(int index, BuildContext context) {
+  //   switch (index) {
+  //     case 0:
+  //       context.go('/');
+  //       break;
+  //     case 1:
+  //       context.go('/favourites');
+  //       break;
+  //   }
+  // }
 }
