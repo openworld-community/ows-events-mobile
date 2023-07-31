@@ -1,11 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ows_events_mobile/common_widgets/events_list_item.dart';
 import 'package:ows_events_mobile/common_widgets/offline_message.dart';
 import 'package:ows_events_mobile/common_widgets/refresh_indicator.dart';
 import 'package:ows_events_mobile/core/location_provider.dart';
-import 'package:ows_events_mobile/features/event/presentation/event_screen.dart';
 import 'package:ows_events_mobile/features/events/data/filters_providers.dart';
 import 'package:ows_events_mobile/features/events/domain/event.dart';
 import 'package:ows_events_mobile/features/events/presentation/events_list_controller.dart';
@@ -79,11 +79,7 @@ class EventsList extends ConsumerWidget {
                               throw UnimplementedError();
                             },
                             itemAction: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => EventScreen(
-                                  id: event.id,
-                                ),
-                              ));
+                              context.go('/events/${event.id}');
                             },
                             onAddToFavorite: () {
                               controller.toggleEventToFavorites(event.id);
