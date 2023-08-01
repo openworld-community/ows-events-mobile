@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get_it/get_it.dart';
 import 'package:ows_events_mobile/features/events/domain/event.dart';
 import 'package:ows_events_mobile/features/events/domain/location.dart';
 import 'package:ows_events_mobile/features/events/domain/event_price.dart';
@@ -46,5 +47,8 @@ class EventsRepository {
   }
 }
 
-final eventsRepositoryProvider =
-    Provider((ref) => EventsRepository(ref.read(eventsApiProvider)));
+final eventsRepositoryProvider = Provider(
+  (ref) => EventsRepository(
+    GetIt.I<EventsApi>(),
+  ),
+);
