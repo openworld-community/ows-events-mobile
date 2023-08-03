@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttericon/mfg_labs_icons.dart';
 import 'package:go_router/go_router.dart';
 
 import 'main_screen_controller.dart';
@@ -38,7 +39,7 @@ class MainScaffold extends ConsumerWidget {
         },
         destinations: <NavigationDestination>[
           NavigationDestination(
-            selectedIcon: const Icon(Icons.local_activity),
+            selectedIcon: const Icon(MfgLabs.home),
             icon: const Icon(Icons.local_activity_outlined),
             label: 'billboardTab'.tr(),
           ),
@@ -51,15 +52,4 @@ class MainScaffold extends ConsumerWidget {
       ),
     );
   }
-
-  // void _goToPage(int index, BuildContext context) {
-  //   switch (index) {
-  //     case 0:
-  //       context.go('/');
-  //       break;
-  //     case 1:
-  //       context.go('/favourites');
-  //       break;
-  //   }
-  // }
 }
