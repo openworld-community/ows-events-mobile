@@ -1,10 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
-import 'package:ows_events_mobile/features/events/data/events_local_store_repository.dart';
 import 'package:ows_events_mobile/features/events/data/events_provider.dart';
 import 'package:ows_events_mobile/features/events/domain/event.dart';
-import 'package:ows_events_mobile/features/events/domain/stored_events.dart';
 import 'package:ows_events_mobile/features/favorite_events/data/favorite_events_repository.dart';
 import 'package:ows_events_mobile/features/favorite_events/data/favotire_events_provider.dart';
 import 'package:ows_events_mobile/features/favorite_events/domain/event_with_favorite_mark.dart';
@@ -17,34 +15,19 @@ class EventsService {
     required this.eventsProvider,
     required this.favoriteEventsProvider,
     required this.favoriteEventsRepository,
-    required this.eventsLocalStoreRepository,
   });
 
   final Ref ref;
   final FutureProvider<List<Event>> eventsProvider;
   final FutureProvider<FavoriteEvents> favoriteEventsProvider;
   final FavoriteEventsRepository favoriteEventsRepository;
-  final EventsLocalStoreRepository eventsLocalStoreRepository;
 
   late List<Event> _eventsList;
   late FavoriteEvents _favoriteEvents;
-  bool connectionError = false;
-  DateTime? saveDataTime;
 
   Future<List<EventWithFavoriteMark>> getEvents() async {
     try {
-      _eventsList = await ref.read(eventsProvider.future).catchError(
-        (error) async {
-          connectionError = true;
-          final StoredEvents? storedEvents =
-              await eventsLocalStoreRepository.getEvents();
-          if (storedEvents != null) {
-            saveDataTime = storedEvents.saveTime;
-            return storedEvents.list;
-          }
-          throw Exception('$error. ${"getStoredEventsError".tr()}');
-        },
-      );
+      _eventsList = await ref.read(eventsProvider.future);
     } catch (error, stack) {
       GetIt.I<Talker>().handle(
         error,
@@ -106,6 +89,5 @@ final eventsServiceProvider = Provider<EventsService>(
     eventsProvider: eventsProvider,
     favoriteEventsProvider: favoriteEventsProvider,
     favoriteEventsRepository: ref.read(favoriteEventsRepositoryProvider),
-    eventsLocalStoreRepository: ref.read(eventsLocalStoreRepositoryProvider),
   ),
 );

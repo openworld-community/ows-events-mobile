@@ -22,9 +22,6 @@ class EventsListController
       final List<EventWithFavoriteMark> eventsWithFavoriteMarksList =
           await eventsService.getEvents();
 
-      connectionError = eventsService.connectionError;
-      saveDataTime = eventsService.saveDataTime;
-
       if (mounted == true) {
         state = AsyncData(eventsWithFavoriteMarksList);
       }
