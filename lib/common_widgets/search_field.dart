@@ -5,11 +5,11 @@ class SearchField extends StatelessWidget {
   const SearchField({
     super.key,
     required this.onChange,
-    required this.onClose,
+    this.onClose,
   });
 
   final void Function(String) onChange;
-  final VoidCallback onClose;
+  final VoidCallback? onClose;
 
   @override
   Widget build(BuildContext context) {
@@ -18,21 +18,32 @@ class SearchField extends StatelessWidget {
         Expanded(
           child: TextField(
             onChanged: onChange,
+            style: TextStyle(
+              color: Colors.grey[500],
+            ),
             decoration: InputDecoration(
-              filled: false,
-              prefixIconColor: Theme.of(context).colorScheme.primary,
+              fillColor: Colors.grey[200],
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide.none,
+              ),
+              prefixIconColor: Colors.grey[400],
               prefixIcon: const Icon(
-                Icons.search,
+                Icons.search_sharp,
                 size: 25.0,
               ),
               hintText: 'search'.tr(),
+              hintStyle: TextStyle(
+                color: Colors.grey[400],
+              ),
             ),
           ),
         ),
-        IconButton(
-          onPressed: onClose,
-          icon: const Icon(Icons.close),
-        ),
+        if (onClose != null)
+          IconButton(
+            onPressed: onClose,
+            icon: const Icon(Icons.close),
+          ),
       ],
     );
   }
