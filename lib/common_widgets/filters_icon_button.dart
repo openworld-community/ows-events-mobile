@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttericon/font_awesome5_icons.dart';
 
 class FiltersIconButton extends StatelessWidget {
   const FiltersIconButton({
@@ -12,7 +13,10 @@ class FiltersIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: onPressed,
-      icon: const Icon(Icons.filter_list),
+      icon: const Icon(
+        FontAwesome5.sliders_h,
+        size: 20,
+      ),
     );
   }
 }

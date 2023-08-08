@@ -6,7 +6,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ows_events_mobile/core/position_manager.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
-final locationProvider = FutureProvider<String>((ref) async {
+final currentLocationProvider = FutureProvider<String>((ref) async {
   try {
     final position = await PositionManager.determinePosition();
     final placemarksList = await placemarkFromCoordinates(

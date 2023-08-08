@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
+  static const double padding = 15;
   static ThemeData getTheme(BuildContext context) {
     final inputDecorationTheme = InputDecorationTheme(
       isDense: true,
@@ -13,10 +14,20 @@ class AppTheme {
         seedColor: const Color(0xff48C78E),
       ).copyWith(
         primary: const Color(0xff48C78E),
-        primaryContainer: const Color(0xff21A86B),
-        secondaryContainer: const Color(0xffDBDBDB),
+        primaryContainer: Colors.white,
+        secondaryContainer: Colors.white,
         surfaceVariant: Colors.white,
+        background: Colors.white,
+        surface: Colors.white,
       ),
+      textTheme: Theme.of(context).textTheme.copyWith(
+            labelLarge: const TextStyle(
+              fontSize: 14,
+            ),
+            bodyMedium: const TextStyle(
+              fontSize: 17,
+            ),
+          ),
       inputDecorationTheme: inputDecorationTheme.copyWith(
         contentPadding: const EdgeInsets.fromLTRB(15, 12, 12, 12),
       ),
@@ -26,6 +37,17 @@ class AppTheme {
             maxHeight: 40,
             minWidth: 50,
             maxWidth: 150,
+          ),
+        ),
+      ),
+      iconButtonTheme: IconButtonThemeData(
+        style: ButtonStyle(
+          fixedSize: const MaterialStatePropertyAll(Size(40, 40)),
+          backgroundColor: MaterialStatePropertyAll(Colors.grey[200]),
+          shape: MaterialStatePropertyAll(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
           ),
         ),
       ),

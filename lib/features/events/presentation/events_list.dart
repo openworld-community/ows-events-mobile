@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ows_events_mobile/common_widgets/events_list_item.dart';
 import 'package:ows_events_mobile/common_widgets/offline_message.dart';
 import 'package:ows_events_mobile/common_widgets/refresh_indicator.dart';
-import 'package:ows_events_mobile/core/location_provider.dart';
+import 'package:ows_events_mobile/core/current_location_provider.dart';
 import 'package:ows_events_mobile/features/events/data/filters_providers.dart';
 import 'package:ows_events_mobile/features/events/domain/event.dart';
 import 'package:ows_events_mobile/features/events/presentation/events_list_controller.dart';
@@ -23,8 +23,9 @@ class EventsList extends ConsumerWidget {
         ref.watch(eventsListControllerProvider);
     final EventsListController controller =
         ref.read(eventsListControllerProvider.notifier);
-    final AsyncValue<String> location =
-        isMobile ? ref.watch(locationProvider) : const AsyncValue.data('');
+    final AsyncValue<String> location = isMobile
+        ? ref.watch(currentLocationProvider)
+        : const AsyncValue.data('');
 
     return asyncEventsListData.when(
       data: (events) {
