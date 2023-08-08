@@ -24,11 +24,18 @@ class MainScaffold extends ConsumerWidget {
         switch (current) {
           case 0:
             context.go('/');
+            break;
           case 1:
             context.go('/favourites');
+            break;
+          case 2:
+            context.go('/profile');
+            break;
         }
       },
     );
+
+    final Color selectedColor = Theme.of(context).colorScheme.primary;
 
     return Scaffold(
       body: child,
@@ -39,14 +46,28 @@ class MainScaffold extends ConsumerWidget {
         },
         destinations: <NavigationDestination>[
           NavigationDestination(
-            selectedIcon: const Icon(MfgLabs.home),
-            icon: const Icon(Icons.local_activity_outlined),
+            selectedIcon: Icon(
+              MfgLabs.home,
+              color: selectedColor,
+            ),
+            icon: const Icon(MfgLabs.home),
             label: 'billboardTab'.tr(),
           ),
           NavigationDestination(
-            selectedIcon: const Icon(Icons.favorite),
+            selectedIcon: Icon(
+              Icons.favorite,
+              color: selectedColor,
+            ),
             icon: const Icon(Icons.favorite_outline),
             label: 'favoritesTab'.tr(),
+          ),
+          NavigationDestination(
+            selectedIcon: Icon(
+              Icons.account_circle_outlined,
+              color: selectedColor,
+            ),
+            icon: const Icon(Icons.account_circle_outlined),
+            label: 'profileTab'.tr(),
           ),
         ],
       ),
