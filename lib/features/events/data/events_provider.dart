@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ows_events_mobile/features/events/data/repository/events_repository.dart';
+import 'package:ows_events_mobile/core/repositories/events_repository.dart';
 import 'package:ows_events_mobile/features/events/domain/event.dart';
 
 final eventsProvider = FutureProvider<List<Event>>((ref) async {
