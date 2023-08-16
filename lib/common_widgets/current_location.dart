@@ -48,9 +48,9 @@ class _CurrentLocationState extends ConsumerState<CurrentLocation> {
             if (_location != null)
               Text(
                 _location!,
+                overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
+                    fontWeight: FontWeight.bold, fontSize: 12.0),
               ),
           ],
         )
