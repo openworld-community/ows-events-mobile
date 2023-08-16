@@ -80,6 +80,7 @@ class EventsList extends ConsumerWidget {
                               throw UnimplementedError();
                             },
                             itemAction: () {
+                              chosenEventIDProvider.overrideWithValue(event.id);
                               context.go('/events/${event.id}');
                             },
                             onAddToFavorite: () {
@@ -103,3 +104,5 @@ class EventsList extends ConsumerWidget {
     );
   }
 }
+
+final chosenEventIDProvider = Provider((ref) => '');
