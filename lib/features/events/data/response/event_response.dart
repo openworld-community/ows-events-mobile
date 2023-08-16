@@ -21,6 +21,7 @@ class EventResponse with _$EventResponse {
     @JsonKey(name: "timezone") required final TimezoneResponse timezone,
     @JsonKey(name: "url") required final String url,
     @JsonKey(name: "image") required final String? image,
+    @JsonKey(name: "tags") required final List<String>? tags,
   }) = _EventResponse;
 
   factory EventResponse.fromJson(Map<String, Object?> json) =>
