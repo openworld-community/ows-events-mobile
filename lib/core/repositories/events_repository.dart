@@ -3,6 +3,8 @@ import 'package:get_it/get_it.dart';
 import 'package:ows_events_mobile/features/events/domain/event.dart';
 import 'package:ows_events_mobile/features/events/domain/location.dart';
 import 'package:ows_events_mobile/core/network/network.dart';
+import 'package:ows_events_mobile/features/search/domain/search_parameter.dart';
+import 'package:ows_events_mobile/features/search/search_provider.dart';
 
 class EventsRepository {
   EventsRepository(this.api);
@@ -41,9 +43,8 @@ class EventsRepository {
     }).toList();
   }
 
-  Future<List<Event>> getFindedEvents() async {
-    final findEventsResponse =
-        await api.getFindedEvents(searchParameterProvider);
+  Future<List<Event>> getFindedEvents(SearchParameter searchParameter) async {
+    final findEventsResponse = await api.getFindedEvents(searchParameter);
 
     return findEventsResponse.map(
       (e) {

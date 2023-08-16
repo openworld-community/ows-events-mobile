@@ -6,9 +6,8 @@ import 'package:ows_events_mobile/features/search/domain/search_parameter.dart';
 
 //провайдер, хранящий результаты поиска
 final findedEventsProvider = Provider(
-  (ref) => EventsRepository(
-    GetIt.I<EventsApi>(),
-  ).getFindedEvents(),
+  (ref) => EventsRepository(GetIt.I<EventsApi>())
+      .getFindedEvents(ref.read(searchParameterProvider)),
 );
 
 // провайдер для проброски параметров поиска
