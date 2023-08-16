@@ -4,7 +4,7 @@ import 'package:ows_events_mobile/features/events/presentation/events_list.dart'
 import 'package:ows_events_mobile/features/events/domain/event.dart';
 import 'package:ows_events_mobile/features/events/domain/location.dart';
 
-import 'package:ows_events_mobile/core/network/events_api.dart';
+import 'package:ows_events_mobile/core/network/network.dart';
 
 class EventRepository {
   EventRepository(this.api, this.eventID);
