@@ -11,6 +11,9 @@ abstract class EventsApi {
   @GET("events")
   Future<List<EventResponse>> getEvents();
 
+  @GET("evens/{id}")
+  Future<EventResponse> getEventInfo(@Path("id") String id);
+
   @GET("/usedCountries")
   Future<List<String>> getCountries();
 
