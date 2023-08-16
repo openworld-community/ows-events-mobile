@@ -49,7 +49,10 @@ class EventsListItem extends ConsumerWidget {
                 Positioned(
                   top: 12,
                   left: 16,
-                  child: Price(price: eventData.price?.value.toString()),
+                  child: Price(
+                    price: eventData.priceFix,
+                    currency: eventData.priceCurrency,
+                  ),
                 ),
                 Positioned(
                   top: 12,

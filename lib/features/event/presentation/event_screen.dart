@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ows_events_mobile/common_widgets/price.dart';
 import 'package:ows_events_mobile/core/current_location_provider.dart';
 import 'package:ows_events_mobile/util/time_utils.dart';
 import 'package:readmore/readmore.dart';
@@ -40,6 +41,7 @@ class EventScreen extends ConsumerWidget {
         final eventData = eventWithFavoriteMark.event;
         toggleEventToFavorites() =>
             controller.toggleEventToFavorites(eventData.id);
+
         return MaxWidthContainer(
           child: Scaffold(
             appBar: AppBar(
@@ -90,9 +92,9 @@ class EventScreen extends ConsumerWidget {
                               color: Theme.of(context).colorScheme.secondary,
                               borderRadius: BorderRadius.circular(16),
                             ),
-                            child: Text(
-                              eventData.price.toString(),
-                              style: Theme.of(context).textTheme.bodyMedium,
+                            child: Price(
+                              price: eventData.priceFix,
+                              currency: eventData.priceCurrency,
                             ),
                           ),
                         ),

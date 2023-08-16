@@ -2,9 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class Price extends StatelessWidget {
-  const Price({super.key, required this.price});
+  const Price({super.key, required this.price, required this.currency});
 
   final String? price;
+  final String? currency;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +31,6 @@ class Price extends StatelessWidget {
 
     if (price == '0') return 'priceFree'.tr();
 
-    return price;
+    return '$price $currency';
   }
 }
