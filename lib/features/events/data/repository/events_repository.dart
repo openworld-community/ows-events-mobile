@@ -2,7 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:ows_events_mobile/features/events/domain/event.dart';
 import 'package:ows_events_mobile/features/events/domain/location.dart';
-import 'package:ows_events_mobile/features/events/domain/event_price.dart';
 
 import 'package:ows_events_mobile/core/network/events_api.dart';
 
@@ -32,16 +31,13 @@ class EventsRepository {
           country: e.location.country,
           city: e.location.city,
         ),
-        price: e.price != null
-            ? EventPrice(
-                minValue: e.price?.minValue,
-                value: e.price?.value,
-                maxValue: e.price?.maxValue,
-                currency: e.price?.currency,
-              )
-            : null,
+        priceMin: e.price?.minValue?.round().toString(),
+        priceFix: e.price?.value?.round().toString(),
+        priceMax: e.price?.maxValue?.round().toString(),
+        priceCurrency: e.price?.currency.toString(),
         url: e.url,
         image: e.image,
+        tags: e.tags,
       );
     }).toList();
   }
