@@ -39,37 +39,26 @@ class MainScaffold extends ConsumerWidget {
 
     return Scaffold(
       body: child,
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: menuIndex,
-        onDestinationSelected: (int index) {
-          ref.read(pageIndexProvider.notifier).update((state) => index);
-        },
-        destinations: <NavigationDestination>[
-          NavigationDestination(
-            selectedIcon: Icon(
-              MfgLabs.home,
-              color: selectedColor,
-            ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
             icon: const Icon(MfgLabs.home),
             label: 'billboardTab'.tr(),
           ),
-          NavigationDestination(
-            selectedIcon: Icon(
-              Icons.favorite,
-              color: selectedColor,
-            ),
-            icon: const Icon(Icons.favorite_outline),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.favorite),
             label: 'favoritesTab'.tr(),
           ),
-          NavigationDestination(
-            selectedIcon: Icon(
-              Icons.account_circle_outlined,
-              color: selectedColor,
-            ),
+          BottomNavigationBarItem(
             icon: const Icon(Icons.account_circle_outlined),
             label: 'profileTab'.tr(),
           ),
         ],
+        currentIndex: menuIndex,
+        selectedItemColor: selectedColor,
+        onTap: (int index) {
+          ref.read(pageIndexProvider.notifier).update((state) => index);
+        },
       ),
     );
   }
