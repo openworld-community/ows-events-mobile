@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,7 @@ import 'package:ows_events_mobile/app.dart';
 import 'package:talker_dio_logger/talker_dio_logger.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
-import 'features/events/data/api/events_api.dart';
+import 'package:ows_events_mobile/core/network/network.dart';
 
 void main() async {
   final talker = TalkerFlutter.init();

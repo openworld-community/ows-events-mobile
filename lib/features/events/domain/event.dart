@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:ows_events_mobile/features/events/domain/event_price.dart';
 import 'location.dart';
 part 'event.freezed.dart';
 
@@ -12,8 +11,12 @@ class Event with _$Event {
     required final DateTime? date,
     required final Duration? duration,
     required final Location location,
-    required final EventPrice? price,
+    required final String? priceMin,
+    required final String? priceFix,
+    required final String? priceMax,
+    required final String? priceCurrency,
     required final String url,
     required final String? image,
+    required final List<String>? tags,
   }) = _Event;
 }

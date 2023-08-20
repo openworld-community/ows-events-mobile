@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
-import 'package:ows_events_mobile/features/events/data/api/events_api.dart';
+import 'package:ows_events_mobile/core/network/network.dart';
 
 class CountriesRepository {
   const CountriesRepository({
