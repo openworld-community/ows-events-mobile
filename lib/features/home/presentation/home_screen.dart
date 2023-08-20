@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ows_events_mobile/features/home/presentation/home_app_bar.dart';
@@ -21,20 +22,21 @@ class HomeScreen extends ConsumerWidget {
                 title: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const HomeSectionTitle(titleText: "Митапы"),
+                    HomeSectionTitle(titleText: "meetupsTitle".tr()),
                     HomeSectionTitle(
                       titleText: "Peredelano",
                       color: Theme.of(context).colorScheme.secondary,
                     ),
                   ],
                 ),
-                moreColor: Theme.of(context).colorScheme.secondary,
+                viewAllColor: Theme.of(context).colorScheme.secondary,
                 onMoreTap: () {
                   // TODO: реализовать переход на полный список митапов переделано
                   throw UnimplementedError(
                       'Переход на полный список митапов не реализован.');
                 },
                 child: SizedBox(
+                  // Блок-заглушка, будет заменен на актуальную карусель событий.
                   height: 208,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
@@ -57,13 +59,14 @@ class HomeScreen extends ConsumerWidget {
                 ),
               ),
               HomeSection(
-                titleText: "Сегодня",
+                titleText: "todayEventsTitle".tr(),
                 onMoreTap: () {
                   // TODO: реализовать переход на полный список событий за сегодня
                   throw UnimplementedError(
                       'Переход на полный список событий за сегодня не реализован.');
                 },
                 child: SizedBox(
+                  // Блок-заглушка, будет заменен на актуальную карусель событий.
                   height: 240,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
@@ -86,13 +89,14 @@ class HomeScreen extends ConsumerWidget {
                 ),
               ),
               HomeSection(
-                titleText: "На этой неделе",
+                titleText: "weekEventsTitle".tr(),
                 onMoreTap: () {
                   // TODO: реализовать переход на полный список событий этой недели
                   throw UnimplementedError(
                       'Переход на полный список событий этой недели не реализован.');
                 },
                 child: SizedBox(
+                  // Блок-заглушка, будет заменен на актуальную карусель событий.
                   height: 240,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
@@ -115,7 +119,7 @@ class HomeScreen extends ConsumerWidget {
                 ),
               ),
               HomeSection(
-                titleText: "В этом месяце",
+                titleText: "monthEventsTitle".tr(),
                 onMoreTap: () {
                   // TODO: реализовать переход на полный список событий в этом месяце
                   throw UnimplementedError(
@@ -144,14 +148,15 @@ class HomeScreen extends ConsumerWidget {
                 ),
               ),
               HomeSection(
-                titleText: "Категории",
-                moreText: "Перейти",
+                titleText: "categoryTitle".tr(),
+                viewAllText: "goTo".tr(),
                 onMoreTap: () {
                   // TODO: реализовать переход на полный список событий ???
                   throw UnimplementedError(
                       'Переход на полный список событий ???');
                 },
                 child: SizedBox(
+                  // Блок-заглушка, будет заменен на актуальную карусель событий.
                   height: 136,
                   child: ListView(
                     scrollDirection: Axis.horizontal,

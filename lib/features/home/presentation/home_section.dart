@@ -8,16 +8,16 @@ class HomeSection extends StatelessWidget {
     this.title,
     this.titleText,
     required this.child,
-    this.moreColor,
-    this.moreText,
+    this.viewAllColor,
+    this.viewAllText,
     this.onMoreTap,
   });
 
   final Widget? title;
   final String? titleText;
   final Widget child;
-  final Color? moreColor;
-  final String? moreText;
+  final Color? viewAllColor;
+  final String? viewAllText;
   final VoidCallback? onMoreTap;
 
   @override
@@ -45,9 +45,9 @@ class HomeSection extends StatelessWidget {
                   TextButton(
                     onPressed: onMoreTap,
                     child: Text(
-                      moreText ?? 'Смотреть все',
+                      viewAllText ?? '',
                       style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                            color: moreColor ??
+                            color: viewAllColor ??
                                 Theme.of(context).colorScheme.primary,
                           ),
                     ),
