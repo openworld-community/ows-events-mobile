@@ -15,6 +15,7 @@ class AppTheme {
       ).copyWith(
         primary: const Color(0xff48C78E),
         primaryContainer: Colors.white,
+        secondary: const Color(0xff546FEF),
         secondaryContainer: Colors.white,
         surfaceVariant: Colors.white,
         background: Colors.white,
@@ -49,6 +50,13 @@ class AppTheme {
               borderRadius: BorderRadius.circular(8),
             ),
           ),
+        ),
+      ),
+      textButtonTheme: const TextButtonThemeData(
+        style: ButtonStyle(
+          padding: MaterialStatePropertyAll(EdgeInsets.zero),
+          minimumSize: MaterialStatePropertyAll(Size(10, 10)),
+          overlayColor: MaterialStatePropertyAll(Colors.transparent),
         ),
       ),
       useMaterial3: true,
