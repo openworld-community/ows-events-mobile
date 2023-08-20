@@ -4,7 +4,12 @@ import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:ows_events_mobile/core/current_location_provider.dart';
 
 class CurrentLocation extends ConsumerStatefulWidget {
-  const CurrentLocation({super.key});
+  const CurrentLocation({
+    super.key,
+    required this.onLocationPressed,
+  });
+
+  final VoidCallback onLocationPressed;
 
   @override
   ConsumerState<CurrentLocation> createState() => _CurrentLocationState();
@@ -37,23 +42,27 @@ class _CurrentLocationState extends ConsumerState<CurrentLocation> {
               ),
         ),
         const SizedBox(height: 10),
-        Row(
-          children: [
-            Icon(
-              FontAwesome5.location_arrow,
-              color: Theme.of(context).colorScheme.primary,
-              size: 17,
-            ),
-            const SizedBox(width: 10),
-            if (_location != null)
-              Text(
-                _location!,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold, fontSize: 12.0),
+        TextButton(
+          onPressed: widget.onLocationPressed,
+          child: Row(
+            children: [
+              Icon(
+                FontAwesome5.location_arrow,
+                color: Theme.of(context).colorScheme.primary,
+                size: 17,
               ),
-          ],
-        )
+              const SizedBox(width: 10),
+              if (_location != null)
+                Text(
+                  _location!,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+            ],
+          ),
+        ),
       ],
     );
   }

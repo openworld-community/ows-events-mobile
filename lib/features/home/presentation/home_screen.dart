@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ows_events_mobile/features/filters/presentation/country_city_bottom_sheet.dart';
+import 'package:ows_events_mobile/features/filters/presentation/filters_bottom_sheet.dart';
 import 'package:ows_events_mobile/features/home/presentation/home_app_bar.dart';
 import 'package:ows_events_mobile/features/home/presentation/home_section.dart';
 import 'package:ows_events_mobile/features/home/presentation/home_section_title.dart';
@@ -12,7 +14,12 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: const HomeAppBar(),
+      appBar: HomeAppBar(
+        onFilterPressed: () => Scaffold.of(context)
+            .showBottomSheet((context) => const FiltersBottomSheet()),
+        onLocationPressed: () => Scaffold.of(context)
+            .showBottomSheet((context) => const CountryCityBottomSheet()),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(top: AppTheme.padding * 2),

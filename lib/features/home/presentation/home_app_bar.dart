@@ -6,14 +6,23 @@ import 'package:ows_events_mobile/common_widgets/search_field.dart';
 import 'package:ows_events_mobile/theme/app_theme.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const HomeAppBar({super.key});
+  const HomeAppBar({
+    super.key,
+    required this.onFilterPressed,
+    required this.onLocationPressed,
+  });
+
+  final VoidCallback onFilterPressed;
+  final VoidCallback onLocationPressed;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: const Padding(
-        padding: EdgeInsets.all(AppTheme.padding),
-        child: CurrentLocation(),
+      leading: Padding(
+        padding: const EdgeInsets.all(AppTheme.padding),
+        child: CurrentLocation(
+          onLocationPressed: onLocationPressed,
+        ),
       ),
       actions: const [
         Padding(
@@ -40,7 +49,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
               const SizedBox(width: 18),
-              FiltersIconButton(onPressed: () {}),
+              FiltersIconButton(onPressed: onFilterPressed),
             ],
           ),
         ),
