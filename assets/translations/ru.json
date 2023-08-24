@@ -52,6 +52,9 @@
   "monthEventsTitle": "В этом месяце",
   "categoryTitle": "Категории",
   "goTo": "Перейти",
-  "viewAll": "Смотреть все"
+  "viewAll": "Смотреть все",
+  "filtersTitle": "Фильтры",
+  "countryCityTitle": "Страна и город",
+  "apply": "Применить"
 
 }
