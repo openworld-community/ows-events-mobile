@@ -45,5 +45,13 @@
   "enter": "Войти",
   "register": "Зарегистрироваться",
   "login": "Логин",
-  "password": "Пароль"
+  "password": "Пароль",
+  "meetupsTitle" : "Митапы",
+  "todayEventsTitle": "Сегодня",
+  "weekEventsTitle": "На этой неделе",
+  "monthEventsTitle": "В этом месяце",
+  "categoryTitle": "Категории",
+  "goTo": "Перейти",
+  "viewAll": "Смотреть все"
+
 }
