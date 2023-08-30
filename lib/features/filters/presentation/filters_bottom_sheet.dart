@@ -1,30 +1,59 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:ows_events_mobile/common_widgets/bottom_sheet_with_scuffold.dart';
+import 'package:ows_events_mobile/features/filters/presentation/filter_section.dart';
+import 'package:ows_events_mobile/theme/app_theme.dart';
 
 class FiltersBottomSheet extends StatelessWidget {
   const FiltersBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BottomSheet(
+    return BottomSheetWithScuffold(
+      titleText: "filtersTitle".tr(),
+      onApplyPressed: () {
+        // TODO: добавить обработчик при нажатии Применить
+        throw UnimplementedError(
+            'не реализован функционал на нажатии на Применить');
+      },
       onClosing: () {
         // TODO: добавить обработчик при закрытии
         throw UnimplementedError(
             'не реализован функционал на закрытие фильтров');
       },
-      builder: (context) => Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: true,
-          title: Text("filtersTitle".tr()),
-          centerTitle: true,
-          actions: [
-            TextButton(
-              onPressed: () {},
-              child: Text('apply'.tr()),
-            )
-          ],
-        ),
-        body: const Placeholder(),
+      child: Column(
+        children: [
+          FilterSection(
+            title: 'selectCategoriesTitle'.tr(),
+            child: const Placeholder(
+              child: Center(
+                child: Text('Список категорий'),
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: AppTheme.padding * 2,
+          ),
+          FilterSection(
+            title: 'selectDatesTitle'.tr(),
+            child: const Placeholder(
+              child: Center(
+                child: Text('Поле вобора диапазона дат'),
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: AppTheme.padding * 2,
+          ),
+          FilterSection(
+            title: 'selectPriceTitle'.tr(),
+            child: const Placeholder(
+              child: Center(
+                child: Text('Поля вобора валюты и цены'),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

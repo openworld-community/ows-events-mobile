@@ -55,6 +55,11 @@
   "viewAll": "Смотреть все",
   "filtersTitle": "Фильтры",
   "countryCityTitle": "Страна и город",
-  "apply": "Применить"
+  "apply": "Применить",
+  "selectCountryTitle": "Выберите страну:",
+  "selectCityTitle": "Выберите город:",
+  "selectCategoriesTitle": "Выберите категории:",
+  "selectDatesTitle": "Выберите даты:",
+  "selectPriceTitle": "Выберите валюту оплаты и ценовой диапазон:"
 
 }

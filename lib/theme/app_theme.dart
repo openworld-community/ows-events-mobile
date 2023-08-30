@@ -17,7 +17,7 @@ class AppTheme {
         primaryContainer: Colors.white,
         secondary: const Color(0xff546FEF),
         secondaryContainer: Colors.white,
-        surfaceVariant: Colors.white,
+        surfaceVariant: gray1,
         background: Colors.white,
         surface: Colors.white,
       ),
@@ -58,6 +58,11 @@ class AppTheme {
           minimumSize: MaterialStatePropertyAll(Size(10, 10)),
           overlayColor: MaterialStatePropertyAll(Colors.transparent),
         ),
+      ),
+      cardTheme: const CardTheme(
+        color: Colors.white,
+        elevation: 0,
+        margin: EdgeInsets.zero,
       ),
       useMaterial3: true,
     ).copyWith(
