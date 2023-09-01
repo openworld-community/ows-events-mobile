@@ -3,14 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:ows_events_mobile/common_widgets/bottom_sheet_with_scuffold.dart';
 import 'package:ows_events_mobile/features/filters/presentation/filter_section.dart';
 import 'package:ows_events_mobile/theme/app_theme.dart';
+import 'categories.dart';
+
+
+
 
 class FiltersBottomSheet extends StatelessWidget {
-  const FiltersBottomSheet({super.key});
+  FiltersBottomSheet({super.key});
+  List<Map> CategoriesData = CategoriesList.data;
+  Map<int, bool> CategoriesCheck = {};
+
 
   @override
   Widget build(BuildContext context) {
     return BottomSheetWithScuffold(
-      titleText: "filtersTitle".tr(),
+      titleText: "filtersTitle".tr(),      
       onApplyPressed: () {
         // TODO: добавить обработчик при нажатии Применить
         throw UnimplementedError(
@@ -25,9 +32,31 @@ class FiltersBottomSheet extends StatelessWidget {
         children: [
           FilterSection(
             title: 'selectCategoriesTitle'.tr(),
-            child: const Placeholder(
+            child: Placeholder(
               child: Center(
-                child: Text('Список категорий'),
+                child:
+                ListView.builder(
+                  itemCount: CategoriesData.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return StatefulBuilder(
+                      builder: (BuildContext context, StateSetter setState) {
+                        return CheckboxListTile(
+                          title: Text(CategoriesData[index]['title']),
+                          value: CategoriesData[index]['checked'], 
+                          onChanged: (bool? value) {
+                            setState(() {
+                              CategoriesData[index]['checked'] = value!;
+                            });
+                          },
+                          secondary: Image.asset("${CategoriesData[index]['logo']}"),
+                        );
+                      }
+                    );
+                    },
+                
+                ),
+
+                // Text('Список категорий'),
               ),
             ),
           ),

@@ -60,6 +60,19 @@
   "selectCityTitle": "Выберите город:",
   "selectCategoriesTitle": "Выберите категории:",
   "selectDatesTitle": "Выберите даты:",
-  "selectPriceTitle": "Выберите валюту оплаты и ценовой диапазон:"
+  "selectPriceTitle": "Выберите валюту оплаты и ценовой диапазон:",
+  "categories": {
+    "concert": "Концерты",
+    "exhibition": "Выставки",
+    "theater": "Театры",
+    "festival": "Фестивали",
+    "standups": "Стендапы",
+    "masterclass": "Мастер-классы",
+    "lecture": "Лекции",
+    "party": "Вечеринки",
+    "sport": "Спорт",
+    "tourism": "Туризм",
+    "other": "Концерты"
+  }
 
 }
