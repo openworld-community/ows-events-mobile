@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:ows_events_mobile/common_widgets/bottom_sheet_with_scuffold.dart';
+import 'package:ows_events_mobile/features/filters/presentation/dates_filter.dart';
 import 'package:ows_events_mobile/features/filters/presentation/filter_section.dart';
 import 'package:ows_events_mobile/theme/app_theme.dart';
 
@@ -36,10 +37,10 @@ class FiltersBottomSheet extends StatelessWidget {
           ),
           FilterSection(
             title: 'selectDatesTitle'.tr(),
-            child: const Placeholder(
-              child: Center(
-                child: Text('Поле вобора диапазона дат'),
-              ),
+            child: DatesFilter(
+              onChanged: (DateTimeRange dates) {
+                // TODO: добавить обработку при сохранении диапазона дат
+              },
             ),
           ),
           const SizedBox(
