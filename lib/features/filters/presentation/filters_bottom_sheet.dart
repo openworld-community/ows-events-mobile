@@ -37,7 +37,11 @@ class FiltersBottomSheet extends StatelessWidget {
           ),
           FilterSection(
             title: 'selectDatesTitle'.tr(),
-            child: const DatesFilter(),
+            child: DatesFilter(
+              onChanged: (DateTimeRange dates) {
+                // TODO: добавить обработку при сохранении диапазона дат
+              },
+            ),
           ),
           const SizedBox(
             height: AppTheme.padding * 2,
