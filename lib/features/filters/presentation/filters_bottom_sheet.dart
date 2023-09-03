@@ -1,7 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:ows_events_mobile/common_widgets/bottom_sheet_with_scuffold.dart';
+import 'package:ows_events_mobile/features/filters/domain/price_currency.dart';
 import 'package:ows_events_mobile/features/filters/presentation/filter_section.dart';
+import 'package:ows_events_mobile/features/filters/presentation/price_currency_filter.dart';
 import 'package:ows_events_mobile/theme/app_theme.dart';
 
 class FiltersBottomSheet extends StatelessWidget {
@@ -47,10 +49,12 @@ class FiltersBottomSheet extends StatelessWidget {
           ),
           FilterSection(
             title: 'selectPriceTitle'.tr(),
-            child: const Placeholder(
-              child: Center(
-                child: Text('Поля вобора валюты и цены'),
-              ),
+            child: PriceCurrencyFilter(
+              onChanged: (PriceCurrency priceCurrency) {
+                // TODO: добавить сохранение выбранных стоимости и валюты в провайдер
+                print(
+                    'price and currency ${priceCurrency.price} ${priceCurrency.currency}');
+              },
             ),
           ),
         ],
