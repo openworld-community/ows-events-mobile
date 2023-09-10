@@ -92,6 +92,7 @@ flutter:
   assets:
     - assets/
     - assets/translations/
+    - assets/icons/categories/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

@@ -16,7 +16,7 @@ class HomeScreen extends ConsumerWidget {
     return Scaffold(
       appBar: HomeAppBar(
         onFilterPressed: () => Scaffold.of(context)
-            .showBottomSheet((context) => const FiltersBottomSheet()),
+            .showBottomSheet((context) => FiltersBottomSheet()),
         onLocationPressed: () => Scaffold.of(context)
             .showBottomSheet((context) => const CountryCityBottomSheet()),
       ),
