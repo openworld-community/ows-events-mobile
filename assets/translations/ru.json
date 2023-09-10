@@ -60,6 +60,6 @@
   "selectCityTitle": "Выберите город:",
   "selectCategoriesTitle": "Выберите категории:",
   "selectDatesTitle": "Выберите даты:",
-  "selectPriceTitle": "Выберите валюту оплаты и ценовой диапазон:"
-
+  "selectPriceTitle": "Выберите валюту оплаты и ценовой диапазон:",
+  "currency": "Валюта"
 }
