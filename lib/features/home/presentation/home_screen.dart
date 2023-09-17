@@ -1,9 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ows_events_mobile/features/events/domain/event.dart';
+import 'package:ows_events_mobile/features/events/domain/location.dart';
 import 'package:ows_events_mobile/features/filters/presentation/country_city_bottom_sheet.dart';
 import 'package:ows_events_mobile/features/filters/presentation/filters_bottom_sheet.dart';
 import 'package:ows_events_mobile/features/home/presentation/home_app_bar.dart';
+import 'package:ows_events_mobile/features/home/presentation/home_event_card.dart';
 import 'package:ows_events_mobile/features/home/presentation/home_section.dart';
 import 'package:ows_events_mobile/features/home/presentation/home_section_title.dart';
 import 'package:ows_events_mobile/theme/app_theme.dart';
@@ -13,6 +16,23 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // TODO: фейковый эвент для теста карты события. После прикрутки реальных данных надо убрать
+    final Event fakeEvent = Event(
+      id: '1',
+      title: 'Peredelato Conf Tbilisi',
+      description: '',
+      date: DateTime.now(),
+      duration: const Duration(hours: 1),
+      location: const Location(country: 'Georgia', city: 'Tbilisi'),
+      priceMin: null,
+      priceFix: '100',
+      priceMax: null,
+      priceCurrency: 'GEL',
+      url: '',
+      image: 'assets/image_event_placeholder.png',
+      tags: ['Конференция'],
+    );
+
     return Scaffold(
       appBar: HomeAppBar(
         onFilterPressed: () => Scaffold.of(context)
@@ -49,16 +69,16 @@ class HomeScreen extends ConsumerWidget {
                     scrollDirection: Axis.horizontal,
                     children: List.filled(
                       3,
-                      const Row(
+                      Row(
                         children: [
-                          SizedBox(
-                            width: 304,
-                            height: 208,
-                            child: Placeholder(
-                              child: Text('Митапы Peredelano'),
-                            ),
+                          HomeEventCard(
+                            imagePath: fakeEvent.image!,
+                            title: fakeEvent.title,
+                            date: fakeEvent.date!,
+                            categories: fakeEvent.tags,
+                            wide: true,
                           ),
-                          SizedBox(width: AppTheme.padding),
+                          const SizedBox(width: AppTheme.padding),
                         ],
                       ),
                     ),
@@ -79,16 +99,15 @@ class HomeScreen extends ConsumerWidget {
                     scrollDirection: Axis.horizontal,
                     children: List.filled(
                       3,
-                      const Row(
+                      Row(
                         children: [
-                          SizedBox(
-                            width: 240,
-                            height: 240,
-                            child: Placeholder(
-                              child: Text('Событие Сегодня'),
-                            ),
+                          HomeEventCard(
+                            imagePath: fakeEvent.image!,
+                            title: fakeEvent.title,
+                            date: fakeEvent.date!,
+                            categories: fakeEvent.tags,
                           ),
-                          SizedBox(width: AppTheme.padding),
+                          const SizedBox(width: AppTheme.padding),
                         ],
                       ),
                     ),
