@@ -6,6 +6,7 @@ import 'package:ows_events_mobile/features/events/domain/location.dart';
 import 'package:ows_events_mobile/features/filters/presentation/country_city_bottom_sheet.dart';
 import 'package:ows_events_mobile/features/filters/presentation/filters_bottom_sheet.dart';
 import 'package:ows_events_mobile/features/home/presentation/home_app_bar.dart';
+import 'package:ows_events_mobile/features/home/presentation/home_category_card.dart';
 import 'package:ows_events_mobile/features/home/presentation/home_event_card.dart';
 import 'package:ows_events_mobile/features/home/presentation/home_section.dart';
 import 'package:ows_events_mobile/features/home/presentation/home_section_title.dart';
@@ -190,11 +191,16 @@ class HomeScreen extends ConsumerWidget {
                       3,
                       const Row(
                         children: [
-                          SizedBox(
-                            width: 136,
-                            height: 136,
-                            child: Placeholder(
-                              child: Text('Категория'),
+                          HomeCategoryCard(
+                            iconData: Icons.theater_comedy,
+                            title: 'Театры',
+                            gradient: LinearGradient(
+                              colors: [
+                                Color(0xFFEACDA3),
+                                Color(0xFFD6AE7B),
+                              ],
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
                             ),
                           ),
                           SizedBox(width: AppTheme.padding),
