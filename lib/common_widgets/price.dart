@@ -11,18 +11,11 @@ class Price extends StatelessWidget {
   Widget build(BuildContext context) {
     final String priceText = _getPriceText(price);
 
-    return Container(
-      padding: const EdgeInsets.fromLTRB(7, 5, 7, 7),
-      decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Text(
-        priceText,
-        style: Theme.of(context).textTheme.labelSmall?.copyWith(
-              color: Theme.of(context).colorScheme.background,
-            ),
-      ),
+    return Text(
+      priceText,
+      style: Theme.of(context).textTheme.labelMedium?.copyWith(
+            color: Colors.white,
+          ),
     );
   }
 
